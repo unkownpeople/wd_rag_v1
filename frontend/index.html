@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta name="description" content="年报 RAG 证据问答台：本地 FastAPI 答案、引用与证据展示" />
+    <title>年报 RAG 证据问答台</title>
+    <link rel="stylesheet" href="./styles.css?v=8" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="site-header">
+        <div class="header-inner">
+          <a class="brand-lockup" href="#top" aria-label="返回年报 RAG 证据问答台">
+            <span class="brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M7 4.5h7l3 3v12H7z" /><path d="M14 4.5v3h3M10 11h4M10 14h4M10 17h2" /></svg>
+            </span>
+            <span>
+              <span class="brand-name">年报 RAG 证据问答台</span>
+              <span class="brand-subtitle">Evidence-first annual report research</span>
+            </span>
+          </a>
+          <div class="service-status" aria-label="服务状态">
+            <span class="status-item"><span class="status-dot status-dot--muted" aria-hidden="true"></span><span class="status-label">Local</span></span>
+            <span class="status-item status-item--checking" data-status="api"><span class="status-dot" aria-hidden="true"></span><span class="status-label">API 检查中</span></span>
+            <span class="status-item status-item--checking" data-status="llm"><span class="status-dot" aria-hidden="true"></span><span class="status-label">LLM 检查中</span></span>
+          </div>
+        </div>
+      </header>
+      <main id="top" class="main-layout">
+        <section class="interface-view" data-view="qa" aria-labelledby="qa-view-title">
+          <h2 id="qa-view-title" class="sr-only">问答界面</h2>
+          <div class="qa-layout">
+            <div class="qa-main">
+              <section class="composer-section" aria-labelledby="question-title">
+                <div class="section-heading">
+                  <div>
+                    <p class="eyebrow">问题输入</p>
+                    <h2 id="question-title">你想核验什么？</h2>
+                  </div>
+                  <span class="section-index">01</span>
+                </div>
+
+                <form id="question-form" class="question-composer">
+                  <label class="sr-only" for="question-input">年报问题</label>
+                  <textarea id="question-input" name="question" rows="3" maxlength="500" placeholder="例如：Apple 2024 年总净销售额是多少？" spellcheck="false"></textarea>
+                  <div class="composer-toolbar">
+                    <span id="composer-hint" class="composer-hint">支持 Ctrl + Enter 提交</span>
+                    <div class="composer-actions">
+                      <button id="clear-button" class="button button--quiet" type="button">清空</button>
+                      <button id="submit-button" class="button button--primary" type="submit">
+                        <span class="button-label">提问</span>
+                        <span class="button-spinner" aria-hidden="true"></span>
+                        <svg class="button-arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" /></svg>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+
+                <div class="examples-block">
+                  <div class="examples-heading"><span>可以从这些问题开始</span><span class="examples-rule" aria-hidden="true"></span></div>
+                  <div class="example-list" aria-label="示例问题">
+                    <button class="example-button" type="button" data-question="Apple 2024 年总净销售额是多少？">Apple 2024 年总净销售额是多少？<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" /></svg></button>
+                    <button class="example-button" type="button" data-question="Microsoft 2023 年三个报告分部的收入分别是多少？">Microsoft 2023 年三个报告分部的收入分别是多少？<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" /></svg></button>
+                    <button class="example-button" type="button" data-question="塔塔咨询服务公司2024财年的营业收入和总收入分别是多少？">塔塔咨询服务公司2024财年的营业收入和总收入分别是多少？<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" /></svg></button>
+                    <button class="example-button" type="button" data-question="TCS FY2024 的 EBIT margin 和 EPS 分别是多少？">TCS FY2024 的 EBIT margin 和 EPS 分别是多少？<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" /></svg></button>
+                  </div>
+                </div>
+              </section>
+              <section id="answer-panel" class="content-panel answer-panel" aria-labelledby="answer-title">
+                <div class="panel-heading">
+                  <div class="panel-title-group">
+                    <span class="panel-icon panel-icon--blue" aria-hidden="true">
+                      <svg viewBox="0 0 20 20"><path d="M5 3.5h6.5L15 7v9.5H5z" /><path d="M11.5 3.5V7H15M8 10h4M8 13h3" /></svg>
+                    </span>
+                    <div>
+                      <p class="eyebrow">LLM 整理结果</p>
+                      <h2 id="answer-title">答案</h2>
+                    </div>
+                  </div>
+                  <span id="answer-state" class="state-label">等待查询</span>
+                </div>
+                <div id="answer-content" class="answer-content" data-view-state="initial">
+                  <div class="empty-illustration" aria-hidden="true">
+                    <span class="empty-ring empty-ring--outer"></span>
+                    <span class="empty-ring empty-ring--inner"></span>
+                    <svg viewBox="0 0 36 36"><path d="m21.5 21.5 7 7M15.5 24a8.5 8.5 0 1 1 0-17 8.5 8.5 0 0 1 0 17Z" /></svg>
+                  </div>
+                  <h3 id="answer-empty-title">答案将在真实查询后显示</h3>
+                  <p id="answer-empty-copy">输入问题后，这里只展示后端返回的整理答案，不伪造数字或引用。</p>
+                </div>
+                <div id="answer-note" class="answer-note" role="status">
+                  <span class="note-mark" aria-hidden="true">i</span>
+                  <span>引用标记会跳转到“检索线索与证据”界面。</span>
+                </div>
+              </section>
+
+              <section class="qa-evidence-cta" aria-labelledby="evidence-cta-title">
+                <div>
+                  <p class="eyebrow">Traceability</p>
+                  <h2 id="evidence-cta-title">需要核验依据？</h2>
+                  <p>进入线索界面查看检索路径、来源索引、定位信息和证据原文。</p>
+                </div>
+                <button class="interface-button interface-button--secondary" type="button" data-view-target="brief">查看检索线索与证据 <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" /></svg></button>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <section class="interface-view brief-view" data-view="brief" aria-labelledby="brief-view-title" hidden>
+          <div class="brief-heading">
+            <div>
+              <p class="section-kicker">RESEARCH SUMMARY</p>
+              <h2 id="brief-view-title">检索过程与证据</h2>
+              <p>将检索路径、来源索引、定位信息和证据原文集中在这里。</p>
+              <div class="brief-question-context" aria-live="polite">
+                <span class="eyebrow">当前问题</span>
+                <p id="brief-question">等待真实查询</p>
+              </div>
+            </div>
+            <button class="interface-button interface-button--secondary" type="button" data-view-target="qa">返回问答界面 <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13 8H4M7.5 4.5 4 8l3.5 3.5" /></svg></button>
+          </div>
+
+          <div class="brief-grid">
+            <section class="content-panel process-panel" aria-labelledby="process-title">
+              <div class="panel-heading process-heading">
+                <span class="panel-title-group">
+                  <span class="panel-icon panel-icon--teal" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M4 5h12M4 10h8M4 15h5" /><path d="m13 13 2 2 3-4" /></svg></span>
+                  <span><span class="eyebrow">Pipeline</span><span id="process-title" class="summary-title">检索与生成过程</span></span>
+                </span>
+                <span class="summary-trailing">固定显示</span>
+              </div>
+              <div class="process-content">
+                <div class="process-step"><span>01</span><strong>混合检索</strong><em data-process-field="retrieval">等待真实请求</em></div><div class="process-line" aria-hidden="true"></div>
+                <div class="process-step"><span>02</span><strong>主题覆盖</strong><em data-process-field="coverage">等待真实请求</em></div><div class="process-line" aria-hidden="true"></div>
+                <div class="process-step"><span>03</span><strong>生成与引用校验</strong><em data-process-field="generation">等待真实请求</em></div>
+              </div>
+            </section>
+
+            <section class="content-panel evidence-panel" aria-labelledby="evidence-title">
+              <div class="panel-heading">
+                <div class="panel-title-group"><span class="panel-icon panel-icon--orange" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M4 4h12v12H4z" /><path d="M7 7h6M7 10h6M7 13h4" /></svg></span><div><p class="eyebrow">Source evidence</p><h2 id="evidence-title">证据原文</h2></div></div>
+                <span id="evidence-state" class="state-label state-label--quiet">尚无证据</span>
+              </div>
+              <div id="evidence-empty" class="evidence-empty"><span class="evidence-empty-line" aria-hidden="true"></span><p>召回原文、表头与结构化定位信息将在真实响应后展示。</p></div>
+              <div id="evidence-list" class="evidence-list" aria-label="证据原文列表" aria-live="polite" tabindex="-1"></div>
+            </section>
+
+            <section class="content-panel citation-panel brief-citation-panel" aria-labelledby="citation-title">
+              <div class="rail-heading">
+                <div><p class="eyebrow">References</p><h2 id="citation-title">来源索引</h2></div>
+                <span id="citation-count" class="count-label">0 个来源</span>
+              </div>
+              <div id="citation-empty" class="rail-empty">
+                <span class="rail-empty-symbol" aria-hidden="true">—</span>
+                <p>真实回答返回后，来源会按引用编号排列于此。</p>
+              </div>
+              <div id="citation-list" class="citation-list" aria-label="来源索引列表" aria-live="polite" tabindex="-1"></div>
+            </section>
+          </div>
+
+          <div class="brief-lower">
+
+            <details class="rail-panel retrieval-panel">
+              <summary class="rail-heading rail-heading--compact rail-heading--summary">
+                <div><p class="eyebrow">Retrieval</p><h2>检索详情</h2></div><svg class="chevron" viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4" /></svg>
+              </summary>
+              <dl class="retrieval-list"><div><dt>mode</dt><dd data-retrieval-field="mode">—</dd></div><div><dt>top_k</dt><dd data-retrieval-field="top_k">—</dd></div><div><dt>hit_count</dt><dd data-retrieval-field="hit_count">—</dd></div><div><dt>candidate_count</dt><dd data-retrieval-field="candidate_count">—</dd></div><div><dt>task_count</dt><dd data-retrieval-field="task_count">—</dd></div><div><dt>task_coverage</dt><dd data-retrieval-field="task_coverage">—</dd></div></dl>
+            </details>
+
+            <section class="rail-panel service-panel" aria-labelledby="service-title">
+              <div class="rail-heading rail-heading--compact"><div><p class="eyebrow">Service status</p><h2 id="service-title">本地服务</h2></div><span class="status-dot status-dot--muted" aria-hidden="true"></span></div>
+              <div class="service-status service-status--stacked" aria-label="服务状态"><span class="status-item"><span class="status-dot status-dot--muted" aria-hidden="true"></span><span class="status-label">Local</span></span><span class="status-item status-item--checking" data-status="api"><span class="status-dot" aria-hidden="true"></span><span class="status-label">API 检查中</span></span><span class="status-item status-item--checking" data-status="llm"><span class="status-dot" aria-hidden="true"></span><span class="status-label">LLM 检查中</span></span></div>
+              <div class="service-nav"><button class="interface-button interface-button--primary" type="button" data-view-target="qa">问答界面</button></div>
+            </section>
+          </div>
+        </section>
+
+        <details class="prototype-controls">
+          <summary>视觉状态预览 <span>仅用于前端回归检查</span></summary>
+          <div class="state-buttons" aria-label="切换视觉状态"><button type="button" class="state-button is-active" data-preview-state="initial">初始</button><button type="button" class="state-button" data-preview-state="loading">加载</button><button type="button" class="state-button" data-preview-state="no-answer">无答案</button><button type="button" class="state-button" data-preview-state="error">错误</button></div>
+        </details>
+      </main>
+
+      <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    </div>
+    <script src="./api.js?v=2" defer></script>
+    <script src="./app.js?v=9" defer></script>
+  </body>
+</html>

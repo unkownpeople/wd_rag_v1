@@ -1,0 +1,34 @@
+{
+  "stage": "embedding",
+  "collection": "annual_report_v1_single_company",
+  "qdrant_path": "F:\\新建文件夹\\Rag\\xianlian",
+  "chunk_dir": "F:\\新建文件夹\\Rag\\data\\processed\\annual_reports\\v1_single_company_chunks",
+  "chunk_digest": "b6ca4f83ea9b76e7bc344841acd9364c372ecd1ab126ec94c7c3a15c38cbac38",
+  "chunk_count": 3959,
+  "point_count": 3959,
+  "vector_digest": "34fcba77215cd613b5a8ef1e1400828081b95f7bef25f39d2df8f0b4b77cfde6",
+  "reused_source_collection": "annual_report_tcs_real_multiformat_v2",
+  "reused_company": "tcs",
+  "newly_encoded_companies": [
+    "apple",
+    "microsoft"
+  ],
+  "newly_encoded_point_count": 786,
+  "model": {
+    "model_id": "BAAI/bge-m3",
+    "model_format": "onnx-int8",
+    "model_path": "F:\\新建文件夹\\Rag\\models\\bge-m3-embedding\\model_quantized.onnx",
+    "model_sha256": "0826f8c1ab9edf1801db86c61919d4d108e8bfc0b809ec823ad366882ff0b77d",
+    "tokenizer_path": "F:\\新建文件夹\\Rag\\models\\bge-m3",
+    "vector_dimension": 1024,
+    "distance": "Cosine",
+    "pooling": "cls",
+    "normalized": true,
+    "max_length": 8192,
+    "provider": "CPUExecutionProvider",
+    "intra_op_num_threads": 4,
+    "inter_op_num_threads": 1
+  },
+  "created_at": "2026-08-14T05:16:18.112728+00:00",
+  "retrieval_evaluation": "not_run"
+}

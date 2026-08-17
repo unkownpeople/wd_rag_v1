@@ -1,0 +1,35 @@
+.env
+.env.*
+!.env.example
+
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+.venv/
+.venv_rag/
+.tmp/
+tmp/
+.hf_cache/
+.pip-cache/
+.codegraph/
+
+*.log
+Thumbs.db
+.DS_Store
+
+# 模型权重超过 GitHub 普通 Git 的单文件限制；Tokenizer 允许提交。
+models/**/*.onnx
+models/**/*.safetensors
+models/**/*.bin
+
+# 保留活动数据库，排除运行时锁和临时 WAL 文件。
+xianlian/.lock
+xianlian/**/*.sqlite-journal
+xianlian/**/*.sqlite-shm
+xianlian/**/*.sqlite-wal
+
+# 失败评测报告可能包含本地错误和服务响应，不作为验收材料提交。
+data/evaluation/*.failed_run.json

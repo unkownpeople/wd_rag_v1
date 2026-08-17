@@ -1,0 +1,57 @@
+{
+  "stage": "chunk",
+  "score_type": "offline_intrinsic_chunking_score",
+  "input_dir": "F:\\新建文件夹\\Rag\\data\\processed\\annual_reports\\pdf_cleaned",
+  "output_dir": "F:\\新建文件夹\\Rag\\data\\processed\\annual_reports\\pdf_chunks",
+  "parameters": {
+    "target_tokens": 400,
+    "max_tokens": 600,
+    "min_tokens": 80,
+    "sentence_overlap": 1,
+    "token_overlap": 50,
+    "small_table_body_rows": 10,
+    "tokenizer": "huggingface:BAAI/bge-m3"
+  },
+  "file_count": 3,
+  "chunk_count": 1491,
+  "weighted_score": 99.36,
+  "files": [
+    {
+      "input_file": "annual_reports/pdf_cleaned/apple_2022_10k.cleaned.jsonl",
+      "chunk_file": "annual_reports/pdf_chunks/apple_2022_10k.chunks.jsonl",
+      "chunk_count": 453,
+      "overall_score": 99.21,
+      "grade": "A",
+      "text_lost_tokens": 0,
+      "table_lost_body_rows": 0,
+      "duplicate_overlap_tokens": 7704,
+      "internal_duplicate_tokens": 0,
+      "cross_chunk_overlap_tokens": 7704
+    },
+    {
+      "input_file": "annual_reports/pdf_cleaned/apple_2023_10k.cleaned.jsonl",
+      "chunk_file": "annual_reports/pdf_chunks/apple_2023_10k.chunks.jsonl",
+      "chunk_count": 457,
+      "overall_score": 99.52,
+      "grade": "A",
+      "text_lost_tokens": 0,
+      "table_lost_body_rows": 0,
+      "duplicate_overlap_tokens": 9617,
+      "internal_duplicate_tokens": 0,
+      "cross_chunk_overlap_tokens": 9617
+    },
+    {
+      "input_file": "annual_reports/pdf_cleaned/apple_2024_10k.cleaned.jsonl",
+      "chunk_file": "annual_reports/pdf_chunks/apple_2024_10k.chunks.jsonl",
+      "chunk_count": 581,
+      "overall_score": 99.34,
+      "grade": "A",
+      "text_lost_tokens": 0,
+      "table_lost_body_rows": 0,
+      "duplicate_overlap_tokens": 16447,
+      "internal_duplicate_tokens": 0,
+      "cross_chunk_overlap_tokens": 16447
+    }
+  ],
+  "interpretation": "这是与清洗内容的离线完整性评分；后续仍需固定评测集和相同 Embedding 模型比较召回。"
+}

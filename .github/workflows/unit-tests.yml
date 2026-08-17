@@ -1,0 +1,32 @@
+name: Unit tests
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements-rag.txt
+
+      - name: Validate V1.2 contract
+        run: |
+          python -c "from scripts.evaluate_v1_2 import load_contract_and_cases; contract, cases = load_contract_and_cases(); assert contract['source_dataset'] == 'test_set_v1_1.jsonl'; assert len(cases) == 21; print('V1.2 contract cases:', len(cases))"
+
+      - name: Run unit tests
+        run: python -m unittest discover -v

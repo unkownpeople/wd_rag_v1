@@ -1,0 +1,2663 @@
+{
+  "test_set": "v1_chinese_aliases",
+  "mode": "full",
+  "scope": "single_company_query_only",
+  "request_policy": "query_only_no_explicit_filters",
+  "api_url": "http://127.0.0.1:8001/api/rag/query",
+  "generated_at": "2026-08-14T13:19:50.602720+00:00",
+  "case_count": 6,
+  "scores": {
+    "company_filter_resolution": {
+      "passed_count": 6,
+      "pass_rate": 1.0
+    },
+    "company_isolation": {
+      "passed_count": 6,
+      "pass_rate": 1.0
+    },
+    "retrieval_coverage": {
+      "passed_count": 6,
+      "pass_rate": 1.0
+    },
+    "grounded_answer": {
+      "passed_count": 6,
+      "pass_rate": 1.0
+    },
+    "answer_completeness": {
+      "passed_count": 6,
+      "pass_rate": 1.0
+    }
+  },
+  "rows": [
+    {
+      "case_id": "apple_cn_short_revenue",
+      "alias": "苹果",
+      "query": "苹果2024财年的总净销售额是多少？请给出金额和单位。",
+      "expected_company_id": "apple",
+      "error": null,
+      "answer": "苹果2024财年的总净销售额为 **391,035**（单位：百万美元，即 In millions）[S1][S2][S4]。\n\n- 该数据来自苹果公司合并经营报表（Consolidated Statements of Operations）中“Total net sales”一栏，对应截至2024年9月28日的财年 [S1][S2]。\n- 同一数值在按报告分部列示的净销售额表格中也有体现（Total net sales $ 391,035）[S4]。",
+      "evidence_count": 5,
+      "evidence_companies": [
+        "apple"
+      ],
+      "resolved_filters": {
+        "company_id": "apple",
+        "fiscal_year": 2024
+      },
+      "numeric_in_evidence": {
+        "391,035": true
+      },
+      "numeric_in_answer": {
+        "391,035": true
+      },
+      "family_coverage": true,
+      "layers": {
+        "company_filter_resolution": true,
+        "company_isolation": true,
+        "retrieval_coverage": true,
+        "grounded_answer": true,
+        "answer_completeness": true
+      },
+      "planner": {
+        "status": "used",
+        "route": "planner",
+        "intent": "查询苹果2024财年总净销售额的金额和单位",
+        "entities": [
+          "苹果"
+        ],
+        "time_scope": "2024财年",
+        "retrieval_tasks": [
+          {
+            "task_id": "T1",
+            "requirement": {
+              "topic": "总净销售额",
+              "metrics": [
+                "总净销售额"
+              ],
+              "relation": "无",
+              "group_by": []
+            },
+            "queries": [
+              "苹果2024财年的总净销售额是多少？请给出金额和单位。 net sales total net sales",
+              "苹果 2024财年 总净销售额 金额 单位",
+              "Apple 2024 fiscal year total net sales amount unit"
+            ],
+            "statement_scope": "合并",
+            "candidate_chunk_ids": [
+              "chunk_b85ad753f9af0b240362c6e5",
+              "chunk_793ac5a0b7dbbbbe2786a52c",
+              "chunk_c94c35d40f41f0a48c45d10f",
+              "chunk_3f66c5d551e5c427cef68456",
+              "chunk_8b07eb03751e31b4cfd1c587",
+              "chunk_bc1a2414a0ae170b1dfcae64",
+              "chunk_256d89635fd3d8af6d003801",
+              "chunk_aa08fb04d4ac26f20b0beb15",
+              "chunk_06d7b7f60c15516ffcde843d",
+              "chunk_9ea437019ee71539a5c3d08d",
+              "chunk_478651e33e8aa910c9c8932f",
+              "chunk_1963582d8690a9314e8d7b01",
+              "chunk_ed76c51fa5a4744d6c541c60",
+              "chunk_2e802d530e74cc529ca4f29c",
+              "chunk_e31feabbceeea45cd51d6891",
+              "chunk_d2030fc8c638c8990311c674",
+              "chunk_b3695b0daeef0cff82d87fd5",
+              "chunk_bbca0e5d97b31941d9e4bde4",
+              "chunk_31842458817542afd2c3b6ea"
+            ],
+            "candidate_top_k": 15,
+            "query_retrieval": [
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              },
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              },
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              }
+            ],
+            "evidence_ids": [
+              "S1",
+              "S2",
+              "S3",
+              "S4",
+              "S5"
+            ]
+          }
+        ],
+        "needs_calculation": false,
+        "clarification_needed": false,
+        "usage": {
+          "prompt_tokens": 757,
+          "completion_tokens": 162,
+          "total_tokens": 919,
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 117,
+          "prompt_cache_total_tokens": 757,
+          "prompt_cache_hit_ratio": 0.8454
+        },
+        "finish_reason": "stop"
+      },
+      "evidence": [
+        {
+          "evidence_id": "S1",
+          "text": "table_id=apple_2024_10k_p032_t01；location=page=32；headers=column_1 | 2024 | 2023 | 2022\ntable_title=CONSOLIDATED STATEMENTS OF OPERATIONS\ntable_context=Apple Inc.\nCONSOLIDATED STATEMENTS OF OPERATIONS\n(In millions, except number of shares, which are reflected in thousands, and per-share amounts)\nYears ended\nSeptember 28, September 30, September 24,\n2024 2023 2022\nNet sales:\nrow_number=4；column_1=Total net sales；2024=391,035；2023=383,285；2022=394,328\n\n完整表格上下文：\n | 2024 | 2023 | 2022\nProducts $ | 294,866 | 298,085 | 316,199\nServices | 96,169 | 85,200 | 78,129\nTotal net sales | 391,035 | 383,285 | 394,328\nCost of sales: |  |  | \nProducts | 185,233 | 189,282 | 201,471\nServices | 25,119 | 24,855 | 22,075\nTotal cost of sales | 210,352 | 214,137 | 223,546\nGross margin | 180,683 | 169,148 | 170,782\nOperating expenses: |  |  | \nResearch and development | 31,370 | 29,915 | 26,251\nSelling, general and administrative | 26,097 | 24,932 | 25,094\nTotal operating expenses | 57,467 | 54,847 | 51,345\nOperating income | 123,216 | 114,301 | 119,437\nOther income/(expense), net | 269 | (565) | (334)\nIncome before provision for income taxes | 123,485 | 113,736 | 119,103\nProvision for income taxes | 29,749 | 16,741 | 19,300\nNet income $ | 93,736 | 96,995 | 99,803\nEarnings per share: |  |  | \nBasic $ | 6.11 | 6.16 | 6.15\nDiluted $ | 6.08 | 6.13 | 6.11\nShares used in computing earnings per share: |  |  | \nBasic | 15,343,783 | 15,744,231 | 16,215,963\nDiluted | 15,408,095 | 15,812,547 | 16,325,819",
+          "citation": {
+            "evidence_id": "S1",
+            "chunk_id": "chunk_b85ad753f9af0b240362c6e5",
+            "document_id": "apple_2024_10k",
+            "company_id": "apple",
+            "company_name": "Apple Inc.",
+            "fiscal_year": 2024,
+            "source_format": "pdf",
+            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "page": 32,
+            "page_start": 32,
+            "page_end": 32,
+            "table_id": "apple_2024_10k_p032_t01",
+            "table_title": "CONSOLIDATED STATEMENTS OF OPERATIONS",
+            "table_context": "Apple Inc.\nCONSOLIDATED STATEMENTS OF OPERATIONS\n(In millions, except number of shares, which are reflected in thousands, and per-share amounts)\nYears ended\nSeptember 28, September 30, September 24,\n2024 2023 2022\nNet sales:",
+            "region": null,
+            "period_years": [
+              2022,
+              2023,
+              2024
+            ],
+            "measure_name": null,
+            "value_kind": "monetary",
+            "currency": "USD",
+            "unit_scale": "as_reported",
+            "column_headers": [
+              "column_1",
+              "2024",
+              "2023",
+              "2022"
+            ],
+            "parent_row_labels": [],
+            "statement_family": "income_statement",
+            "statement_scope": "consolidated",
+            "period_end": "FY2024",
+            "unit": "In millions",
+            "table_title_raw": "CONSOLIDATED STATEMENTS OF OPERATIONS",
+            "table_group_id": "apple_2024_10k_p032_t01",
+            "paragraph_index": null,
+            "sheet_name": null,
+            "cell_range": null,
+            "source_location": "page=32",
+            "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/a/NASDAQ_AAPL_2024.pdf",
+            "source_kind": "public_archive_copy"
+          },
+          "retrieval_task_ids": [
+            "T1"
+          ]
+        },
+        {
+          "evidence_id": "S2",
+          "text": "CONSOLIDATED STATEMENTS OF OPERATIONS(In millions, except number of shares, which are reflected in thousands, and per-share amounts) September 28,2024 September 30,2023 September 24,2022 Net sales: Products $ 294,866 $ 298,085 $ 316,199 Services 96,169 85,200 78,129 Total net sales 391,035 383,285 394,328 Cost of sales: Products 185,233 189,282 201,471 Services 25,119 24,855 22,075 Total cost of sales 210,352 214,137 223,546 Gross margin 180,683 169,148 170,782 Operating expenses: Research and development 31,370 29,915 26,251 Selling, general and administrative 26,097 24,932 25,094 Total operating expenses 57,467 54,847 51,345 Operating income 123,216 114,301 119,437 Other income/(expense), net 269 (565) (334) Income before provision for income taxes 123,485 113,736 119,103 Provision for income taxes 29,749 16,741 19,300 Net income $ 93,736 $ 96,995 $ 99,803 Earnings per share: Basic $ 6.11 $ 6.16 $ 6.15 Diluted $ 6.08 $ 6.13 $ 6.11 Shares used in computing earnings per share: Basic 15,343,783 15,744,231 16,215,963 Diluted 15,408,095 15,812,547 16,325,819 Apple Inc.\n\n| 2024 Form 10-K | 29",
+          "citation": {
+            "evidence_id": "S2",
+            "chunk_id": "chunk_793ac5a0b7dbbbbe2786a52c",
+            "document_id": "apple_2024_10k",
+            "company_id": "apple",
+            "company_name": "Apple Inc.",
+            "fiscal_year": 2024,
+            "source_format": "pdf",
+            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "page": 32,
+            "page_start": 32,
+            "page_end": 32,
+            "table_id": null,
+            "table_title": null,
+            "table_context": null,
+            "region": null,
+            "period_years": [
+              2022,
+              2023,
+              2024
+            ],
+            "measure_name": null,
+            "value_kind": null,
+            "currency": "USD",
+            "unit_scale": "as_reported",
+            "column_headers": [],
+            "parent_row_labels": [],
+            "statement_family": "income_statement",
+            "statement_scope": "consolidated",
+            "period_end": "FY2024",
+            "unit": "In millions",
+            "table_title_raw": null,
+            "table_group_id": "apple_2024_10k:page:32:text",
+            "paragraph_index": null,
+            "sheet_name": null,
+            "cell_range": null,
+            "source_location": "page=32",
+            "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/a/NASDAQ_AAPL_2024.pdf",
+            "source_kind": "public_archive_copy"
+          },
+          "retrieval_task_ids": [
+            "T1"
+          ]
+        },
+        {
+          "evidence_id": "S3",
+          "text": "table_id=apple_2024_10k_p050_t04；location=page=50；headers=column_1 | column_2 | 2024 | 2024 | 2023 | 2023\ntable_title=The following table shows information by reportable segment for 2024, 2023 and 2022 (in millions):\ntable_context=2024 2023 2022\nNet sales:\nU.S. $ 142,196 $ 138,573 $ 147,859\nChina (1) 66,952 72,559 74,200\nOther countries 181,887 172,153 172,269\nTotal net sales $ 391,035 $ 383,285 $ 394,328\n2024 2023\nLong-lived assets:\nrow_number=2；column_1=U.S.；column_2=空值；2024=35,664；2024=35,664；2023=33,276；2023=33,276\nrow_number=3；column_1=(1) China；column_2=空值；2024=4,797；2024=4,797；2023=5,778；2023=5,778\nrow_number=4；column_1=Other countries；column_2=空值；2024=5,219；2024=5,219；2023=4,661；2023=4,661\nrow_number=5；column_1=Total long-lived assets；column_2=空值；2024=45,680；2024=45,680；2023=43,715；2023=43,715\n\n完整表格上下文：\n |  | 2024 | 2024 | 2023 | 2023\nU.S. |  | 35,664 | 35,664 | 33,276 | 33,276\n(1) China |  | 4,797 | 4,797 | 5,778 | 5,778\nOther countries |  | 5,219 | 5,219 | 4,661 | 4,661\nTotal long-lived assets |  | 45,680 | 45,680 | 43,715 | 43,715",
+          "citation": {
+            "evidence_id": "S3",
+            "chunk_id": "chunk_c94c35d40f41f0a48c45d10f",
+            "document_id": "apple_2024_10k",
+            "company_id": "apple",
+            "company_name": "Apple Inc.",
+            "fiscal_year": 2024,
+            "source_format": "pdf",
+            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "page": 50,
+            "page_start": 50,
+            "page_end": 50,
+            "table_id": "apple_2024_10k_p050_t04",
+            "table_title": "The following table shows information by reportable segment for 2024, 2023 and 2022 (in millions):",
+            "table_context": "2024 2023 2022\nNet sales:\nU.S. $ 142,196 $ 138,573 $ 147,859\nChina (1) 66,952 72,559 74,200\nOther countries 181,887 172,153 172,269\nTotal net sales $ 391,035 $ 383,285 $ 394,328\n2024 2023\nLong-lived assets:",
+            "region": null,
+            "period_years": [
+              2023,
+              2024
+            ],
+            "measure_name": null,
+            "value_kind": "monetary",
+            "currency": "USD",
+            "unit_scale": "as_reported",
+            "column_headers": [
+              "column_1",
+              "column_2",
+              "2024",
+              "2024",
+              "2023",
+              "2023"
+            ],
+            "parent_row_labels": [],
+            "statement_family": "income_statement",
+            "statement_scope": "consolidated",
+            "period_end": "FY2024",
+            "unit": "in millions",
+            "table_title_raw": "The following table shows information by reportable segment for 2024, 2023 and 2022 (in millions):",
+            "table_group_id": "apple_2024_10k_p050_t04",
+            "paragraph_index": null,
+            "sheet_name": null,
+            "cell_range": null,
+            "source_location": "page=50",
+            "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/a/NASDAQ_AAPL_2024.pdf",
+            "source_kind": "public_archive_copy"
+          },
+          "retrieval_task_ids": [
+            "T1"
+          ]
+        },
+        {
+          "evidence_id": "S4",
+          "text": "table_id=apple_2024_10k_p050_t03；location=page=50；headers=column_1 | 2024 | 2023 | 2022\ntable_title=The following table shows information by reportable segment for 2024, 2023 and 2022 (in millions):\ntable_context=Research and development expense (31,370) (29,915) (26,251)\nOther corporate expenses, net (1) (7,458) (6,672) (7,207)\nTotal operating income $ 123,216 $ 114,301 $ 119,437\n(1) Includes general and administrative compensation costs, various nonrecurring charges, and other separately managed costs.\nThe following tables show net sales for 2024, 2023 and 2022 and long-lived assets as of September 28, 2024 and September 30, 2023 for countries that\nindividually accounted for 10% or more of the respective totals, as well as aggregate amounts for the remaining countries (in millions):\n2024 2023 2022\nNet sales:\nrow_number=2；column_1=U.S. $；2024=142,196；2023=138,573；2022=147,859\nrow_number=3；column_1=(1) China；2024=66,952；2023=72,559；2022=74,200\nrow_number=4；column_1=Other countries；2024=181,887；2023=172,153；2022=172,269\nrow_number=5；column_1=Total net sales $；2024=391,035；2023=383,285；2022=394,328\n\n完整表格上下文：\n | 2024 | 2023 | 2022\nU.S. $ | 142,196 | 138,573 | 147,859\n(1) China | 66,952 | 72,559 | 74,200\nOther countries | 181,887 | 172,153 | 172,269\nTotal net sales $ | 391,035 | 383,285 | 394,328",
+          "citation": {
+            "evidence_id": "S4",
+            "chunk_id": "chunk_3f66c5d551e5c427cef68456",
+            "document_id": "apple_2024_10k",
+            "company_id": "apple",
+            "company_name": "Apple Inc.",
+            "fiscal_year": 2024,
+            "source_format": "pdf",
+            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "page": 50,
+            "page_start": 50,
+            "page_end": 50,
+            "table_id": "apple_2024_10k_p050_t03",
+            "table_title": "The following table shows information by reportable segment for 2024, 2023 and 2022 (in millions):",
+            "table_context": "Research and development expense (31,370) (29,915) (26,251)\nOther corporate expenses, net (1) (7,458) (6,672) (7,207)\nTotal operating income $ 123,216 $ 114,301 $ 119,437\n(1) Includes general and administrative compensation costs, various nonrecurring charges, and other separately managed costs.\nThe following tables show net sales for 2024, 2023 and 2022 and long-lived assets as of September 28, 2024 and September 30, 2023 for countries that\nindividually accounted for 10% or more of the respective totals, as well as aggregate amounts for the remaining countries (in millions):\n2024 2023 2022\nNet sales:",
+            "region": null,
+            "period_years": [
+              2022,
+              2023,
+              2024
+            ],
+            "measure_name": null,
+            "value_kind": "monetary",
+            "currency": "USD",
+            "unit_scale": "as_reported",
+            "column_headers": [
+              "column_1",
+              "2024",
+              "2023",
+              "2022"
+            ],
+            "parent_row_labels": [],
+            "statement_family": "income_statement",
+            "statement_scope": "consolidated",
+            "period_end": "2024-09-28",
+            "unit": "in millions",
+            "table_title_raw": "The following table shows information by reportable segment for 2024, 2023 and 2022 (in millions):",
+            "table_group_id": "apple_2024_10k_p050_t03",
+            "paragraph_index": null,
+            "sheet_name": null,
+            "cell_range": null,
+            "source_location": "page=50",
+            "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/a/NASDAQ_AAPL_2024.pdf",
+            "source_kind": "public_archive_copy"
+          },
+          "retrieval_task_ids": [
+            "T1"
+          ]
+        },
+        {
+          "evidence_id": "S5",
+          "text": "table_id=apple_2024_10k_p033_t01；location=page=33；headers=column_1 | 2024 | 2023 | 2022\ntable_title=CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME\ntable_context=Apple Inc.\nCONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME\n(In millions)\nYears ended\nSeptember 28, September 30, September 24,\n2024 2023 2022\nNet income $ 93,736 $ 96,995 $ 99,803\nrow_number=13；column_1=Total comprehensive income $；2024=98,016；2023=96,652；2022=88,531\n\n完整表格上下文：\n | 2024 | 2023 | 2022\nOther comprehensive income/(loss): |  |  | \nChange in foreign currency translation, net of tax | 395 | (765) | (1,511)\nChange in unrealized gains/losses on derivative instruments, net of tax: |  |  | \nChange in fair value of derivative instruments | (832) | 323 | 3,212\nAdjustment for net (gains)/losses realized and included in net income | (1,337) | (1,717) | (1,074)\nTotal change in unrealized gains/losses on derivative instruments | (2,169) | (1,394) | 2,138\nChange in unrealized gains/losses on marketable debt securities, net of tax: |  |  | \nChange in fair value of marketable debt securities | 5,850 | 1,563 | (12,104)\nAdjustment for net (gains)/losses realized and included in net income | 204 | 253 | 205\nTotal change in unrealized gains/losses on marketable debt securities | 6,054 | 1,816 | (11,899)\nTotal other comprehensive income/(loss) | 4,280 | (343) | (11,272)\nTotal comprehensive income $ | 98,016 | 96,652 | 88,531",
+          "citation": {
+            "evidence_id": "S5",
+            "chunk_id": "chunk_e31feabbceeea45cd51d6891",
+            "document_id": "apple_2024_10k",
+            "company_id": "apple",
+            "company_name": "Apple Inc.",
+            "fiscal_year": 2024,
+            "source_format": "pdf",
+            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "page": 33,
+            "page_start": 33,
+            "page_end": 33,
+            "table_id": "apple_2024_10k_p033_t01",
+            "table_title": "CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME",
+            "table_context": "Apple Inc.\nCONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME\n(In millions)\nYears ended\nSeptember 28, September 30, September 24,\n2024 2023 2022\nNet income $ 93,736 $ 96,995 $ 99,803",
+            "region": null,
+            "period_years": [
+              2022,
+              2023,
+              2024
+            ],
+            "measure_name": null,
+            "value_kind": "monetary",
+            "currency": "USD",
+            "unit_scale": "as_reported",
+            "column_headers": [
+              "column_1",
+              "2024",
+              "2023",
+              "2022"
+            ],
+            "parent_row_labels": [],
+            "statement_family": "income_statement",
+            "statement_scope": "consolidated",
+            "period_end": "FY2024",
+            "unit": "In millions",
+            "table_title_raw": "CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME",
+            "table_group_id": "apple_2024_10k_p033_t01",
+            "paragraph_index": null,
+            "sheet_name": null,
+            "cell_range": null,
+            "source_location": "page=33",
+            "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/a/NASDAQ_AAPL_2024.pdf",
+            "source_kind": "public_archive_copy"
+          },
+          "retrieval_task_ids": [
+            "T1"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "apple_cn_company_services",
+      "alias": "苹果公司",
+      "query": "苹果公司2024财年的服务业务净销售额是多少？",
+      "expected_company_id": "apple",
+      "error": null,
+      "answer": "苹果公司2024财年服务业务的净销售额为 **96,169**（单位：百万美元，即 In millions）[S1][S3]。\n\n该数据来源于苹果公司2024财年（截至2024年9月28日）的合并利润表（CONSOLIDATED STATEMENTS OF OPERATIONS），其中“Services”行对应的2024财年净销售额为 96,169 百万美元[S1][S3]。",
+      "evidence_count": 5,
+      "evidence_companies": [
+        "apple"
+      ],
+      "resolved_filters": {
+        "company_id": "apple",
+        "fiscal_year": 2024
+      },
+      "numeric_in_evidence": {
+        "96,169": true
+      },
+      "numeric_in_answer": {
+        "96,169": true
+      },
+      "family_coverage": true,
+      "layers": {
+        "company_filter_resolution": true,
+        "company_isolation": true,
+        "retrieval_coverage": true,
+        "grounded_answer": true,
+        "answer_completeness": true
+      },
+      "planner": {
+        "status": "used",
+        "route": "planner",
+        "intent": "查询苹果公司2024财年服务业务的净销售额",
+        "entities": [
+          "苹果公司",
+          "服务业务",
+          "净销售额"
+        ],
+        "time_scope": "2024财年",
+        "retrieval_tasks": [
+          {
+            "task_id": "T1",
+            "requirement": {
+              "topic": "服务业务净销售额",
+              "metrics": [
+                "净销售额"
+              ],
+              "relation": "无",
+              "group_by": [
+                "服务业务"
+              ]
+            },
+            "queries": [
+              "苹果公司2024财年的服务业务净销售额是多少？ net sales total net sales",
+              "Apple 2024 fiscal year services net sales",
+              "苹果公司2024财年服务业务净销售额",
+              "2024 annual report services segment net sales"
+            ],
+            "statement_scope": "合并",
+            "candidate_chunk_ids": [
+              "chunk_b85ad753f9af0b240362c6e5",
+              "chunk_c06af01ac31347cc179134a4",
+              "chunk_793ac5a0b7dbbbbe2786a52c",
+              "chunk_c94c35d40f41f0a48c45d10f",
+              "chunk_3f66c5d551e5c427cef68456",
+              "chunk_98dfddbc26e00d3893c9a97c",
+              "chunk_47800caf62835aa721838c02",
+              "chunk_6382ef6cc4273a63fc709d19",
+              "chunk_8b07eb03751e31b4cfd1c587",
+              "chunk_aaed67bd592e05fe09faf6ea",
+              "chunk_256d89635fd3d8af6d003801",
+              "chunk_478651e33e8aa910c9c8932f",
+              "chunk_9ea437019ee71539a5c3d08d",
+              "chunk_06d7b7f60c15516ffcde843d",
+              "chunk_1963582d8690a9314e8d7b01",
+              "chunk_45d03ef415a57b2622fb202f",
+              "chunk_ea2132446a20847bb3ae403c"
+            ],
+            "candidate_top_k": 15,
+            "query_retrieval": [
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              },
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              },
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              },
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              }
+            ],
+            "evidence_ids": [
+              "S1",
+              "S2",
+              "S3",
+              "S4",
+              "S5"
+            ]
+          }
+        ],
+        "needs_calculation": false,
+        "clarification_needed": false,
+        "usage": {
+          "prompt_tokens": 753,
+          "completion_tokens": 177,
+          "total_tokens": 930,
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 113,
+          "prompt_cache_total_tokens": 753,
+          "prompt_cache_hit_ratio": 0.8499
+        },
+        "finish_reason": "stop"
+      },
+      "evidence": [
+        {
+          "evidence_id": "S1",
+          "text": "table_id=apple_2024_10k_p032_t01；location=page=32；headers=column_1 | 2024 | 2023 | 2022\ntable_title=CONSOLIDATED STATEMENTS OF OPERATIONS\ntable_context=Apple Inc.\nCONSOLIDATED STATEMENTS OF OPERATIONS\n(In millions, except number of shares, which are reflected in thousands, and per-share amounts)\nYears ended\nSeptember 28, September 30, September 24,\n2024 2023 2022\nNet sales:\nrow_number=4；column_1=Total net sales；2024=391,035；2023=383,285；2022=394,328\n\n完整表格上下文：\n | 2024 | 2023 | 2022\nProducts $ | 294,866 | 298,085 | 316,199\nServices | 96,169 | 85,200 | 78,129\nTotal net sales | 391,035 | 383,285 | 394,328\nCost of sales: |  |  | \nProducts | 185,233 | 189,282 | 201,471\nServices | 25,119 | 24,855 | 22,075\nTotal cost of sales | 210,352 | 214,137 | 223,546\nGross margin | 180,683 | 169,148 | 170,782\nOperating expenses: |  |  | \nResearch and development | 31,370 | 29,915 | 26,251\nSelling, general and administrative | 26,097 | 24,932 | 25,094\nTotal operating expenses | 57,467 | 54,847 | 51,345\nOperating income | 123,216 | 114,301 | 119,437\nOther income/(expense), net | 269 | (565) | (334)\nIncome before provision for income taxes | 123,485 | 113,736 | 119,103\nProvision for income taxes | 29,749 | 16,741 | 19,300\nNet income $ | 93,736 | 96,995 | 99,803\nEarnings per share: |  |  | \nBasic $ | 6.11 | 6.16 | 6.15\nDiluted $ | 6.08 | 6.13 | 6.11\nShares used in computing earnings per share: |  |  | \nBasic | 15,343,783 | 15,744,231 | 16,215,963\nDiluted | 15,408,095 | 15,812,547 | 16,325,819",
+          "citation": {
+            "evidence_id": "S1",
+            "chunk_id": "chunk_b85ad753f9af0b240362c6e5",
+            "document_id": "apple_2024_10k",
+            "company_id": "apple",
+            "company_name": "Apple Inc.",
+            "fiscal_year": 2024,
+            "source_format": "pdf",
+            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "page": 32,
+            "page_start": 32,
+            "page_end": 32,
+            "table_id": "apple_2024_10k_p032_t01",
+            "table_title": "CONSOLIDATED STATEMENTS OF OPERATIONS",
+            "table_context": "Apple Inc.\nCONSOLIDATED STATEMENTS OF OPERATIONS\n(In millions, except number of shares, which are reflected in thousands, and per-share amounts)\nYears ended\nSeptember 28, September 30, September 24,\n2024 2023 2022\nNet sales:",
+            "region": null,
+            "period_years": [
+              2022,
+              2023,
+              2024
+            ],
+            "measure_name": null,
+            "value_kind": "monetary",
+            "currency": "USD",
+            "unit_scale": "as_reported",
+            "column_headers": [
+              "column_1",
+              "2024",
+              "2023",
+              "2022"
+            ],
+            "parent_row_labels": [],
+            "statement_family": "income_statement",
+            "statement_scope": "consolidated",
+            "period_end": "FY2024",
+            "unit": "In millions",
+            "table_title_raw": "CONSOLIDATED STATEMENTS OF OPERATIONS",
+            "table_group_id": "apple_2024_10k_p032_t01",
+            "paragraph_index": null,
+            "sheet_name": null,
+            "cell_range": null,
+            "source_location": "page=32",
+            "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/a/NASDAQ_AAPL_2024.pdf",
+            "source_kind": "public_archive_copy"
+          },
+          "retrieval_task_ids": [
+            "T1"
+          ]
+        },
+        {
+          "evidence_id": "S2",
+          "text": "table_id=apple_2024_10k_p027_t03；location=page=27；headers=column_1 | 2024 | Change | 2023 | Change | 2022\ntable_context=Services gross margin increased during 2024 compared to 2023 due primarily to higher Services net sales.\nServices gross margin percentage increased during 2024 compared to 2023 due to a different Services mix.\nThe Company’s future gross margins can be impacted by a variety of factors, as discussed in Part I, Item 1A of this Form 10-K under the heading “Risk Factors.”\nAs a result, the Company believes, in general, gross margins will be subject to volatility and downward pressure.\nOperating Expenses\nOperating expenses for 2024, 2023 and 2022 were as follows (dollars in millions):\n2024 Change 2023 Change 2022\nResearch and development $ 31,370 5 % $ 29,915 14 % $ 26,251\nrow_number=2；column_1=Percentage of total net sales；2024=8；Change=空值；2023=8；Change=空值；2022=7\nrow_number=3；column_1=Selling, general and administrative $；2024=26,097；Change=5；2023=24,932；Change=空值；2022=25,094\nrow_number=4；column_1=Percentage of total net sales；2024=7；Change=空值；2023=7；Change=空值；2022=6\nrow_number=5；column_1=Total operating expenses $；2024=57,467；Change=5；2023=54,847；Change=7；2022=51,345\nrow_number=6；column_1=Percentage of total net sales；2024=15；Change=空值；2023=14；Change=空值；2022=13\n\n完整表格上下文：\n | 2024 | Change | 2023 | Change | 2022\nPercentage of total net sales | 8 |  | 8 |  | 7\nSelling, general and administrative $ | 26,097 | 5 | 24,932 |  | 25,094\nPercentage of total net sales | 7 |  | 7 |  | 6\nTotal operating expenses $ | 57,467 | 5 | 54,847 | 7 | 51,345\nPercentage of total net sales | 15 |  | 14 |  | 13",
+          "citation": {
+            "evidence_id": "S2",
+            "chunk_id": "chunk_c06af01ac31347cc179134a4",
+            "document_id": "apple_2024_10k",
+            "company_id": "apple",
+            "company_name": "Apple Inc.",
+            "fiscal_year": 2024,
+            "source_format": "pdf",
+            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "page": 27,
+            "page_start": 27,
+            "page_end": 27,
+            "table_id": "apple_2024_10k_p027_t03",
+            "table_title": null,
+            "table_context": "Services gross margin increased during 2024 compared to 2023 due primarily to higher Services net sales.\nServices gross margin percentage increased during 2024 compared to 2023 due to a different Services mix.\nThe Company’s future gross margins can be impacted by a variety of factors, as discussed in Part I, Item 1A of this Form 10-K under the heading “Risk Factors.”\nAs a result, the Company believes, in general, gross margins will be subject to volatility and downward pressure.\nOperating Expenses\nOperating expenses for 2024, 2023 and 2022 were as follows (dollars in millions):\n2024 Change 2023 Change 2022\nResearch and development $ 31,370 5 % $ 29,915 14 % $ 26,251",
+            "region": null,
+            "period_years": [
+              2022,
+              2023,
+              2024
+            ],
+            "measure_name": null,
+            "value_kind": "monetary",
+            "currency": "USD",
+            "unit_scale": "as_reported",
+            "column_headers": [
+              "column_1",
+              "2024",
+              "Change",
+              "2023",
+              "Change",
+              "2022"
+            ],
+            "parent_row_labels": [],
+            "statement_family": "income_statement",
+            "statement_scope": "consolidated",
+            "period_end": "FY2024",
+            "unit": "in millions",
+            "table_title_raw": "column_1=Percentage of total net sales",
+            "table_group_id": "apple_2024_10k_p027_t03",
+            "paragraph_index": null,
+            "sheet_name": null,
+            "cell_range": null,
+            "source_location": "page=27",
+            "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/a/NASDAQ_AAPL_2024.pdf",
+            "source_kind": "public_archive_copy"
+          },
+          "retrieval_task_ids": [
+            "T1"
+          ]
+        },
+        {
+          "evidence_id": "S3",
+          "text": "CONSOLIDATED STATEMENTS OF OPERATIONS(In millions, except number of shares, which are reflected in thousands, and per-share amounts) September 28,2024 September 30,2023 September 24,2022 Net sales: Products $ 294,866 $ 298,085 $ 316,199 Services 96,169 85,200 78,129 Total net sales 391,035 383,285 394,328 Cost of sales: Products 185,233 189,282 201,471 Services 25,119 24,855 22,075 Total cost of sales 210,352 214,137 223,546 Gross margin 180,683 169,148 170,782 Operating expenses: Research and development 31,370 29,915 26,251 Selling, general and administrative 26,097 24,932 25,094 Total operating expenses 57,467 54,847 51,345 Operating income 123,216 114,301 119,437 Other income/(expense), net 269 (565) (334) Income before provision for income taxes 123,485 113,736 119,103 Provision for income taxes 29,749 16,741 19,300 Net income $ 93,736 $ 96,995 $ 99,803 Earnings per share: Basic $ 6.11 $ 6.16 $ 6.15 Diluted $ 6.08 $ 6.13 $ 6.11 Shares used in computing earnings per share: Basic 15,343,783 15,744,231 16,215,963 Diluted 15,408,095 15,812,547 16,325,819 Apple Inc.\n\n| 2024 Form 10-K | 29",
+          "citation": {
+            "evidence_id": "S3",
+            "chunk_id": "chunk_793ac5a0b7dbbbbe2786a52c",
+            "document_id": "apple_2024_10k",
+            "company_id": "apple",
+            "company_name": "Apple Inc.",
+            "fiscal_year": 2024,
+            "source_format": "pdf",
+            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "page": 32,
+            "page_start": 32,
+            "page_end": 32,
+            "table_id": null,
+            "table_title": null,
+            "table_context": null,
+            "region": null,
+            "period_years": [
+              2022,
+              2023,
+              2024
+            ],
+            "measure_name": null,
+            "value_kind": null,
+            "currency": "USD",
+            "unit_scale": "as_reported",
+            "column_headers": [],
+            "parent_row_labels": [],
+            "statement_family": "income_statement",
+            "statement_scope": "consolidated",
+            "period_end": "FY2024",
+            "unit": "In millions",
+            "table_title_raw": null,
+            "table_group_id": "apple_2024_10k:page:32:text",
+            "paragraph_index": null,
+            "sheet_name": null,
+            "cell_range": null,
+            "source_location": "page=32",
+            "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/a/NASDAQ_AAPL_2024.pdf",
+            "source_kind": "public_archive_copy"
+          },
+          "retrieval_task_ids": [
+            "T1"
+          ]
+        },
+        {
+          "evidence_id": "S4",
+          "text": "table_id=apple_2024_10k_p050_t04；location=page=50；headers=column_1 | column_2 | 2024 | 2024 | 2023 | 2023\ntable_title=The following table shows information by reportable segment for 2024, 2023 and 2022 (in millions):\ntable_context=2024 2023 2022\nNet sales:\nU.S. $ 142,196 $ 138,573 $ 147,859\nChina (1) 66,952 72,559 74,200\nOther countries 181,887 172,153 172,269\nTotal net sales $ 391,035 $ 383,285 $ 394,328\n2024 2023\nLong-lived assets:\nrow_number=2；column_1=U.S.；column_2=空值；2024=35,664；2024=35,664；2023=33,276；2023=33,276\nrow_number=3；column_1=(1) China；column_2=空值；2024=4,797；2024=4,797；2023=5,778；2023=5,778\nrow_number=4；column_1=Other countries；column_2=空值；2024=5,219；2024=5,219；2023=4,661；2023=4,661\nrow_number=5；column_1=Total long-lived assets；column_2=空值；2024=45,680；2024=45,680；2023=43,715；2023=43,715\n\n完整表格上下文：\n |  | 2024 | 2024 | 2023 | 2023\nU.S. |  | 35,664 | 35,664 | 33,276 | 33,276\n(1) China |  | 4,797 | 4,797 | 5,778 | 5,778\nOther countries |  | 5,219 | 5,219 | 4,661 | 4,661\nTotal long-lived assets |  | 45,680 | 45,680 | 43,715 | 43,715",
+          "citation": {
+            "evidence_id": "S4",
+            "chunk_id": "chunk_c94c35d40f41f0a48c45d10f",
+            "document_id": "apple_2024_10k",
+            "company_id": "apple",
+            "company_name": "Apple Inc.",
+            "fiscal_year": 2024,
+            "source_format": "pdf",
+            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "page": 50,
+            "page_start": 50,
+            "page_end": 50,
+            "table_id": "apple_2024_10k_p050_t04",
+            "table_title": "The following table shows information by reportable segment for 2024, 2023 and 2022 (in millions):",
+            "table_context": "2024 2023 2022\nNet sales:\nU.S. $ 142,196 $ 138,573 $ 147,859\nChina (1) 66,952 72,559 74,200\nOther countries 181,887 172,153 172,269\nTotal net sales $ 391,035 $ 383,285 $ 394,328\n2024 2023\nLong-lived assets:",
+            "region": null,
+            "period_years": [
+              2023,
+              2024
+            ],
+            "measure_name": null,
+            "value_kind": "monetary",
+            "currency": "USD",
+            "unit_scale": "as_reported",
+            "column_headers": [
+              "column_1",
+              "column_2",
+              "2024",
+              "2024",
+              "2023",
+              "2023"
+            ],
+            "parent_row_labels": [],
+            "statement_family": "income_statement",
+            "statement_scope": "consolidated",
+            "period_end": "FY2024",
+            "unit": "in millions",
+            "table_title_raw": "The following table shows information by reportable segment for 2024, 2023 and 2022 (in millions):",
+            "table_group_id": "apple_2024_10k_p050_t04",
+            "paragraph_index": null,
+            "sheet_name": null,
+            "cell_range": null,
+            "source_location": "page=50",
+            "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/a/NASDAQ_AAPL_2024.pdf",
+            "source_kind": "public_archive_copy"
+          },
+          "retrieval_task_ids": [
+            "T1"
+          ]
+        },
+        {
+          "evidence_id": "S5",
+          "text": "table_id=apple_2024_10k_p050_t03；location=page=50；headers=column_1 | 2024 | 2023 | 2022\ntable_title=The following table shows information by reportable segment for 2024, 2023 and 2022 (in millions):\ntable_context=Research and development expense (31,370) (29,915) (26,251)\nOther corporate expenses, net (1) (7,458) (6,672) (7,207)\nTotal operating income $ 123,216 $ 114,301 $ 119,437\n(1) Includes general and administrative compensation costs, various nonrecurring charges, and other separately managed costs.\nThe following tables show net sales for 2024, 2023 and 2022 and long-lived assets as of September 28, 2024 and September 30, 2023 for countries that\nindividually accounted for 10% or more of the respective totals, as well as aggregate amounts for the remaining countries (in millions):\n2024 2023 2022\nNet sales:\nrow_number=2；column_1=U.S. $；2024=142,196；2023=138,573；2022=147,859\nrow_number=3；column_1=(1) China；2024=66,952；2023=72,559；2022=74,200\nrow_number=4；column_1=Other countries；2024=181,887；2023=172,153；2022=172,269\nrow_number=5；column_1=Total net sales $；2024=391,035；2023=383,285；2022=394,328\n\n完整表格上下文：\n | 2024 | 2023 | 2022\nU.S. $ | 142,196 | 138,573 | 147,859\n(1) China | 66,952 | 72,559 | 74,200\nOther countries | 181,887 | 172,153 | 172,269\nTotal net sales $ | 391,035 | 383,285 | 394,328",
+          "citation": {
+            "evidence_id": "S5",
+            "chunk_id": "chunk_3f66c5d551e5c427cef68456",
+            "document_id": "apple_2024_10k",
+            "company_id": "apple",
+            "company_name": "Apple Inc.",
+            "fiscal_year": 2024,
+            "source_format": "pdf",
+            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "page": 50,
+            "page_start": 50,
+            "page_end": 50,
+            "table_id": "apple_2024_10k_p050_t03",
+            "table_title": "The following table shows information by reportable segment for 2024, 2023 and 2022 (in millions):",
+            "table_context": "Research and development expense (31,370) (29,915) (26,251)\nOther corporate expenses, net (1) (7,458) (6,672) (7,207)\nTotal operating income $ 123,216 $ 114,301 $ 119,437\n(1) Includes general and administrative compensation costs, various nonrecurring charges, and other separately managed costs.\nThe following tables show net sales for 2024, 2023 and 2022 and long-lived assets as of September 28, 2024 and September 30, 2023 for countries that\nindividually accounted for 10% or more of the respective totals, as well as aggregate amounts for the remaining countries (in millions):\n2024 2023 2022\nNet sales:",
+            "region": null,
+            "period_years": [
+              2022,
+              2023,
+              2024
+            ],
+            "measure_name": null,
+            "value_kind": "monetary",
+            "currency": "USD",
+            "unit_scale": "as_reported",
+            "column_headers": [
+              "column_1",
+              "2024",
+              "2023",
+              "2022"
+            ],
+            "parent_row_labels": [],
+            "statement_family": "income_statement",
+            "statement_scope": "consolidated",
+            "period_end": "2024-09-28",
+            "unit": "in millions",
+            "table_title_raw": "The following table shows information by reportable segment for 2024, 2023 and 2022 (in millions):",
+            "table_group_id": "apple_2024_10k_p050_t03",
+            "paragraph_index": null,
+            "sheet_name": null,
+            "cell_range": null,
+            "source_location": "page=50",
+            "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/a/NASDAQ_AAPL_2024.pdf",
+            "source_kind": "public_archive_copy"
+          },
+          "retrieval_task_ids": [
+            "T1"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "microsoft_cn_short_income",
+      "alias": "微软",
+      "query": "微软2023财年的营业收入、营业利润和净利润分别是多少？",
+      "expected_company_id": "microsoft",
+      "error": null,
+      "answer": "根据微软2023财年（截至2023年6月30日）合并财务报表，相关数据如下（单位：百万美元）：\n\n- **营业收入（Total revenue）**：**211,915** [S1][S2][S4][S5]\n- **营业利润（Operating income）**：**88,523** [S1][S2][S5]\n- **净利润（Net income）**：**72,361** [S1][S5][S6]\n\n以上数据均来自微软2023财年合并损益表及管理层讨论与分析中的合并业绩数据，财年截止日为2023年6月30日，单位为百万美元 [S1][S2][S5]。",
+      "evidence_count": 7,
+      "evidence_companies": [
+        "microsoft"
+      ],
+      "resolved_filters": {
+        "company_id": "microsoft",
+        "fiscal_year": 2023
+      },
+      "numeric_in_evidence": {
+        "211,915": true,
+        "88,523": true,
+        "72,361": true
+      },
+      "numeric_in_answer": {
+        "211,915": true,
+        "88,523": true,
+        "72,361": true
+      },
+      "family_coverage": true,
+      "layers": {
+        "company_filter_resolution": true,
+        "company_isolation": true,
+        "retrieval_coverage": true,
+        "grounded_answer": true,
+        "answer_completeness": true
+      },
+      "planner": {
+        "status": "used",
+        "route": "planner",
+        "intent": "查询微软2023财年营业收入、营业利润和净利润的具体数值",
+        "entities": [
+          "微软"
+        ],
+        "time_scope": "2023财年",
+        "retrieval_tasks": [
+          {
+            "task_id": "T1",
+            "requirement": {
+              "topic": "营业收入",
+              "metrics": [
+                "营业收入"
+              ],
+              "relation": "数值",
+              "group_by": []
+            },
+            "queries": [
+              "微软2023财年的营业收入、营业利润和净利润分别是多少？ consolidated statement of profit and loss revenue from operations total income revenue total revenue",
+              "Microsoft 2023 fiscal year revenue",
+              "微软2023财年营业收入",
+              "Microsoft FY2023 income statement revenue"
+            ],
+            "statement_scope": "合并",
+            "candidate_chunk_ids": [
+              "chunk_b525d4af8bb0b788c129b95b",
+              "chunk_e7420aab4d0b7ea5ddf30592",
+              "chunk_a5d1ae27d867782864608b60",
+              "chunk_fd8d7b195946ba5ffdd49429",
+              "chunk_c257513568337a8cd90c3ecc",
+              "chunk_dd13801fed094bb42deb8ca6",
+              "chunk_b575548c54a72602c5eaa2d4",
+              "chunk_e5349aca0e712353e19f221a",
+              "chunk_f88ed978ea6000c5cd311792",
+              "chunk_68a60de785de2c12f3ff884c",
+              "chunk_d1f4aa2bed6b3fd75e544976",
+              "chunk_c2c450ba490671d0b6aed353",
+              "chunk_569cdc9964310c054bc32008",
+              "chunk_5e1266c27ed61ca13848a6f1",
+              "chunk_1f47235fbf5c8f8d542bdb15",
+              "chunk_3b871f8ec2fca861eb376be3"
+            ],
+            "candidate_top_k": 15,
+            "query_retrieval": [
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              },
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              },
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              },
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              }
+            ],
+            "evidence_ids": [
+              "S1",
+              "S2",
+              "S3",
+              "S4",
+              "S6"
+            ]
+          },
+          {
+            "task_id": "T2",
+            "requirement": {
+              "topic": "营业利润",
+              "metrics": [
+                "营业利润"
+              ],
+              "relation": "数值",
+              "group_by": []
+            },
+            "queries": [
+              "微软2023财年的营业收入、营业利润和净利润分别是多少？ profit for the year operating income net income operating margin",
+              "Microsoft 2023 fiscal year operating income",
+              "微软2023财年营业利润",
+              "Microsoft FY2023 operating income"
+            ],
+            "statement_scope": "合并",
+            "candidate_chunk_ids": [
+              "chunk_a5d1ae27d867782864608b60",
+              "chunk_e7420aab4d0b7ea5ddf30592",
+              "chunk_b525d4af8bb0b788c129b95b",
+              "chunk_c2c450ba490671d0b6aed353",
+              "chunk_d1f4aa2bed6b3fd75e544976",
+              "chunk_92a1729eeff38c629b4cdab9",
+              "chunk_b575548c54a72602c5eaa2d4",
+              "chunk_f88ed978ea6000c5cd311792",
+              "chunk_e5349aca0e712353e19f221a",
+              "chunk_68a60de785de2c12f3ff884c",
+              "chunk_fd8d7b195946ba5ffdd49429",
+              "chunk_c257513568337a8cd90c3ecc",
+              "chunk_96b9275791ffa42ca640c189",
+              "chunk_3b92470696d0d3cb3a76b267",
+              "chunk_dd13801fed094bb42deb8ca6",
+              "chunk_1f47235fbf5c8f8d542bdb15",
+              "chunk_3b871f8ec2fca861eb376be3"
+            ],
+            "candidate_top_k": 15,
+            "query_retrieval": [
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              },
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              },
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              },
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              }
+            ],
+            "evidence_ids": [
+              "S1",
+              "S2",
+              "S3",
+              "S5",
+              "S7"
+            ]
+          },
+          {
+            "task_id": "T3",
+            "requirement": {
+              "topic": "净利润",
+              "metrics": [
+                "净利润"
+              ],
+              "relation": "数值",
+              "group_by": []
+            },
+            "queries": [
+              "微软2023财年的营业收入、营业利润和净利润分别是多少？ profit for the year operating income net income operating margin",
+              "Microsoft 2023 fiscal year net income",
+              "微软2023财年净利润",
+              "Microsoft FY2023 net income"
+            ],
+            "statement_scope": "合并",
+            "candidate_chunk_ids": [
+              "chunk_a5d1ae27d867782864608b60",
+              "chunk_b525d4af8bb0b788c129b95b",
+              "chunk_e7420aab4d0b7ea5ddf30592",
+              "chunk_c2c450ba490671d0b6aed353",
+              "chunk_d1f4aa2bed6b3fd75e544976",
+              "chunk_92a1729eeff38c629b4cdab9",
+              "chunk_96b9275791ffa42ca640c189",
+              "chunk_c257513568337a8cd90c3ecc",
+              "chunk_b575548c54a72602c5eaa2d4",
+              "chunk_f88ed978ea6000c5cd311792",
+              "chunk_68a60de785de2c12f3ff884c",
+              "chunk_e5349aca0e712353e19f221a",
+              "chunk_fd8d7b195946ba5ffdd49429",
+              "chunk_35a5f84ba930e0b7aa183837",
+              "chunk_43fae6d0e9fe250793801e3f",
+              "chunk_ec970a59fc7ddc9f560f2f6f",
+              "chunk_3b92470696d0d3cb3a76b267",
+              "chunk_3b871f8ec2fca861eb376be3",
+              "chunk_1f47235fbf5c8f8d542bdb15",
+              "chunk_5e1266c27ed61ca13848a6f1"
+            ],
+            "candidate_top_k": 15,
+            "query_retrieval": [
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              },
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              },
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              },
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              }
+            ],
+            "evidence_ids": [
+              "S1",
+              "S2",
+              "S3",
+              "S5",
+              "S7"
+            ]
+          }
+        ],
+        "needs_calculation": false,
+        "clarification_needed": false,
+        "usage": {
+          "prompt_tokens": 756,
+          "completion_tokens": 330,
+          "total_tokens": 1086,
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 116,
+          "prompt_cache_total_tokens": 756,
+          "prompt_cache_hit_ratio": 0.8466
+        },
+        "finish_reason": "stop"
+      },
+      "evidence": [
+        {
+          "evidence_id": "S1",
+          "text": "43 FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA INCOME STATEMENTS\n\n(In millions, except per share amounts)\n\nYear Ended June 30, 2023 2022 2021\n\nRevenue: Product $ 64,699 $ 72,732 $ 71,074 Service and other 147,216 125,538 97,014 Total revenue 211,915 198,270 168,088 Cost of revenue: Product 17,804 19,064 18,219 Service and other 48,059 43,586 34,013 Total cost of revenue 65,863 62,650 52,232 Gross margin 146,052 135,620 115,856 Research and development 27,195 24,512 20,716 Sales and marketing 22,759 21,825 20,117 General and administrative 7,575 5,900 5,107 Operating income 88,523 83,383 69,916 Other income, net 788 333 1,186 Income before income taxes 89,311 83,716 71,102 Provision for income taxes 16,950 10,978 9,831 Net income $ 72,361 $ 72,738 $ 61,271\n\nEarnings per share: Basic $ 9.72 $ 9.70 $ 8.12 Diluted $ 9.68 $ 9.65 $ 8.05\n\nWeighted average shares outstanding: Basic 7,446 7,496 7,547 Diluted 7,472 7,540 7,608",
+          "citation": {
+            "evidence_id": "S1",
+            "chunk_id": "chunk_b525d4af8bb0b788c129b95b",
+            "document_id": "microsoft_2023_annual_report",
+            "company_id": "microsoft",
+            "company_name": "Microsoft Corporation",
+            "fiscal_year": 2023,
+            "source_format": "pdf",
+            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "page": 44,
+            "page_start": 44,
+            "page_end": 44,
+            "table_id": null,
+            "table_title": null,
+            "table_context": null,
+            "region": null,
+            "period_years": [
+              2021,
+              2022,
+              2023
+            ],
+            "measure_name": null,
+            "value_kind": null,
+            "currency": "USD",
+            "unit_scale": "as_reported",
+            "column_headers": [],
+            "parent_row_labels": [],
+            "statement_family": "ratio",
+            "statement_scope": "consolidated",
+            "period_end": "2023-06-30",
+            "unit": "In millions",
+            "table_title_raw": null,
+            "table_group_id": "microsoft_2023_annual_report:page:44:text",
+            "paragraph_index": null,
+            "sheet_name": null,
+            "cell_range": null,
+            "source_location": "page=44",
+            "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/m/NASDAQ_MSFT_2023.pdf",
+            "source_kind": "public_archive_copy"
+          },
+          "retrieval_task_ids": [
+            "T1",
+            "T3",
+            "T2"
+          ]
+        },
+        {
+          "evidence_id": "S2",
+          "text": "Revenue, gross margin, and operating income included an unfavorable foreign currency impact of 4%, 4%, and 6%, respectively.\n\nCost of revenue and operating expenses both included a favorable foreign currency impact of 2%.\n\nCurrent year gross margin, operati ng income, net income, and diluted EPS were negatively impacted by the Q2 charge, which resulted in decreases of $152 million, $1.2 billion, $946 million, and $0.13, respectively.\n\nPrior year net income and diluted EPS were positively impacted by the net tax benefit related to the transfer of intangible properties, which resulted in an increase to net income and diluted EPS of $3.3 billion and $0.44, respectively.\n\nSEGMENT RESULTS OF OPERATIONS\n\n(In millions, except percentages) 2023 2022 Percentage Change\n\nRevenue\n\nProductivity and Business Processes $ 69,274 $ 63,364 9% Intelligent Cloud 87,907 74,965 17% More Personal Computing 54,734 59,941 (9)% Total $ 211,915 $ 198,270 7%\n\nOperating Income\n\nProductivity and Business Processes $ 34,189 $ 29,690 15% Intelligent Cloud 37,884 33,203 14% More Personal Computing 16,450 20,490 (20)% Total $ 88,523 $ 83,383 6% Reportable Segments Fiscal Year 2023 Compared with Fiscal Year 2022 Productivity and Business Processes Revenue increased $5.9 billion or 9%.\n\n• Office Commercial products and cloud services revenue increased $3.7 billion or 10%.\n\nOffice 365 Commercial revenue grew 13% with seat growth of 11%, driven by small and medium business and frontline worker offerings, as well as growth in revenue per user.\n\nOffice Commercial products revenue declined 21% driven by continued customer shift to cloud offerings.",
+          "citation": {
+            "evidence_id": "S2",
+            "chunk_id": "chunk_a5d1ae27d867782864608b60",
+            "document_id": "microsoft_2023_annual_report",
+            "company_id": "microsoft",
+            "company_name": "Microsoft Corporation",
+            "fiscal_year": 2023,
+            "source_format": "pdf",
+            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "page": 32,
+            "page_start": 32,
+            "page_end": 32,
+            "table_id": null,
+            "table_title": null,
+            "table_context": null,
+            "region": null,
+            "period_years": [
+              2022,
+              2023
+            ],
+            "measure_name": null,
+            "value_kind": null,
+            "currency": "USD",
+            "unit_scale": "as_reported",
+            "column_headers": [],
+            "parent_row_labels": [],
+            "statement_family": "income_statement",
+            "statement_scope": "consolidated",
+            "period_end": "FY2023",
+            "unit": "In millions",
+            "table_title_raw": null,
+            "table_group_id": "microsoft_2023_annual_report:page:32:text",
+            "paragraph_index": null,
+            "sheet_name": null,
+            "cell_range": null,
+            "source_location": "page=32",
+            "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/m/NASDAQ_MSFT_2023.pdf",
+            "source_kind": "public_archive_copy"
+          },
+          "retrieval_task_ids": [
+            "T2",
+            "T3",
+            "T1"
+          ]
+        },
+        {
+          "evidence_id": "S3",
+          "text": "Based on the carrying amount of server and network equipment included in property and equipment, net as of June 30, 2022, the effect of this change in estimate for fiscal year 2023 was an increase in operating income of $3.7 billion and net income of $3.0 billion, or $0.40 per both basic and diluted share.\n\nForeign Currencies Assets and liabilities recorded in foreign currencies are translated at the exchange rate on the balance sheet date.\n\nRevenue and expenses are translated at average rates of exchan ge prevailing during the year.\n\nTranslation adjustments resulting from this process are recorded to other comprehensive income.\n\nRevenue Product Revenue and Service and Other Revenue Product revenue includes sales from operating systems, cross -device productivity and collaboration applications, server applications, business solution applications, desktop and server management tools, software development tools, video games, and hardware such as PCs, tablets, gaming and entertainment consoles, other intelligent devices, and related accessories.\n\nService and other revenue includes sales from cloud -based solutions that provide customers with software, services, platforms, and content such as Office 365, Azure, Dynamics 365, and Xbox; solution support; and consulting services.\n\nService and other revenue also includes sales from online advertising and LinkedIn.",
+          "citation": {
+            "evidence_id": "S3",
+            "chunk_id": "chunk_e7420aab4d0b7ea5ddf30592",
+            "document_id": "microsoft_2023_annual_report",
+            "company_id": "microsoft",
+            "company_name": "Microsoft Corporation",
+            "fiscal_year": 2023,
+            "source_format": "pdf",
+            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "page": 49,
+            "page_start": 49,
+            "page_end": 49,
+            "table_id": null,
+            "table_title": null,
+            "table_context": null,
+            "region": null,
+            "period_years": [
+              2022,
+              2023
+            ],
+            "measure_name": null,
+            "value_kind": null,
+            "currency": "USD",
+            "unit_scale": "as_reported",
+            "column_headers": [],
+            "parent_row_labels": [],
+            "statement_family": "income_statement",
+            "statement_scope": "consolidated",
+            "period_end": "2022-06-30",
+            "unit": "USD as_reported",
+            "table_title_raw": null,
+            "table_group_id": "microsoft_2023_annual_report:page:49:text",
+            "paragraph_index": null,
+            "sheet_name": null,
+            "cell_range": null,
+            "source_location": "page=49",
+            "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/m/NASDAQ_MSFT_2023.pdf",
+            "source_kind": "public_archive_copy"
+          },
+          "retrieval_task_ids": [
+            "T1",
+            "T2",
+            "T3"
+          ]
+        },
+        {
+          "evidence_id": "S4",
+          "text": "75 Revenue and costs are generally directly attributed to our segments.\n\nHowever, due to the integrated structure of our business, certain revenue recognized and costs incurred by one segment may benefit other segments.\n\nRevenue from certain contracts is allocated amon g the segments based on the relative value of the underlying products and services, which can include allocation based on actual prices charged, prices when sold separately, or estimated costs plus a profit margin.\n\nCost of revenue is allocated in certain c ases based on a relative revenue methodology.\n\nOperating expenses that are allocated primarily include those relating to marketing of products and services from which multiple segments benefit and are generally allocated based on relative gross margin.\n\nIn addition, certain costs are incurred at a corporate level and allocated to our segments.\n\nThese allocated costs generally include legal, including settlements and fines, information technology, human resources, finance, excise taxes, field selling, shared facilities services, customer service and support, and severance incurred as part of a corporate program.\n\nEach allocation is measured differently based on the specific facts and circumstances of the costs being allocated and is generally based on relative gross margin or relative headcount.\n\nSegment revenue and operating income were as follows during the periods presented:\n\n(In millions)\n\nYear Ended June 30, 2023 2022 2021\n\nRevenue\n\nProductivity and Business Processes $ 69,274 $ 63,364 $ 53,915 Intelligent Cloud 87,907 74,965 59,728 More Personal Computing 54,734 59,941 54,445 Total $ 211,915 $ 198,270 $ 168,088\n\nOperating Income",
+          "citation": {
+            "evidence_id": "S4",
+            "chunk_id": "chunk_fd8d7b195946ba5ffdd49429",
+            "document_id": "microsoft_2023_annual_report",
+            "company_id": "microsoft",
+            "company_name": "Microsoft Corporation",
+            "fiscal_year": 2023,
+            "source_format": "pdf",
+            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "page": 76,
+            "page_start": 76,
+            "page_end": 76,
+            "table_id": null,
+            "table_title": null,
+            "table_context": null,
+            "region": null,
+            "period_years": [
+              2021,
+              2022,
+              2023
+            ],
+            "measure_name": null,
+            "value_kind": null,
+            "currency": "USD",
+            "unit_scale": "as_reported",
+            "column_headers": [],
+            "parent_row_labels": [],
+            "statement_family": "income_statement",
+            "statement_scope": "consolidated",
+            "period_end": "2023-06-30",
+            "unit": "In millions",
+            "table_title_raw": null,
+            "table_group_id": "microsoft_2023_annual_report:page:76:text",
+            "paragraph_index": null,
+            "sheet_name": null,
+            "cell_range": null,
+            "source_location": "page=76",
+            "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/m/NASDAQ_MSFT_2023.pdf",
+            "source_kind": "public_archive_copy"
+          },
+          "retrieval_task_ids": [
+            "T1"
+          ]
+        },
+        {
+          "evidence_id": "S5",
+          "text": "Revenue $ 211,915 $ 198,270 7% Gross margin 146,052 135,620 8% Operating income 88,523 83,383 6% Net income 72,361 72,738 (1)% Diluted earnings per share 9.68 9.65 0%\n\nAdjusted gross margin (non-GAAP) 146,204 135,620 8% Adjusted operating income (non-GAAP) 89,694 83,383 8% Adjusted net income (non-GAAP) 73,307 69,447 6% Adjusted diluted earnings per share (non-GAAP) 9.81 9.21 7% Adjusted gross margin, operating income, net income, and diluted earnings per share (“EPS”) are non -GAAP financial measures.\n\nCurrent year non -GAAP financial measures exclude the impact of the Q2 charge, which includes employee severance expenses, impairmen t charges resulting from changes to our hardware portfolio, and costs related to lease consolidation activities.\n\nPrior year non-GAAP financial measures exclude the net income tax benefit related to transfer of intangible properties in the first quarter of fiscal year 2022.\n\nRefer to Note 12 – Income Taxes of the Notes to Financial Statements for further discussion.\n\nRefer to the Non -GAAP Financial Measures section below for a reconciliation of our financial results reported in accordance with GAAP to non-GAAP financial results.",
+          "citation": {
+            "evidence_id": "S5",
+            "chunk_id": "chunk_c2c450ba490671d0b6aed353",
+            "document_id": "microsoft_2023_annual_report",
+            "company_id": "microsoft",
+            "company_name": "Microsoft Corporation",
+            "fiscal_year": 2023,
+            "source_format": "pdf",
+            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "page": 31,
+            "page_start": 31,
+            "page_end": 31,
+            "table_id": null,
+            "table_title": null,
+            "table_context": null,
+            "region": null,
+            "period_years": [
+              2022
+            ],
+            "measure_name": null,
+            "value_kind": null,
+            "currency": "USD",
+            "unit_scale": "as_reported",
+            "column_headers": [],
+            "parent_row_labels": [],
+            "statement_family": "ratio",
+            "statement_scope": "consolidated",
+            "period_end": "FY2023",
+            "unit": "USD as_reported",
+            "table_title_raw": null,
+            "table_group_id": "microsoft_2023_annual_report:page:31:text",
+            "paragraph_index": null,
+            "sheet_name": null,
+            "cell_range": null,
+            "source_location": "page=31",
+            "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/m/NASDAQ_MSFT_2023.pdf",
+            "source_kind": "public_archive_copy"
+          },
+          "retrieval_task_ids": [
+            "T2",
+            "T3"
+          ]
+        },
+        {
+          "evidence_id": "S6",
+          "text": "46 CASH FLOWS STATEMENTS\n\nYear Ended June 30, 2023 2022 2021\n\nOperations Net income $   72,361 $  72,738 $  61,271 Adjustments to reconcile net income to net cash from operations: Depreciation, amortization, and other 13,861 14,460 11,686 Stock-based compensation expense 9,611 7,502 6,118 Net recognized losses (gains) on investments and derivatives 196 (409) (1,249) Deferred income taxes (6,059) (5,702) (150) Changes in operating assets and liabilities: Accounts receivable (4,087) (6,834) (6,481) Inventories 1,242 (1,123) (737) Other current assets (1,991) (709) (932) Other long-term assets (2,833) (2,805) (3,459) Accounts payable (2,721) 2,943 2,798 Unearned revenue 5,535 5,109 4,633 Income taxes (358) 696 (2,309) Other current liabilities 2,272 2,344 4,149 Other long-term liabilities 553 825 1,402 Net cash from operations 87,582 89,035 76,740 Financing Cash premium on debt exchange 0 0 (1,754) Repayments of debt (2,750) (9,023) (3,750) Common stock issued 1,866 1,841 1,693 Common stock repurchased (22,245) (32,696) (27,385) Common stock cash dividends paid (19,800) (18,135) (16,521) Other, net (1,006) (863) (769) Net cash used in financing (43,935) (58,876) (48,486) Investing Additions to property and equipment (28,107) (23,886) (20,622) Acquisition of companies, net of cash acquired, and purchases of intangible and other assets (1,670) (22,038) (8,909) Purchases of investments (37,651) (26,456) (62,924) Maturities of investments 33,510 16,451 51,792 Sales of investments 14,354 28,443 14,008 Other, net (3,116) (2,825) (922) Net cash used in investing (22,680) (30,311) (27,577) Effect of foreign exchange rates on cash and cash equivalents (194) (141) (29) Net change in cash and cash equivalents 20,773 (293) 648 Cash and cash equivalents, beginning of period 13,931 14,224 13,576 Cash and cash equivalents, end of period $ 34,704 $ 13,931 $ 14,224",
+          "citation": {
+            "evidence_id": "S6",
+            "chunk_id": "chunk_c257513568337a8cd90c3ecc",
+            "document_id": "microsoft_2023_annual_report",
+            "company_id": "microsoft",
+            "company_name": "Microsoft Corporation",
+            "fiscal_year": 2023,
+            "source_format": "pdf",
+            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "page": 47,
+            "page_start": 47,
+            "page_end": 47,
+            "table_id": null,
+            "table_title": null,
+            "table_context": null,
+            "region": null,
+            "period_years": [
+              2021,
+              2022,
+              2023
+            ],
+            "measure_name": null,
+            "value_kind": null,
+            "currency": "USD",
+            "unit_scale": "as_reported",
+            "column_headers": [],
+            "parent_row_labels": [],
+            "statement_family": "cash_flow",
+            "statement_scope": "consolidated",
+            "period_end": "2023-06-30",
+            "unit": "USD as_reported",
+            "table_title_raw": null,
+            "table_group_id": "microsoft_2023_annual_report:page:47:text",
+            "paragraph_index": null,
+            "sheet_name": null,
+            "cell_range": null,
+            "source_location": "page=47",
+            "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/m/NASDAQ_MSFT_2023.pdf",
+            "source_kind": "public_archive_copy"
+          },
+          "retrieval_task_ids": [
+            "T1"
+          ]
+        },
+        {
+          "evidence_id": "S7",
+          "text": "Seasonality Our revenue fluctuates quarterly and is generally higher in the second and fourth quarters of our fiscal year.\n\nSecond quarter revenue is driven by corporate year-end spending trends in our major markets and holiday season spending by consumers, and fourth quarter revenue is driven by the volume of multi-year on-premises contracts executed during the period.\n\nChange in Accounting Estimate In July 2022, we completed an assessment of the useful lives of our server and network equipment.\n\nDue to investments in software that increased efficiencies in how we operate our server and network equipment, as well as advances in technology, we determined we should increase the estimated useful lives of both server and network equipment from four years to six years.\n\nThis change in accounting estimate was effective beginning fiscal year 2023.\n\nBased on the carrying amount of server and network equipment included in property and equipment, net as of June 30, 2022, the effect of this change in estimate for fiscal year 2023 was an increase in operating income of $3.7 billion and net income of $3.0 billion, or $0.40 per both basic and diluted share.\n\nReportable Segments We report our financial performance based on the following segments: Productivity and Business Processes, Intelligent Cloud, and More Personal Computing.\n\nThe segment amounts included in MD&A are presented on a basis consistent with our internal management reporting.\n\nWe have recast certain prior period amounts to conform to the way we internally manage and monitor our business.",
+          "citation": {
+            "evidence_id": "S7",
+            "chunk_id": "chunk_d1f4aa2bed6b3fd75e544976",
+            "document_id": "microsoft_2023_annual_report",
+            "company_id": "microsoft",
+            "company_name": "Microsoft Corporation",
+            "fiscal_year": 2023,
+            "source_format": "pdf",
+            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "page": 29,
+            "page_start": 29,
+            "page_end": 29,
+            "table_id": null,
+            "table_title": null,
+            "table_context": null,
+            "region": null,
+            "period_years": [
+              2022,
+              2023
+            ],
+            "measure_name": null,
+            "value_kind": null,
+            "currency": "USD",
+            "unit_scale": "as_reported",
+            "column_headers": [],
+            "parent_row_labels": [],
+            "statement_family": "income_statement",
+            "statement_scope": "consolidated",
+            "period_end": "2022-06-30",
+            "unit": "USD as_reported",
+            "table_title_raw": null,
+            "table_group_id": "microsoft_2023_annual_report:page:29:text",
+            "paragraph_index": null,
+            "sheet_name": null,
+            "cell_range": null,
+            "source_location": "page=29",
+            "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/m/NASDAQ_MSFT_2023.pdf",
+            "source_kind": "public_archive_copy"
+          },
+          "retrieval_task_ids": [
+            "T2",
+            "T3"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "microsoft_cn_company_cloud",
+      "alias": "微软公司",
+      "query": "微软公司2023财年的智能云业务收入是多少？",
+      "expected_company_id": "microsoft",
+      "error": null,
+      "answer": "微软公司2023财年智能云（Intelligent Cloud）业务收入为 **87,907（单位：百万美元）** [S4]。\n\n该数据来自微软2023财年年报“分部经营业绩”（Segment Results of Operations）表格，其中明确列示：Intelligent Cloud 2023年收入为 $87,907（百万美元），2022年为 $74,965，同比增长17% [S4]。\n\n此外，证据[S3]也提到“Intelligent Cloud Revenue increased $12.9 billion or 17%”，与上述表格数据一致 [S3]。",
+      "evidence_count": 5,
+      "evidence_companies": [
+        "microsoft"
+      ],
+      "resolved_filters": {
+        "company_id": "microsoft",
+        "fiscal_year": 2023
+      },
+      "numeric_in_evidence": {
+        "87,907": true
+      },
+      "numeric_in_answer": {
+        "87,907": true
+      },
+      "family_coverage": true,
+      "layers": {
+        "company_filter_resolution": true,
+        "company_isolation": true,
+        "retrieval_coverage": true,
+        "grounded_answer": true,
+        "answer_completeness": true
+      },
+      "planner": {
+        "status": "used",
+        "route": "planner",
+        "intent": "查询微软公司2023财年智能云业务收入金额",
+        "entities": [
+          "微软公司",
+          "智能云业务",
+          "2023财年"
+        ],
+        "time_scope": "2023财年",
+        "retrieval_tasks": [
+          {
+            "task_id": "T1",
+            "requirement": {
+              "topic": "智能云业务收入",
+              "metrics": [
+                "收入"
+              ],
+              "relation": "无",
+              "group_by": [
+                "智能云业务"
+              ]
+            },
+            "queries": [
+              "微软公司2023财年的智能云业务收入是多少？ revenue revenue from operations total revenue cloud revenue cloud services revenue",
+              "微软公司2023财年智能云业务收入",
+              "Microsoft 2023 fiscal year Intelligent Cloud revenue",
+              "智能云分部收入 2023财年 微软"
+            ],
+            "statement_scope": "合并",
+            "candidate_chunk_ids": [
+              "chunk_b4bac969752341d4b54fb78b",
+              "chunk_569cdc9964310c054bc32008",
+              "chunk_e5349aca0e712353e19f221a",
+              "chunk_a5d1ae27d867782864608b60",
+              "chunk_a930f485b3c5797dfb713387",
+              "chunk_9d8fe42d9b7d068d5333356d",
+              "chunk_b525d4af8bb0b788c129b95b",
+              "chunk_538795f6b9118af218120994",
+              "chunk_68a60de785de2c12f3ff884c",
+              "chunk_40d919e20b63a730f5433eb7",
+              "chunk_e7420aab4d0b7ea5ddf30592",
+              "chunk_fd8d7b195946ba5ffdd49429",
+              "chunk_f88ed978ea6000c5cd311792",
+              "chunk_2aec842633d9ca58518a0cdb",
+              "chunk_81811248104e28b90e6d0843",
+              "chunk_6ebf6ceb7d6032bc8b602bb2",
+              "chunk_d1f4aa2bed6b3fd75e544976",
+              "chunk_b575548c54a72602c5eaa2d4",
+              "chunk_e0e0de51f681588130558562",
+              "chunk_5114d81f3d6d34e15f655a70",
+              "chunk_f2aa1cc6be655c728d621160",
+              "chunk_2cb7df4bbd16b24ac793c52e",
+              "chunk_e5cdf3b296dad811c3a87eef",
+              "chunk_dccd12992fa807358139aa64"
+            ],
+            "candidate_top_k": 15,
+            "query_retrieval": [
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              },
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              },
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              },
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              }
+            ],
+            "evidence_ids": [
+              "S1",
+              "S2",
+              "S3",
+              "S4",
+              "S5"
+            ]
+          }
+        ],
+        "needs_calculation": false,
+        "clarification_needed": false,
+        "usage": {
+          "prompt_tokens": 754,
+          "completion_tokens": 156,
+          "total_tokens": 910,
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 114,
+          "prompt_cache_total_tokens": 754,
+          "prompt_cache_hit_ratio": 0.8488
+        },
+        "finish_reason": "stop"
+      },
+      "evidence": [
+        {
+          "evidence_id": "S1",
+          "text": "We generate revenue by offering a wide range of cloud -based s olutions, content, and other services to people and businesses; licensing and supporting an array of software products; delivering relevant online advertising to a global audience; and designing and selling devices.\n\nOur most significant expenses are relate d to compensating employees; supporting and investing in our cloud-based services, including datacenter operations; designing, manufacturing, marketing, and selling our other products and services; and income taxes.\n\nHighlights from fiscal year 2023 compared with fiscal year 2022 included: • Microsoft Cloud revenue increased 22% to $111.6 billion.\n\n• Office Commercial products and cloud services revenue increased 10% driven by Office 365 Commercial growth of 13%.\n\n• Office Consumer products and cloud services revenue increased 2% and Microsoft 365 Consumer subscribers increased to 67.0 million.\n\n• LinkedIn revenue increased 10%.\n\n• Dynamics products and cloud services revenue increased 16% driven by Dynamics 365 growth of 24%.\n\n• Server products and cloud services revenue increased 19% driven by Azure and other cloud services growth of 29%.\n\n• Windows original equipment manufacturer licensing (“Windows OEM”) revenue decreased 25%.\n\n• Devices revenue decreased 24%.\n\n• Windows Commercial products and cloud services revenue increased 5%.\n\n• Xbox content and services revenue decreased 3%.\n\n• Search and news advertising revenue excluding traffic acquisition costs increased 11%.\n\nIndustry Trends Our industry is dynamic and highly competitive, with frequent changes in both technologies and business models.\n\nEach industry shift is an opportunity to conceive new products, new technologies, or new ideas that can further transform the industry and our business.\n\nAt Microsoft, we push the boundaries of what is possible through a broad range of research and development activities that seek to identify and address the changing demands of customers and users, industry trends, and competitive forces.",
+          "citation": {
+            "evidence_id": "S1",
+            "chunk_id": "chunk_b4bac969752341d4b54fb78b",
+            "document_id": "microsoft_2023_annual_report",
+            "company_id": "microsoft",
+            "company_name": "Microsoft Corporation",
+            "fiscal_year": 2023,
+            "source_format": "pdf",
+            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "page": 28,
+            "page_start": 28,
+            "page_end": 28,
+            "table_id": null,
+            "table_title": null,
+            "table_context": null,
+            "region": null,
+            "period_years": [
+              2022,
+              2023
+            ],
+            "measure_name": null,
+            "value_kind": null,
+            "currency": "USD",
+            "unit_scale": "as_reported",
+            "column_headers": [],
+            "parent_row_labels": [],
+            "statement_family": "segment",
+            "statement_scope": "segment",
+            "period_end": "FY2023",
+            "unit": "USD as_reported",
+            "table_title_raw": null,
+            "table_group_id": "microsoft_2023_annual_report:page:28:text",
+            "paragraph_index": null,
+            "sheet_name": null,
+            "cell_range": null,
+            "source_location": "page=28",
+            "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/m/NASDAQ_MSFT_2023.pdf",
+            "source_kind": "public_archive_copy"
+          },
+          "retrieval_task_ids": [
+            "T1"
+          ]
+        },
+        {
+          "evidence_id": "S2",
+          "text": "Microsoft Cloud revenue Revenue from Azure and other cloud services, Office 365 Commercial, the commercial portion of LinkedIn, Dynamics 365, and other commercial cloud properties\n\nMicrosoft Cloud gross margin percentage Gross margin percentage for our Microsoft Cloud business\n\nProductivity and Business Processes and Intelligent Cloud Metrics related to our Productivity and Business Processes and Intelligent Cloud segments assess the health of our core businesses within these segments.\n\nThe metrics reflect our cloud and on-premises product strategies and trends.\n\nOffice Commercial products and cloud services revenue growth Revenue from Office Commercial products and cloud services (Office 365 subscriptions, the Office 365 portion of Microsoft 365 Commercial subscriptions, and Of fice licensed on -premises), comprising Office, Exchange, SharePoint, Microsoft Teams, Office 365 Security and Compliance, Microsoft Viva, and Microsoft 365 Copilot\n\nOffice Consumer products and cloud services revenue growth Revenue from Office Consumer products and cloud services, including Microsoft 365 Consumer subscriptions, Office licensed on-premises, and other Office services\n\nOffice 365 Commercial seat growth The number of Office 365 Commercial seats at end of period where seats are paid users covered by an Office 365 Commercial subscription\n\nMicrosoft 365 Consumer subscribers The number of Microsoft 365 Consumer subscribers at end of period\n\nDynamics products and cloud services revenue growth Revenue from Dynamics products and cloud services, including Dynamics 365, comprising a set of intelligent, cloud-based applications across ERP, CRM (including Customer Insights), Power Apps, and Power Automate; and on-premises ERP and CRM applications",
+          "citation": {
+            "evidence_id": "S2",
+            "chunk_id": "chunk_569cdc9964310c054bc32008",
+            "document_id": "microsoft_2023_annual_report",
+            "company_id": "microsoft",
+            "company_name": "Microsoft Corporation",
+            "fiscal_year": 2023,
+            "source_format": "pdf",
+            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "page": 30,
+            "page_start": 30,
+            "page_end": 30,
+            "table_id": null,
+            "table_title": null,
+            "table_context": null,
+            "region": null,
+            "period_years": [],
+            "measure_name": null,
+            "value_kind": null,
+            "currency": "USD",
+            "unit_scale": "as_reported",
+            "column_headers": [],
+            "parent_row_labels": [],
+            "statement_family": "ratio",
+            "statement_scope": "consolidated",
+            "period_end": "FY2023",
+            "unit": "USD as_reported",
+            "table_title_raw": null,
+            "table_group_id": "microsoft_2023_annual_report:page:30:text",
+            "paragraph_index": null,
+            "sheet_name": null,
+            "cell_range": null,
+            "source_location": "page=30",
+            "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/m/NASDAQ_MSFT_2023.pdf",
+            "source_kind": "public_archive_copy"
+          },
+          "retrieval_task_ids": [
+            "T1"
+          ]
+        },
+        {
+          "evidence_id": "S3",
+          "text": "32 • Office Consumer products and cloud services revenue increased $140 million or 2%.\n\nMicrosoft 365 Consumer subscribers grew 12% to 67.0 million.\n\n• LinkedIn revenue increased $1.3 billion or 10% driven by Talent Solutions.\n\n• Dynamics products and cloud services revenue increased $750 million or 16% driven by Dynamics 365 growth of 24%.\n\nOperating income increased $4.5 billion or 15%.\n\n• Gross margin increased $5.8 billion or 12% driven by growth in Office 365 Commercial and LinkedIn, as well as the change in accounting estimate.\n\nGross margin percentage increased.\n\nExcluding the impact of the change in accounting estimate, gross margin percentage increased slightly driven by improvement in Office 365 Commercial, offset in part by sales mix shift to cloud offerings.\n\n• Operating expenses increased $1.3 billion or 7% driven by investment in LinkedIn and employee severance expenses.\n\nRevenue, gross margin, and operating income included an unfavorable foreign currency impact of 5%, 5%, and 8%, respectively.\n\nIntelligent Cloud Revenue increased $12.9 billion or 17%.\n\n• Server products and cloud services revenue increased $12.6 billion or 19% driven by Azure and other cloud services.\n\nAzure and other cloud services revenue grew 29% driven by growth in our consumption -based services.\n\nServer products revenue decreased 1%.\n\n• Enterprise Services revenue increased $315 million or 4% driven by growth in Enterprise Support Services, offset in part by a decline in Industry Solutions (formerly Microsoft Consulting Services).\n\nOperating income increased $4.7 billion or 14%.\n\n• Gross margin increased $8.9 billion or 17% driven by growth in Azure and other cloud services and the change in accounting estimate.\n\nGross margin percentage decreased slightly.",
+          "citation": {
+            "evidence_id": "S3",
+            "chunk_id": "chunk_e5349aca0e712353e19f221a",
+            "document_id": "microsoft_2023_annual_report",
+            "company_id": "microsoft",
+            "company_name": "Microsoft Corporation",
+            "fiscal_year": 2023,
+            "source_format": "pdf",
+            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "page": 33,
+            "page_start": 33,
+            "page_end": 33,
+            "table_id": null,
+            "table_title": null,
+            "table_context": null,
+            "region": null,
+            "period_years": [],
+            "measure_name": null,
+            "value_kind": null,
+            "currency": "USD",
+            "unit_scale": "as_reported",
+            "column_headers": [],
+            "parent_row_labels": [],
+            "statement_family": "ratio",
+            "statement_scope": "consolidated",
+            "period_end": "FY2023",
+            "unit": "USD as_reported",
+            "table_title_raw": null,
+            "table_group_id": "microsoft_2023_annual_report:page:33:text",
+            "paragraph_index": null,
+            "sheet_name": null,
+            "cell_range": null,
+            "source_location": "page=33",
+            "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/m/NASDAQ_MSFT_2023.pdf",
+            "source_kind": "public_archive_copy"
+          },
+          "retrieval_task_ids": [
+            "T1"
+          ]
+        },
+        {
+          "evidence_id": "S4",
+          "text": "Revenue, gross margin, and operating income included an unfavorable foreign currency impact of 4%, 4%, and 6%, respectively.\n\nCost of revenue and operating expenses both included a favorable foreign currency impact of 2%.\n\nCurrent year gross margin, operati ng income, net income, and diluted EPS were negatively impacted by the Q2 charge, which resulted in decreases of $152 million, $1.2 billion, $946 million, and $0.13, respectively.\n\nPrior year net income and diluted EPS were positively impacted by the net tax benefit related to the transfer of intangible properties, which resulted in an increase to net income and diluted EPS of $3.3 billion and $0.44, respectively.\n\nSEGMENT RESULTS OF OPERATIONS\n\n(In millions, except percentages) 2023 2022 Percentage Change\n\nRevenue\n\nProductivity and Business Processes $ 69,274 $ 63,364 9% Intelligent Cloud 87,907 74,965 17% More Personal Computing 54,734 59,941 (9)% Total $ 211,915 $ 198,270 7%\n\nOperating Income\n\nProductivity and Business Processes $ 34,189 $ 29,690 15% Intelligent Cloud 37,884 33,203 14% More Personal Computing 16,450 20,490 (20)% Total $ 88,523 $ 83,383 6% Reportable Segments Fiscal Year 2023 Compared with Fiscal Year 2022 Productivity and Business Processes Revenue increased $5.9 billion or 9%.\n\n• Office Commercial products and cloud services revenue increased $3.7 billion or 10%.\n\nOffice 365 Commercial revenue grew 13% with seat growth of 11%, driven by small and medium business and frontline worker offerings, as well as growth in revenue per user.\n\nOffice Commercial products revenue declined 21% driven by continued customer shift to cloud offerings.",
+          "citation": {
+            "evidence_id": "S4",
+            "chunk_id": "chunk_a5d1ae27d867782864608b60",
+            "document_id": "microsoft_2023_annual_report",
+            "company_id": "microsoft",
+            "company_name": "Microsoft Corporation",
+            "fiscal_year": 2023,
+            "source_format": "pdf",
+            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "page": 32,
+            "page_start": 32,
+            "page_end": 32,
+            "table_id": null,
+            "table_title": null,
+            "table_context": null,
+            "region": null,
+            "period_years": [
+              2022,
+              2023
+            ],
+            "measure_name": null,
+            "value_kind": null,
+            "currency": "USD",
+            "unit_scale": "as_reported",
+            "column_headers": [],
+            "parent_row_labels": [],
+            "statement_family": "income_statement",
+            "statement_scope": "consolidated",
+            "period_end": "FY2023",
+            "unit": "In millions",
+            "table_title_raw": null,
+            "table_group_id": "microsoft_2023_annual_report:page:32:text",
+            "paragraph_index": null,
+            "sheet_name": null,
+            "cell_range": null,
+            "source_location": "page=32",
+            "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/m/NASDAQ_MSFT_2023.pdf",
+            "source_kind": "public_archive_copy"
+          },
+          "retrieval_task_ids": [
+            "T1"
+          ]
+        },
+        {
+          "evidence_id": "S5",
+          "text": "76 Dynamics 5,437 4,687 3,754 Other 211 289 373 Total $ 211,915 $ 198,270 $ 168,088 Our Microsoft Cloud revenue, which includes Azure and other cloud services, Office 365 Commercial, the commercial portion of LinkedIn, Dynamics 365, and other commercial cloud properties, was $111.6 billion, $91.4 billion, and $69.1 billion in fiscal years 2023, 2022, and 2021, respectively.\n\nThese amounts are primarily included in Server products and cloud services, Office products and cloud services, LinkedIn, and Dynamics in the table above.\n\nAssets are not allocated to segments for internal reporting pre sentations.\n\nA portion of amortization and depreciation is included with various other costs in an overhead allocation to each segment.\n\nIt is impracticable for us to separately identify the amount of amortization and depreciation by segment that is included in the measure of segment profit or loss.\n\nLong-lived assets, excluding financial instruments and tax assets, classified by the location of the controlling statutory company and with countries over 10% of the total shown separately, were as follows:\n\n(In millions)\n\nJune 30, 2023 2022 2021\n\nUnited States $ 114,380 $ 106,430 $ 76,153 Ireland 16,359 15,505 13,303 Other countries 56,500 44,433 38,858 Total $ 187,239 $ 166,368 $ 128,314",
+          "citation": {
+            "evidence_id": "S5",
+            "chunk_id": "chunk_a930f485b3c5797dfb713387",
+            "document_id": "microsoft_2023_annual_report",
+            "company_id": "microsoft",
+            "company_name": "Microsoft Corporation",
+            "fiscal_year": 2023,
+            "source_format": "pdf",
+            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "page": 77,
+            "page_start": 77,
+            "page_end": 77,
+            "table_id": null,
+            "table_title": null,
+            "table_context": null,
+            "region": null,
+            "period_years": [
+              2021,
+              2022,
+              2023
+            ],
+            "measure_name": null,
+            "value_kind": null,
+            "currency": "USD",
+            "unit_scale": "as_reported",
+            "column_headers": [],
+            "parent_row_labels": [],
+            "statement_family": "segment",
+            "statement_scope": "segment",
+            "period_end": "FY2023",
+            "unit": "In millions",
+            "table_title_raw": null,
+            "table_group_id": "microsoft_2023_annual_report:page:77:text",
+            "paragraph_index": null,
+            "sheet_name": null,
+            "cell_range": null,
+            "source_location": "page=77",
+            "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/m/NASDAQ_MSFT_2023.pdf",
+            "source_kind": "public_archive_copy"
+          },
+          "retrieval_task_ids": [
+            "T1"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tcs_cn_short_cash_flow",
+      "alias": "塔塔咨询",
+      "query": "塔塔咨询2024财年经营活动产生的现金总额和经营活动净现金额分别是多少？",
+      "expected_company_id": "tcs",
+      "error": null,
+      "answer": "根据塔塔咨询（Tata Consultancy Services Limited）2024财年（截至2024年3月31日）合并现金流量表：\n\n- **经营活动产生的现金总额（Cash generated from operations）**：**56,827** 千万卢比（INR crore）[S1]\n- **经营活动净现金额（Net cash generated from operating activities）**：**44,338** 千万卢比（INR crore）[S1]\n\n以上数据均来自合并现金流量表，单位为千万卢比（` crore），财年为截至2024年3月31日。[S1]",
+      "evidence_count": 6,
+      "evidence_companies": [
+        "tcs"
+      ],
+      "resolved_filters": {
+        "company_id": "tcs",
+        "fiscal_year": 2024
+      },
+      "numeric_in_evidence": {
+        "56,827": true,
+        "44,338": true
+      },
+      "numeric_in_answer": {
+        "56,827": true,
+        "44,338": true
+      },
+      "family_coverage": true,
+      "layers": {
+        "company_filter_resolution": true,
+        "company_isolation": true,
+        "retrieval_coverage": true,
+        "grounded_answer": true,
+        "answer_completeness": true
+      },
+      "planner": {
+        "status": "used",
+        "route": "planner",
+        "intent": "查询塔塔咨询2024财年经营活动产生的现金总额和经营活动净现金额",
+        "entities": [
+          "塔塔咨询"
+        ],
+        "time_scope": "2024财年",
+        "retrieval_tasks": [
+          {
+            "task_id": "T1",
+            "requirement": {
+              "topic": "经营活动产生的现金总额",
+              "metrics": [
+                "经营活动产生的现金总额"
+              ],
+              "relation": "无",
+              "group_by": []
+            },
+            "queries": [
+              "塔塔咨询 2024财年 经营活动产生的现金总额",
+              "Tata Consultancy Services fiscal year 2024 total cash generated from operating activities",
+              "TCS annual report 2024 cash from operations total"
+            ],
+            "statement_scope": "合并",
+            "candidate_chunk_ids": [
+              "chunk_dfc0dbb7b4af8cf2812fcbec",
+              "chunk_8cb4e23a32105c2cd606dbf0",
+              "chunk_272adada7a0f160a9d37ea22",
+              "chunk_3a8d42187d8107facff4d5cb",
+              "chunk_77c714744114da44822e2039",
+              "chunk_6d2dd5d7232a18828a029010",
+              "chunk_5556032f93b0811b6d08946a",
+              "chunk_70937445be280afa4ce04037",
+              "chunk_49e0532acdbea52b9247e0fe",
+              "chunk_de80e96ac9722a1602574682",
+              "chunk_124f339fb1f00dac029e721d",
+              "chunk_2f4949a8f5646b9b4b0536d5",
+              "chunk_f8dd2c128bd935b2d1472030",
+              "chunk_22bcc43db5350482537a7d4a",
+              "chunk_ae63f594def3d205ef6e5523",
+              "chunk_133cc6535eb091dfcbb274fd",
+              "chunk_8652360629993634d4b64629",
+              "chunk_ad0bca882049db8e66eb288b",
+              "chunk_a02ccfc345290c5ea2aad650"
+            ],
+            "candidate_top_k": 15,
+            "query_retrieval": [
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              },
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              },
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              }
+            ],
+            "evidence_ids": [
+              "S1",
+              "S2",
+              "S3",
+              "S4",
+              "S5"
+            ]
+          },
+          {
+            "task_id": "T2",
+            "requirement": {
+              "topic": "经营活动净现金额",
+              "metrics": [
+                "经营活动净现金额"
+              ],
+              "relation": "无",
+              "group_by": []
+            },
+            "queries": [
+              "塔塔咨询 2024财年 经营活动净现金额",
+              "Tata Consultancy Services fiscal year 2024 net cash from operating activities",
+              "TCS annual report 2024 net cash provided by operating activities"
+            ],
+            "statement_scope": "合并",
+            "candidate_chunk_ids": [
+              "chunk_dfc0dbb7b4af8cf2812fcbec",
+              "chunk_8cb4e23a32105c2cd606dbf0",
+              "chunk_272adada7a0f160a9d37ea22",
+              "chunk_77c714744114da44822e2039",
+              "chunk_d5085404d4cbf9b1e7bd3134",
+              "chunk_124f339fb1f00dac029e721d",
+              "chunk_49e0532acdbea52b9247e0fe",
+              "chunk_ad0bca882049db8e66eb288b",
+              "chunk_60caffa226e623018de19544",
+              "chunk_5556032f93b0811b6d08946a",
+              "chunk_f8dd2c128bd935b2d1472030",
+              "chunk_70937445be280afa4ce04037",
+              "chunk_8652360629993634d4b64629",
+              "chunk_de80e96ac9722a1602574682",
+              "chunk_7a904c11f362f6153f2cd96b",
+              "chunk_bcb98e773cfb7da55ac30a86",
+              "chunk_3b7cbd5a43da40673599f205",
+              "chunk_ebe9ebed8d16bef6b3d6028a"
+            ],
+            "candidate_top_k": 15,
+            "query_retrieval": [
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              },
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              },
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              }
+            ],
+            "evidence_ids": [
+              "S1",
+              "S2",
+              "S3",
+              "S5",
+              "S6"
+            ]
+          }
+        ],
+        "needs_calculation": false,
+        "clarification_needed": false,
+        "usage": {
+          "prompt_tokens": 761,
+          "completion_tokens": 300,
+          "total_tokens": 1061,
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 121,
+          "prompt_cache_total_tokens": 761,
+          "prompt_cache_hit_ratio": 0.841
+        },
+        "finish_reason": "stop"
+      },
+      "evidence": [
+        {
+          "evidence_id": "S1",
+          "text": "184 Consolidated Financial Statements 2023-24 Consolidated Statement of Cash Flows (` crore) Year ended March 31, 2024 Year ended March 31, 2023 CASH FLOWS FROM OPERATING ACTIVITIES Profit for the year 46,099 42,303 Adjustments for: Depreciation and amortisation expense 4,985 5,022 Bad debts and advances written off, allowance for expected credit losses and doubtful advances (net) 114 140 Tax expense 15,898 14,604 Net (gain) / loss on lease modification (7) 2 Unrealised foreign exchange gain (17) (189) Net gain on disposal of property, plant and equipment (7) (26) Net gain on disposal / fair valuation of investments (312) (224) Interest income (3,781) (3,248) Dividend income (41) (15) Finance costs 778 779 Operating profit before working capital changes 63,709 59,148 Net change in Inventories - (8) Trade receivables Billed (3,327) (6,501) Unbilled (5) (1,182) Loans and other financial assets (301) 261 Other assets (3,160) (25) Trade payables (632) 2,036 Unearned and deferred revenue (740) 39 Other financial liabilities (695) 1,417 Other liabilities and provisions 1,978 (254) Cash generated from operations 56,827 54,931 Taxes paid (net of refunds) (12,489) (12,966) Net cash generated from operating activities 44,338 41,965 CASH FLOWS FROM INVESTING ACTIVITIES Bank deposits placed (9,471) (4,548) Inter-corporate deposits placed - (8,293) Purchase of investments # (141,011) (129,745) Payment for purchase of property, plant and equipment (2,202) (2,532) Payment including advances for acquiring right-of-use assets (30) (213) Payment for purchase of intangible assets (442) (355) Proceeds from bank deposits 8,089 6,252 Proceeds from inter-corporate deposits 846 13,654 Proceeds from disposal / redemption of investments# 1,47,204 1,22,687 Proceeds from sub-lease receivable 3 2 Proceeds from disposal of property, plant and equipment 17 37",
+          "citation": {
+            "evidence_id": "S1",
+            "chunk_id": "chunk_dfc0dbb7b4af8cf2812fcbec",
+            "document_id": "tcs_2024_annual_report",
+            "company_id": "tcs",
+            "company_name": "Tata Consultancy Services Limited",
+            "fiscal_year": 2024,
+            "source_format": "pdf",
+            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "page": 184,
+            "page_start": 184,
+            "page_end": 184,
+            "table_id": null,
+            "table_title": null,
+            "table_context": null,
+            "region": null,
+            "period_years": [
+              2023,
+              2024
+            ],
+            "measure_name": null,
+            "value_kind": null,
+            "currency": "INR",
+            "unit_scale": "crore",
+            "column_headers": [],
+            "parent_row_labels": [],
+            "statement_family": "cash_flow",
+            "statement_scope": "consolidated",
+            "period_end": "2024-03-31",
+            "unit": "INR crore",
+            "table_title_raw": null,
+            "table_group_id": "tcs_2024_annual_report:page:184:text",
+            "paragraph_index": null,
+            "sheet_name": null,
+            "cell_range": null,
+            "source_location": "page=184",
+            "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/t/OTC_TCS_2024.pdf",
+            "source_kind": "public_archive_copy"
+          },
+          "retrieval_task_ids": [
+            "T1",
+            "T2"
+          ]
+        },
+        {
+          "evidence_id": "S2",
+          "text": "233Consolidated Financial Statements 2023-24 Name of the entity Country of incorporation % of voting power as at March 31, 2024 % of voting power as at March 31, 2023 Net assets, i.e.\n\ntotal assets minus total liabilities Share in Profit or loss Share in other comprehensive income Share in total comprehensive income As % of consolidated net assets Amount (` crore) As % of consolidated profit or loss Amount (` crore) As % of consolidated other comprehensive income Amount (` crore) As % of total comprehensive income Amount (` crore) Tata Consultancy Services Belgium Belgium 100.00 100.00 0.60 586 0.23 117 - - 0.23 117 Tata Consultancy Services De Espana S.A.\n\nSpain 100.00 100.00 0.13 131 0.02 9 - - 0.02 9 Tata Consultancy Services Deutschland GmbH Germany 100.00 100.00 0.93 909 0.20 101 (0.52) (1) 0.20 100 Tata Consultancy Services Italia s.r .l.Italy 100.00 100.00 0.08 82 0.01 4 - - 0.01 4 Tata Consultancy Services Netherlands BV Netherlands 100.00 100.00 3.49 3,397 1.12 563 - - 1.11 563 Tata Consultancy Services Sverige AB Sweden 100.00 100.00 1.19 1,157 0.53 266 - - 0.52 266 Tata Consultancy Services (Portugal) Unipessoal, Limitada Portugal 100.00 100.00 0.06 54 0.04 19 - - 0.04 19 Diligenta Limited U.K.\n\n100.00 100.00 1.72 1,673 0.45 226 (3.63) (7) 0.43 219 Tata Consultancy Services Luxembourg S.A.\n\nCapellen (G.D.\n\nde Luxembourg) 100.00 100.00 0.13 123 0.12 62 - - 0.12 62 Tata Consultancy Services Switzerland Ltd.",
+          "citation": {
+            "evidence_id": "S2",
+            "chunk_id": "chunk_8cb4e23a32105c2cd606dbf0",
+            "document_id": "tcs_2024_annual_report",
+            "company_id": "tcs",
+            "company_name": "Tata Consultancy Services Limited",
+            "fiscal_year": 2024,
+            "source_format": "pdf",
+            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "page": 233,
+            "page_start": 233,
+            "page_end": 233,
+            "table_id": null,
+            "table_title": null,
+            "table_context": null,
+            "region": null,
+            "period_years": [
+              2023,
+              2024
+            ],
+            "measure_name": null,
+            "value_kind": null,
+            "currency": "INR",
+            "unit_scale": "crore",
+            "column_headers": [],
+            "parent_row_labels": [],
+            "statement_family": "balance_sheet",
+            "statement_scope": "consolidated",
+            "period_end": "FY2024",
+            "unit": "INR crore",
+            "table_title_raw": null,
+            "table_group_id": "tcs_2024_annual_report:page:233:text",
+            "paragraph_index": null,
+            "sheet_name": null,
+            "cell_range": null,
+            "source_location": "page=233",
+            "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/t/OTC_TCS_2024.pdf",
+            "source_kind": "public_archive_copy"
+          },
+          "retrieval_task_ids": [
+            "T1",
+            "T2"
+          ]
+        },
+        {
+          "evidence_id": "S3",
+          "text": "232 Consolidated Financial Statements 2023-24 21) Statement of net assets, profit and loss and other comprehensive income attributable to owners and non-controlling interests Name of the entity Country of incorporation % of voting power as at March 31, 2024 % of voting power as at March 31, 2023 Net assets, i.e.\n\ntotal assets minus total liabilities Share in Profit or loss Share in other comprehensive income Share in total comprehensive income As % of consolidated net assets Amount (` crore) As % of consolidated profit or loss Amount (` crore) As % of consolidated other comprehensive income Amount (` crore) As % of total comprehensive income Amount (` crore) Tata Consultancy Services Limited India - - 74.12 72,120 86.29 43,559 85.49 165 86.28 43,724 Subsidiaries (held directly) Indian APTOnline Limited India 89.00 89.00 0.13 128 0.04 22 - - 0.04 22 C-Edge Technologies Limited India 51.00 51.00 0.42 411 0.19 94 - - 0.19 94 MP Online Limited India 89.00 89.00 0.13 140 0.06 29 - - 0.06 29 TCS e-Serve International Limited India 100.00 100.00 0.49 476 0.45 229 (0.52) (1) 0.45 228 MahaOnline Limited India 74.00 74.00 0.09 85 0.01 6 - - 0.01 6 TCS Foundation India 100.00 100.00 1.34 1,307 - - - - - - Foreign Tata America International Corporation U.S.A.\n\n100.00 100.00 1.72 1,669 2.32 1,170 (3.11) (6) 2.30 1,164 Tata Consultancy Services Canada Inc.\n\nCanada 100.00 100.00 1.96 1,906 2.07 1,047 - - 2.07 1,047 Tata Consultancy Services Argentina S.A.",
+          "citation": {
+            "evidence_id": "S3",
+            "chunk_id": "chunk_272adada7a0f160a9d37ea22",
+            "document_id": "tcs_2024_annual_report",
+            "company_id": "tcs",
+            "company_name": "Tata Consultancy Services Limited",
+            "fiscal_year": 2024,
+            "source_format": "pdf",
+            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "page": 232,
+            "page_start": 232,
+            "page_end": 232,
+            "table_id": null,
+            "table_title": null,
+            "table_context": null,
+            "region": null,
+            "period_years": [
+              2023,
+              2024
+            ],
+            "measure_name": null,
+            "value_kind": null,
+            "currency": "INR",
+            "unit_scale": "crore",
+            "column_headers": [],
+            "parent_row_labels": [],
+            "statement_family": "balance_sheet",
+            "statement_scope": "consolidated",
+            "period_end": "FY2024",
+            "unit": "INR crore",
+            "table_title_raw": null,
+            "table_group_id": "tcs_2024_annual_report:page:232:text",
+            "paragraph_index": null,
+            "sheet_name": null,
+            "cell_range": null,
+            "source_location": "page=232",
+            "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/t/OTC_TCS_2024.pdf",
+            "source_kind": "public_archive_copy"
+          },
+          "retrieval_task_ids": [
+            "T1",
+            "T2"
+          ]
+        },
+        {
+          "evidence_id": "S4",
+          "text": "235Consolidated Financial Statements 2023-24 Name of the entity Country of incorporation % of voting power as at March 31, 2024 % of voting power as at March 31, 2023 Net assets, i.e.\n\ntotal assets minus total liabilities Share in Profit or loss Share in other comprehensive income Share in total comprehensive income As % of consolidated net assets Amount (` crore) As % of consolidated profit or loss Amount (` crore) As % of consolidated other comprehensive income Amount (` crore) As % of total comprehensive income Amount (` crore) a) Adjustments arising out of consolidation (5,986) (4,382) 44 (4,338) b) Non-controlling interests Indian subsidiaries APTOnline Limited (14) (2) - (2) C-Edge Technologies Limited (201) (46) - (46) MP Online Limited (15) (3) - (3) MahaOnline Limited (22) (2) - (2) Foreign subsidiaries Tata Consultancy Services (China) Co., Ltd.\n\n- - - - Tata Consultancy Services Japan, Ltd.\n\n(577) (137) 62 (75) TOTAL (830) (191) 62 (129) TOTAL 90,489 45,908 299 46,207 Notes: 1.\n\nTCS Technology Solutions AG renamed as TCS Technology Solutions GmbH.\n\n2.\n\nSaudi Desert Rose Holding B.V.\n\nmerged with Tata Consultancy Services Netherlands BV w.e.f.\n\nAugust 29, 2023.\n\n3.\n\nDiligenta Limited incorporated a subsidiary, Diligenta (Europe) B.V.\n\nin Netherlands on September 14, 2023.",
+          "citation": {
+            "evidence_id": "S4",
+            "chunk_id": "chunk_3a8d42187d8107facff4d5cb",
+            "document_id": "tcs_2024_annual_report",
+            "company_id": "tcs",
+            "company_name": "Tata Consultancy Services Limited",
+            "fiscal_year": 2024,
+            "source_format": "pdf",
+            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "page": 235,
+            "page_start": 235,
+            "page_end": 235,
+            "table_id": null,
+            "table_title": null,
+            "table_context": null,
+            "region": null,
+            "period_years": [
+              2023,
+              2024
+            ],
+            "measure_name": null,
+            "value_kind": null,
+            "currency": "INR",
+            "unit_scale": "crore",
+            "column_headers": [],
+            "parent_row_labels": [],
+            "statement_family": "balance_sheet",
+            "statement_scope": "consolidated",
+            "period_end": "FY2024",
+            "unit": "INR crore",
+            "table_title_raw": null,
+            "table_group_id": "tcs_2024_annual_report:page:235:text",
+            "paragraph_index": null,
+            "sheet_name": null,
+            "cell_range": null,
+            "source_location": "page=235",
+            "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/t/OTC_TCS_2024.pdf",
+            "source_kind": "public_archive_copy"
+          },
+          "retrieval_task_ids": [
+            "T1"
+          ]
+        },
+        {
+          "evidence_id": "S5",
+          "text": "75Management Discussion and Analysis Financial Performance Overview The discussions in this section relate to the consolidated, Rupee-denominated financial results pertaining to the year that ended March 31, 2024.\n\nThe financial statements of Tata Consultancy Services Limited and its subsidiaries (collectively referred to as ‘TCS’ or ‘the Company’) are prepared in accordance with the Indian Accounting Standards (referred to as `Ind AS’) prescribed under section 133 of the Companies Act, 2013, read with the Companies (Indian Accounting Standards) Rules, as amended from time to time.\n\nSignificant accounting policies used in the preparation of the financial statements are disclosed in the notes to the consolidated financial statements.\n\nThe following table gives an overview of the consolidated financial results of the company: (` crore) FY 2024* FY 2024 FY 2023 Amount % of Revenue % Growth Amount % of Revenue Amount % of Revenue Revenue from operations 240,893 100.0 6.8 240,893 100.0 225,458 100.0 Earnings before interest and tax (EBIT) (Before other income) 59,311 24.6 9.4 58,353 24.2 54,237 24.1 Profit after tax attributable to shareholders of the company 46,585 19.3 10.5 45,908 19.1 42,147 18.7 Earnings per share (in ₹) 127.74 10.9 125.88 115.19 Analysis of revenue growth and margin performance On a reported basis, TCS’ revenue grew 6.8% in FY 2024, compared to 17.6% in the prior year .\n\nThe company’s performance showed a remarkable resilience against the backdrop of macro uncertainty and geo-political volatility.",
+          "citation": {
+            "evidence_id": "S5",
+            "chunk_id": "chunk_77c714744114da44822e2039",
+            "document_id": "tcs_2024_annual_report",
+            "company_id": "tcs",
+            "company_name": "Tata Consultancy Services Limited",
+            "fiscal_year": 2024,
+            "source_format": "pdf",
+            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "page": 75,
+            "page_start": 75,
+            "page_end": 75,
+            "table_id": null,
+            "table_title": null,
+            "table_context": null,
+            "region": null,
+            "period_years": [
+              2013,
+              2023,
+              2024
+            ],
+            "measure_name": null,
+            "value_kind": null,
+            "currency": "INR",
+            "unit_scale": "crore",
+            "column_headers": [],
+            "parent_row_labels": [],
+            "statement_family": "ratio",
+            "statement_scope": "consolidated",
+            "period_end": "FY2024",
+            "unit": "INR crore",
+            "table_title_raw": null,
+            "table_group_id": "tcs_2024_annual_report:page:75:text",
+            "paragraph_index": null,
+            "sheet_name": null,
+            "cell_range": null,
+            "source_location": "page=75",
+            "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/t/OTC_TCS_2024.pdf",
+            "source_kind": "public_archive_copy"
+          },
+          "retrieval_task_ids": [
+            "T2",
+            "T1"
+          ]
+        },
+        {
+          "evidence_id": "S6",
+          "text": "table_id=tcs_2024_annual_report_p215_t01；location=page=215；headers=column_1 | Year ended March 31, 2024 | (` crore) / Year ended March 31, 2023\ntable_title=Revenue disaggregation by nature of services is as follows:\ntable_context=Revenue disaggregation by nature of services is as follows:\nrow_number=3；column_1=Consultancy services；Year ended March 31, 2024=2,38,135；(` crore) / Year ended March 31, 2023=2,23,332\nrow_number=4；column_1=Sale of equipment and software licences；Year ended March 31, 2024=2,758；(` crore) / Year ended March 31, 2023=2,126\nrow_number=5；column_1=Sale of equipment and software licences；Year ended March 31, 2024=2,40,893；(` crore) / Year ended March 31, 2023=2,25,458\n\n完整表格上下文：\n |  | (` crore)\n | Year ended March 31, 2024 | Year ended March 31, 2023\nConsultancy services | 2,38,135 | 2,23,332\nSale of equipment and software licences | 2,758 | 2,126\n | 2,40,893 | 2,25,458",
+          "citation": {
+            "evidence_id": "S6",
+            "chunk_id": "chunk_d5085404d4cbf9b1e7bd3134",
+            "document_id": "tcs_2024_annual_report",
+            "company_id": "tcs",
+            "company_name": "Tata Consultancy Services Limited",
+            "fiscal_year": 2024,
+            "source_format": "pdf",
+            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "page": 215,
+            "page_start": 215,
+            "page_end": 215,
+            "table_id": "tcs_2024_annual_report_p215_t01",
+            "table_title": "Revenue disaggregation by nature of services is as follows:",
+            "table_context": "Revenue disaggregation by nature of services is as follows:",
+            "region": null,
+            "period_years": [
+              2023,
+              2024
+            ],
+            "measure_name": "revenue",
+            "value_kind": "monetary",
+            "currency": "INR",
+            "unit_scale": "crore",
+            "column_headers": [
+              "column_1",
+              "Year ended March 31, 2024",
+              "(` crore) / Year ended March 31, 2023"
+            ],
+            "parent_row_labels": [],
+            "statement_family": "segment",
+            "statement_scope": "consolidated",
+            "period_end": "2024-03-31",
+            "unit": "INR crore",
+            "table_title_raw": "Revenue disaggregation by nature of services is as follows:",
+            "table_group_id": "tcs_2024_annual_report_p215_t01",
+            "paragraph_index": null,
+            "sheet_name": null,
+            "cell_range": null,
+            "source_location": "page=215",
+            "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/t/OTC_TCS_2024.pdf",
+            "source_kind": "public_archive_copy"
+          },
+          "retrieval_task_ids": [
+            "T2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "tcs_cn_company_income",
+      "alias": "塔塔咨询服务公司",
+      "query": "塔塔咨询服务公司2024财年的营业收入和总收入分别是多少？",
+      "expected_company_id": "tcs",
+      "error": null,
+      "answer": "根据塔塔咨询服务公司（Tata Consultancy Services Limited）2024财年（截至2024年3月31日）的合并利润表：\n\n- **营业收入（Revenue from operations）**：**2,40,893** 千万卢比（INR crore）[S2][S5]\n- **总收入（TOTAL INCOME）**：**2,45,315** 千万卢比（INR crore）[S2]\n\n其中，总收入由营业收入 2,40,893 千万卢比加上其他收入（Other income）4,422 千万卢比构成 [S2]。",
+      "evidence_count": 6,
+      "evidence_companies": [
+        "tcs"
+      ],
+      "resolved_filters": {
+        "company_id": "tcs",
+        "fiscal_year": 2024
+      },
+      "numeric_in_evidence": {
+        "2,40,893": true,
+        "2,45,315": true
+      },
+      "numeric_in_answer": {
+        "2,40,893": true,
+        "2,45,315": true
+      },
+      "family_coverage": true,
+      "layers": {
+        "company_filter_resolution": true,
+        "company_isolation": true,
+        "retrieval_coverage": true,
+        "grounded_answer": true,
+        "answer_completeness": true
+      },
+      "planner": {
+        "status": "used",
+        "route": "planner",
+        "intent": "查询塔塔咨询服务公司2024财年的营业收入和总收入",
+        "entities": [
+          "塔塔咨询服务公司"
+        ],
+        "time_scope": "2024财年",
+        "retrieval_tasks": [
+          {
+            "task_id": "T1",
+            "requirement": {
+              "topic": "营业收入",
+              "metrics": [
+                "营业收入"
+              ],
+              "relation": "无",
+              "group_by": []
+            },
+            "queries": [
+              "塔塔咨询服务公司2024财年的营业收入和总收入分别是多少？ consolidated statement of profit and loss revenue from operations total income revenue total revenue",
+              "塔塔咨询服务公司 2024财年 营业收入",
+              "Tata Consultancy Services fiscal year 2024 revenue from operations"
+            ],
+            "statement_scope": "合并",
+            "candidate_chunk_ids": [
+              "chunk_35a8e17e873fd4d53388814c",
+              "chunk_ae63f594def3d205ef6e5523",
+              "chunk_9c41e056946b3c02940781e2",
+              "chunk_6d2dd5d7232a18828a029010",
+              "chunk_77c714744114da44822e2039",
+              "chunk_dc58681af7603af5d9c6f230",
+              "chunk_dfc0dbb7b4af8cf2812fcbec",
+              "chunk_d5085404d4cbf9b1e7bd3134",
+              "chunk_8cb4e23a32105c2cd606dbf0",
+              "chunk_124f339fb1f00dac029e721d",
+              "chunk_272adada7a0f160a9d37ea22"
+            ],
+            "candidate_top_k": 15,
+            "query_retrieval": [
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              },
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              },
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              }
+            ],
+            "evidence_ids": [
+              "S1",
+              "S2",
+              "S3",
+              "S4",
+              "S5",
+              "S6"
+            ]
+          },
+          {
+            "task_id": "T2",
+            "requirement": {
+              "topic": "总收入",
+              "metrics": [
+                "总收入"
+              ],
+              "relation": "无",
+              "group_by": []
+            },
+            "queries": [
+              "塔塔咨询服务公司2024财年的营业收入和总收入分别是多少？ consolidated statement of profit and loss revenue from operations total income revenue total revenue",
+              "塔塔咨询服务公司 2024财年 总收入",
+              "Tata Consultancy Services fiscal year 2024 total income"
+            ],
+            "statement_scope": "合并",
+            "candidate_chunk_ids": [
+              "chunk_35a8e17e873fd4d53388814c",
+              "chunk_ae63f594def3d205ef6e5523",
+              "chunk_9c41e056946b3c02940781e2",
+              "chunk_6d2dd5d7232a18828a029010",
+              "chunk_77c714744114da44822e2039",
+              "chunk_dc58681af7603af5d9c6f230",
+              "chunk_dfc0dbb7b4af8cf2812fcbec",
+              "chunk_8cb4e23a32105c2cd606dbf0",
+              "chunk_124f339fb1f00dac029e721d",
+              "chunk_272adada7a0f160a9d37ea22",
+              "chunk_3a8d42187d8107facff4d5cb"
+            ],
+            "candidate_top_k": 15,
+            "query_retrieval": [
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              },
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              },
+              {
+                "candidate_count": 15,
+                "effective_top_k": 15,
+                "coverage_truncated": false
+              }
+            ],
+            "evidence_ids": [
+              "S1",
+              "S2",
+              "S3",
+              "S4",
+              "S5"
+            ]
+          }
+        ],
+        "needs_calculation": false,
+        "clarification_needed": false,
+        "usage": {
+          "prompt_tokens": 756,
+          "completion_tokens": 244,
+          "total_tokens": 1000,
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 116,
+          "prompt_cache_total_tokens": 756,
+          "prompt_cache_hit_ratio": 0.8466
+        },
+        "finish_reason": "stop"
+      },
+      "evidence": [
+        {
+          "evidence_id": "S1",
+          "text": "table_id=tcs_2024_annual_report_p225_t02；location=page=225；headers=column_1 | Year ended March 31, 2024 | (` crore) / Year ended March 31, 2023\ntable_title=consolidated statement of profit and loss is as follows:\ntable_context=consolidated statement of profit and loss is as follows:\nrow_number=14；column_1=Total income tax expense；Year ended March 31, 2024=15,898；(` crore) / Year ended March 31, 2023=14,604\n\n完整表格上下文：\n |  | (` crore)\n | Year ended March 31, 2024 | Year ended March 31, 2023\nProfit before tax | 61,997 | 56,907\nIndian statutory income tax rate | 34.94% | 34.94%\nExpected income tax expense | 21,664 | 19,887\nTax effect of adjustments to reconcile expected income tax expense to reported income tax expense |  | \nTax holidays | (6,407) | (5,112)\nIncome exempt from tax | (522) | (236)\nUndistributed earnings in branches and subsidiaries | 111 | 276\nTax on income at different rates | 891 | 508\nTax pertaining to prior years | (389) | (655)\nEffect of tax rate change under new regime | 441 | -\nOthers (net) | 109 | (64)\nTotal income tax expense | 15,898 | 14,604",
+          "citation": {
+            "evidence_id": "S1",
+            "chunk_id": "chunk_35a8e17e873fd4d53388814c",
+            "document_id": "tcs_2024_annual_report",
+            "company_id": "tcs",
+            "company_name": "Tata Consultancy Services Limited",
+            "fiscal_year": 2024,
+            "source_format": "pdf",
+            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "page": 225,
+            "page_start": 225,
+            "page_end": 225,
+            "table_id": "tcs_2024_annual_report_p225_t02",
+            "table_title": "consolidated statement of profit and loss is as follows:",
+            "table_context": "consolidated statement of profit and loss is as follows:",
+            "region": null,
+            "period_years": [
+              2023,
+              2024
+            ],
+            "measure_name": null,
+            "value_kind": "numeric",
+            "currency": "INR",
+            "unit_scale": "crore",
+            "column_headers": [
+              "column_1",
+              "Year ended March 31, 2024",
+              "(` crore) / Year ended March 31, 2023"
+            ],
+            "parent_row_labels": [],
+            "statement_family": "income_statement",
+            "statement_scope": "consolidated",
+            "period_end": "2024-03-31",
+            "unit": "INR crore",
+            "table_title_raw": "consolidated statement of profit and loss is as follows:",
+            "table_group_id": "tcs_2024_annual_report_p225_t02",
+            "paragraph_index": null,
+            "sheet_name": null,
+            "cell_range": null,
+            "source_location": "page=225",
+            "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/t/OTC_TCS_2024.pdf",
+            "source_kind": "public_archive_copy"
+          },
+          "retrieval_task_ids": [
+            "T1",
+            "T2"
+          ]
+        },
+        {
+          "evidence_id": "S2",
+          "text": "181Consolidated Financial Statements 2023-24 Consolidated Statement of Profit and Loss (` crore) Note Year ended March 31, 2024 Year ended March 31, 2023 Revenue from operations 12 2,40,893 2,25,458 Other income 13 4,422 3,449 TOTAL INCOME 2,45,315 2,28,907 Expenses Employee benefit expenses 14 1,40,131 1,27,522 Cost of equipment and software licences 15(a) 3,702 1,881 Finance costs 16 778 779 Depreciation and amortisation expense 4,985 5,022 Other expenses 15(b) 32,764 36,796 TOTAL EXPENSES 1,82,360 1,72,000 PROFIT BEFORE EXCEPTIONAL ITEM AND TAX 62,955 56,907 Exceptional item Settlement of legal claim 20 958 - PROFIT BEFORE TAX 61,997 56,907 Tax expense Current tax 17 15,864 14,757 Deferred tax 17 34 (153) TOTAL TAX EXPENSE 15,898 14,604 PROFIT FOR THE YEAR 46,099 42,303 OTHER COMPREHENSIVE INCOME (OCI) Items that will not be reclassified subsequently to profit or loss Remeasurement of defined employee benefit plans (2) 350 Net change in fair values of investments in equity shares carried at fair value through OCI (6) (2) Income tax on items that will not be reclassified subsequently to profit or loss (11) (75) Items that will be reclassified subsequently to profit or loss Net change in fair values of investments other than equity shares carried at fair value through OCI 237 (679) Net change in intrinsic value of derivatives designated as cash flow hedges 1 (25) Net change in time value of derivatives designated as cash flow hedges 13 32 Exchange differences on translation of financial statements of foreign operations 44 655 Income tax on items that will be reclassified subsequently to profit or loss (39) 236 TOTAL OTHER COMPREHENSIVE INCOME / (LOSSES) 237 492 TOTAL COMPREHENSIVE INCOME FOR THE YEAR 46,336 42,795 Profit for the year attributable to: Shareholders of the Company 45,908 42,147 Non-controlling interests 191 156 46,099 42,303 Other comprehensive income for the year attributable to: Shareholders of the Company 299 493 Non-controlling interests (62) (1) 237 492 Total comprehensive income for the year attributable to: Shareholders of the Company 46,207 42,640 Non-controlling interests 129 155 46,336 42,795 Earnings per equity share:- Basic and diluted (`) 18 125.88 115.19",
+          "citation": {
+            "evidence_id": "S2",
+            "chunk_id": "chunk_ae63f594def3d205ef6e5523",
+            "document_id": "tcs_2024_annual_report",
+            "company_id": "tcs",
+            "company_name": "Tata Consultancy Services Limited",
+            "fiscal_year": 2024,
+            "source_format": "pdf",
+            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "page": 181,
+            "page_start": 181,
+            "page_end": 181,
+            "table_id": null,
+            "table_title": null,
+            "table_context": null,
+            "region": null,
+            "period_years": [
+              2023,
+              2024
+            ],
+            "measure_name": null,
+            "value_kind": null,
+            "currency": "INR",
+            "unit_scale": "crore",
+            "column_headers": [],
+            "parent_row_labels": [],
+            "statement_family": "income_statement",
+            "statement_scope": "consolidated",
+            "period_end": "2024-03-31",
+            "unit": "INR crore",
+            "table_title_raw": null,
+            "table_group_id": "tcs_2024_annual_report:page:181:text",
+            "paragraph_index": null,
+            "sheet_name": null,
+            "cell_range": null,
+            "source_location": "page=181",
+            "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/t/OTC_TCS_2024.pdf",
+            "source_kind": "public_archive_copy"
+          },
+          "retrieval_task_ids": [
+            "T1",
+            "T2"
+          ]
+        },
+        {
+          "evidence_id": "S3",
+          "text": "Refer note 21 of consolidated financial statement for list of subsidiaries of the Company.\n\nTransactions with related parties are as follows: (` crore) Year ended March 31, 2024 Tata Sons Private Limited Subsidiaries of the Company Subsidiaries of Tata Sons Private Limited Associates / joint ventures of Tata Sons Private Limited and their subsidiaries Other related parties Total Revenue from operations 50 26,298 1,006 3,875 - 31,229 Dividend income - 3,296 - - - 3,296 Rent income - 43 - - - 43 Other income - 40 - - - 40 Purchases of goods and services (including reimbursements) 1 17,707 1,344 248 - 19,300 Brand equity contribution 200 - - - - 200 Facility expenses 1 76 18 73 - 168 Lease rental - - 49 46 - 95 Bad debts and advances written off, allowance for expected credit losses and doubtful advances (net) - - 7 (1) - 6 Contribution and advance to post employment benefit plans - - - - 3,783 3,783 Purchase of property, plant and equipment - - 108 98 - 206 Advances given - 5 1,013 98 - 1,116 Advances recovered - 5 8 4 - 17 Advances taken - 45 27 1 - 73 Dividend paid 18,177 - 8 2 - 18,187 Buy-back of shares 10,548 - 4 3 - 10,555 Cost recovery - 4,177 - - - 4,177 Sale of property, plant and equipment - 1 - - - 1",
+          "citation": {
+            "evidence_id": "S3",
+            "chunk_id": "chunk_9c41e056946b3c02940781e2",
+            "document_id": "tcs_2024_annual_report",
+            "company_id": "tcs",
+            "company_name": "Tata Consultancy Services Limited",
+            "fiscal_year": 2024,
+            "source_format": "pdf",
+            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "page": 298,
+            "page_start": 298,
+            "page_end": 298,
+            "table_id": null,
+            "table_title": null,
+            "table_context": null,
+            "region": null,
+            "period_years": [
+              2024
+            ],
+            "measure_name": null,
+            "value_kind": null,
+            "currency": "INR",
+            "unit_scale": "crore",
+            "column_headers": [],
+            "parent_row_labels": [],
+            "statement_family": "income_statement",
+            "statement_scope": "consolidated",
+            "period_end": "2024-03-31",
+            "unit": "INR crore",
+            "table_title_raw": null,
+            "table_group_id": "tcs_2024_annual_report:page:298:text",
+            "paragraph_index": null,
+            "sheet_name": null,
+            "cell_range": null,
+            "source_location": "page=298",
+            "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/t/OTC_TCS_2024.pdf",
+            "source_kind": "public_archive_copy"
+          },
+          "retrieval_task_ids": [
+            "T1",
+            "T2"
+          ]
+        },
+        {
+          "evidence_id": "S4",
+          "text": "237Consolidated Financial Statements 2023-24 (` crore) Year ended March 31, 2023 Tata Sons Private Limited Subsidiaries of Tata Sons Private Limited Associates / joint ventures of Tata Sons Private Limited and their subsidiaries Other related parties Total Revenue from operations 38 1,174 3,050 - 4,262 Purchases of goods and services (including reimbursements) 1 610 225 - 836 Brand equity contribution 227 - - - 227 Facility expenses 1 25 59 - 85 Lease rental - 56 47 - 103 Bad debts and advances written off, allowance for expected credit losses and doubtful advances (net) - (1) - - (1) Contribution and advance to post employment benefit plans - - - 2,955 2,955 Purchase of property, plant and equipment - 13 137 - 150 Advances given - 1 45 - 46 Advances recovered - 1 15 - 16 Advances taken - 25 4 - 29 Dividend paid 29,881 16 6 - 29,903 Balances receivable from related parties are as follows: (` crore) As at March 31, 2024 Tata Sons Private Limited Subsidiaries of Tata Sons Private Limited Associates / joint ventures of Tata Sons Private Limited and their subsidiaries Other related parties Total Trade receivables and contract assets 5 411 1,509 - 1,925 Loans, other financial assets and other assets 2 1,238 9 - 1,249 7 1,649 1,518 - 3,174",
+          "citation": {
+            "evidence_id": "S4",
+            "chunk_id": "chunk_6d2dd5d7232a18828a029010",
+            "document_id": "tcs_2024_annual_report",
+            "company_id": "tcs",
+            "company_name": "Tata Consultancy Services Limited",
+            "fiscal_year": 2024,
+            "source_format": "pdf",
+            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "page": 237,
+            "page_start": 237,
+            "page_end": 237,
+            "table_id": null,
+            "table_title": null,
+            "table_context": null,
+            "region": null,
+            "period_years": [
+              2023,
+              2024
+            ],
+            "measure_name": null,
+            "value_kind": null,
+            "currency": "INR",
+            "unit_scale": "crore",
+            "column_headers": [],
+            "parent_row_labels": [],
+            "statement_family": "income_statement",
+            "statement_scope": "consolidated",
+            "period_end": "2023-03-31",
+            "unit": "INR crore",
+            "table_title_raw": null,
+            "table_group_id": "tcs_2024_annual_report:page:237:text",
+            "paragraph_index": null,
+            "sheet_name": null,
+            "cell_range": null,
+            "source_location": "page=237",
+            "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/t/OTC_TCS_2024.pdf",
+            "source_kind": "public_archive_copy"
+          },
+          "retrieval_task_ids": [
+            "T1",
+            "T2"
+          ]
+        },
+        {
+          "evidence_id": "S5",
+          "text": "75Management Discussion and Analysis Financial Performance Overview The discussions in this section relate to the consolidated, Rupee-denominated financial results pertaining to the year that ended March 31, 2024.\n\nThe financial statements of Tata Consultancy Services Limited and its subsidiaries (collectively referred to as ‘TCS’ or ‘the Company’) are prepared in accordance with the Indian Accounting Standards (referred to as `Ind AS’) prescribed under section 133 of the Companies Act, 2013, read with the Companies (Indian Accounting Standards) Rules, as amended from time to time.\n\nSignificant accounting policies used in the preparation of the financial statements are disclosed in the notes to the consolidated financial statements.\n\nThe following table gives an overview of the consolidated financial results of the company: (` crore) FY 2024* FY 2024 FY 2023 Amount % of Revenue % Growth Amount % of Revenue Amount % of Revenue Revenue from operations 240,893 100.0 6.8 240,893 100.0 225,458 100.0 Earnings before interest and tax (EBIT) (Before other income) 59,311 24.6 9.4 58,353 24.2 54,237 24.1 Profit after tax attributable to shareholders of the company 46,585 19.3 10.5 45,908 19.1 42,147 18.7 Earnings per share (in ₹) 127.74 10.9 125.88 115.19 Analysis of revenue growth and margin performance On a reported basis, TCS’ revenue grew 6.8% in FY 2024, compared to 17.6% in the prior year .\n\nThe company’s performance showed a remarkable resilience against the backdrop of macro uncertainty and geo-political volatility.",
+          "citation": {
+            "evidence_id": "S5",
+            "chunk_id": "chunk_77c714744114da44822e2039",
+            "document_id": "tcs_2024_annual_report",
+            "company_id": "tcs",
+            "company_name": "Tata Consultancy Services Limited",
+            "fiscal_year": 2024,
+            "source_format": "pdf",
+            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "page": 75,
+            "page_start": 75,
+            "page_end": 75,
+            "table_id": null,
+            "table_title": null,
+            "table_context": null,
+            "region": null,
+            "period_years": [
+              2013,
+              2023,
+              2024
+            ],
+            "measure_name": null,
+            "value_kind": null,
+            "currency": "INR",
+            "unit_scale": "crore",
+            "column_headers": [],
+            "parent_row_labels": [],
+            "statement_family": "ratio",
+            "statement_scope": "consolidated",
+            "period_end": "FY2024",
+            "unit": "INR crore",
+            "table_title_raw": null,
+            "table_group_id": "tcs_2024_annual_report:page:75:text",
+            "paragraph_index": null,
+            "sheet_name": null,
+            "cell_range": null,
+            "source_location": "page=75",
+            "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/t/OTC_TCS_2024.pdf",
+            "source_kind": "public_archive_copy"
+          },
+          "retrieval_task_ids": [
+            "T1",
+            "T2"
+          ]
+        },
+        {
+          "evidence_id": "S6",
+          "text": "238 Consolidated Financial Statements 2023-24 (` crore) As at March 31, 2023 Tata Sons Private Limited Subsidiaries of Tata Sons Private Limited Associates / joint ventures of Tata Sons Private Limited and their subsidiaries Other related parties Total Trade receivables and contract assets 2 434 1,004 - 1,440 Loans, other financial assets and other assets 10 95 85 - 190 12 529 1,089 - 1,630 Balances payable to related parties are as follows: (` crore) As at March 31, 2024 Tata Sons Private Limited Subsidiaries of Tata Sons Private Limited Associates / joint ventures of Tata Sons Private Limited and their subsidiaries Other related parties Total Trade payables, unearned and deferred revenue, other financial liabilities and other liabilities 355 1,003 428 - 1,786 Commitments - 1,412 13 - 1,425 (` crore) As at March 31, 2023 Tata Sons Private Limited Subsidiaries of Tata Sons Private Limited Associates / joint ventures of Tata Sons Private Limited and their subsidiaries Other related parties Total Trade payables, unearned and deferred revenue, other financial liabilities and other liabilities 213 377 322 278 1,190 Commitments - 12 50 - 62 Material related party transactions are as follows: (` crore) Year ended March 31, 2024 Year ended March 31, 2023 Revenue from operations Jaguar Land Rover Limited 2,902 1,707 Tata Steel IJmuiden BV 599 533 Tata Digital Private Limited 286 502 Purchases of goods and services (including reimbursements) and net of cost recovery Tejas Networks Limited 754 - Advances given Tejas Networks Limited 960 -",
+          "citation": {
+            "evidence_id": "S6",
+            "chunk_id": "chunk_dc58681af7603af5d9c6f230",
+            "document_id": "tcs_2024_annual_report",
+            "company_id": "tcs",
+            "company_name": "Tata Consultancy Services Limited",
+            "fiscal_year": 2024,
+            "source_format": "pdf",
+            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "page": 238,
+            "page_start": 238,
+            "page_end": 238,
+            "table_id": null,
+            "table_title": null,
+            "table_context": null,
+            "region": null,
+            "period_years": [
+              2023,
+              2024
+            ],
+            "measure_name": null,
+            "value_kind": null,
+            "currency": "INR",
+            "unit_scale": "crore",
+            "column_headers": [],
+            "parent_row_labels": [],
+            "statement_family": "income_statement",
+            "statement_scope": "consolidated",
+            "period_end": "2024-03-31",
+            "unit": "INR crore",
+            "table_title_raw": null,
+            "table_group_id": "tcs_2024_annual_report:page:238:text",
+            "paragraph_index": null,
+            "sheet_name": null,
+            "cell_range": null,
+            "source_location": "page=238",
+            "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/t/OTC_TCS_2024.pdf",
+            "source_kind": "public_archive_copy"
+          },
+          "retrieval_task_ids": [
+            "T1"
+          ]
+        }
+      ]
+    }
+  ]
+}

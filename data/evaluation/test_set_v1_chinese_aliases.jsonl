@@ -1,0 +1,7 @@
+{"record_type":"contract","test_set":"v1_chinese_aliases","scope":"single_company_query_only","request_policy":"query_only_no_explicit_filters","aliases":["苹果","苹果公司","微软","微软公司","塔塔咨询","塔塔咨询服务公司"]}
+{"record_type":"case","case_id":"apple_cn_short_revenue","alias":"苹果","query":"苹果2024财年的总净销售额是多少？请给出金额和单位。","expected_company_id":"apple","expected_values":["391,035"],"required_evidence_families":["income_statement"]}
+{"record_type":"case","case_id":"apple_cn_company_services","alias":"苹果公司","query":"苹果公司2024财年的服务业务净销售额是多少？","expected_company_id":"apple","expected_values":["96,169"],"required_evidence_families":["income_statement"]}
+{"record_type":"case","case_id":"microsoft_cn_short_income","alias":"微软","query":"微软2023财年的营业收入、营业利润和净利润分别是多少？","expected_company_id":"microsoft","expected_values":["211,915","88,523","72,361"],"required_evidence_families":["income_statement"]}
+{"record_type":"case","case_id":"microsoft_cn_company_cloud","alias":"微软公司","query":"微软公司2023财年的智能云业务收入是多少？","expected_company_id":"microsoft","expected_values":["87,907"],"required_evidence_families":["segment"]}
+{"record_type":"case","case_id":"tcs_cn_short_cash_flow","alias":"塔塔咨询","query":"塔塔咨询2024财年经营活动产生的现金总额和经营活动净现金额分别是多少？","expected_company_id":"tcs","expected_values":["56,827","44,338"],"required_evidence_families":["cash_flow"]}
+{"record_type":"case","case_id":"tcs_cn_company_income","alias":"塔塔咨询服务公司","query":"塔塔咨询服务公司2024财年的营业收入和总收入分别是多少？","expected_company_id":"tcs","expected_values":["2,40,893","2,45,315"],"required_evidence_families":["income_statement"]}
