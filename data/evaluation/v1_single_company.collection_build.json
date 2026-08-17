@@ -1,9 +1,11 @@
 {
   "stage": "v1_single_company_collection_build",
   "generated_at": "2026-08-14T05:16:18.116344+00:00",
+  "metadata_refreshed_at": "2026-08-17T17:27:16.9476744+08:00",
   "collection": "annual_report_v1_single_company",
-  "qdrant_path": "F:\\新建文件夹\\Rag\\xianlian",
-  "chunk_dir": "F:\\新建文件夹\\Rag\\data\\processed\\annual_reports\\v1_single_company_chunks",
+  "qdrant_path": "xianlian",
+  "chunk_dir": "data/processed/annual_reports/v1_single_company_chunks",
+  "source_count": 7,
   "chunk_count": 3959,
   "point_count": 3959,
   "company_year_counts": {
@@ -13,9 +15,9 @@
     "tcs:2023": 1009,
     "tcs:2024": 1142
   },
-  "source_collection": "annual_report_tcs_real_multiformat_v2",
-  "reused_tcs_point_count": 3173,
-  "newly_encoded_point_count": 786,
-  "manifest": "F:\\新建文件夹\\Rag\\data\\processed\\annual_reports\\v1_single_company_reports\\embedding.manifest.json",
+  "build_source": "v1_single_company_chunks",
+  "resume_existing": true,
+  "encoded_point_count": 0,
+  "manifest": "data/processed/annual_reports/v1_single_company_reports/embedding.manifest.json",
   "passed": true
 }

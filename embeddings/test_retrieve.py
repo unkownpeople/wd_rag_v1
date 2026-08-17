@@ -4,8 +4,6 @@ import unittest
 from types import SimpleNamespace
 from unittest.mock import Mock
 
-from pathlib import Path
-
 from .contracts import QueryRequest
 from .retrieve import BM25Index, QdrantRetriever, assemble_context
 from .vectorize import DEFAULT_CHUNK_DIR, _payload
@@ -98,15 +96,23 @@ class BM25IndexTests(unittest.TestCase):
         self.assertEqual(hit["citation"]["statement_family"], "risk")
 
     def test_formulations_query_finds_exact_chunk(self) -> None:
-        index = BM25Index.from_chunk_dir(DEFAULT_CHUNK_DIR)
+        index = BM25Index(
+            [
+                {
+                    "chunk_id": "formulations",
+                    "chunk_text": (
+                        "same retrieved passages across the generated sequence "
+                        "and different passages per token"
+                    ),
+                },
+                {"chunk_id": "unrelated", "chunk_text": "annual report revenue"},
+            ]
+        )
         hits = index.search(
             "same retrieved passages across the generated sequence and different passages per token",
             limit=5,
         )
-        self.assertIn(
-            "chunk_e592d80e117dfff74ff1ed53",
-            [hit["chunk_id"] for hit in hits],
-        )
+        self.assertEqual(hits[0]["chunk_id"], "formulations")
 
     def test_geography_payload_has_auditable_period_and_scope(self) -> None:
         chunk = {
@@ -142,8 +148,7 @@ class BM25IndexTests(unittest.TestCase):
         self.assertEqual(request.explicit_filters(), {"company_id": "apple", "fiscal_year": 2024})
 
     def test_annual_index_infers_company_and_year(self) -> None:
-        annual_dir = Path(__file__).resolve().parents[1] / "data" / "processed" / "annual_reports" / "pdf_chunks"
-        index = BM25Index.from_chunk_dir(annual_dir)
+        index = BM25Index.from_chunk_dir(DEFAULT_CHUNK_DIR)
         self.assertEqual(
             index.infer_filters("What were Apple's total net sales in fiscal 2024?"),
             {"company_id": "apple", "fiscal_year": 2024},

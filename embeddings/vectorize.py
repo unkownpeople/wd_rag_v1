@@ -24,10 +24,27 @@ from .semantic_metadata import enrich_chunk
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_CHUNK_DIR = ROOT / "data" / "processed" / "chunks" / "bge-m3-tokenizer-v1"
+DEFAULT_CHUNK_DIR = (
+    ROOT / "data" / "processed" / "annual_reports" / "v1_single_company_chunks"
+)
 DEFAULT_QDRANT_PATH = ROOT / "xianlian"
-DEFAULT_MANIFEST = ROOT / "data" / "processed" / "embeddings" / "bge-m3-onnx-int8.manifest.json"
-COLLECTION = "rag_chunks"
+DEFAULT_MANIFEST = (
+    ROOT
+    / "data"
+    / "processed"
+    / "annual_reports"
+    / "v1_single_company_reports"
+    / "embedding.manifest.json"
+)
+COLLECTION = "annual_report_v1_single_company"
+
+
+def _manifest_path(path: Path) -> str:
+    resolved = path.resolve()
+    try:
+        return resolved.relative_to(ROOT).as_posix()
+    except ValueError:
+        return str(resolved)
 
 
 def _chunk_digest(files: list[Path]) -> str:
@@ -176,6 +193,11 @@ def run(
         max_length=max_length,
     )
     model_metadata = encoder.metadata()
+    manifest_model = dict(model_metadata)
+    manifest_model["model_path"] = _manifest_path(Path(model_metadata["model_path"]))
+    manifest_model["tokenizer_path"] = _manifest_path(
+        Path(model_metadata["tokenizer_path"])
+    )
 
     from qdrant_client import QdrantClient, models
 
@@ -298,8 +320,8 @@ def run(
         manifest = {
             "stage": "embedding",
             "collection": collection,
-            "qdrant_path": str(qdrant_path),
-            "chunk_dir": str(chunk_dir),
+            "qdrant_path": _manifest_path(qdrant_path),
+            "chunk_dir": _manifest_path(chunk_dir),
             "chunk_digest": chunk_digest,
             "chunk_count": len(chunks),
             "point_count": point_count,
@@ -314,7 +336,7 @@ def run(
             "resume_existing": resume_existing,
             "existing_ids_valid": existing_ids_valid,
             "missing_point_count_before_write": len(missing_indices),
-            "model": model_metadata,
+            "model": manifest_model,
             "created_at": datetime.now(timezone.utc).isoformat(),
             "retrieval_evaluation": "not_run",
         }

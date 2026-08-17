@@ -36,6 +36,14 @@ REPORT_PATH = (
 )
 
 
+def _report_path(path: Path) -> str:
+    resolved = path.resolve()
+    try:
+        return resolved.relative_to(ROOT).as_posix()
+    except ValueError:
+        return str(resolved)
+
+
 def _write_json(path: Path, value: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
@@ -86,8 +94,8 @@ def run(*, recreate: bool = False, batch_size: int = 32) -> dict[str, Any]:
         "stage": "v1_single_company_collection_build",
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "collection": TARGET_COLLECTION,
-        "qdrant_path": str(QDRANT_PATH),
-        "chunk_dir": str(TARGET_CHUNK_DIR),
+        "qdrant_path": _report_path(QDRANT_PATH),
+        "chunk_dir": _report_path(TARGET_CHUNK_DIR),
         "chunk_count": len(chunks),
         "point_count": point_count,
         "company_year_counts": company_year_counts,
@@ -96,7 +104,7 @@ def run(*, recreate: bool = False, batch_size: int = 32) -> dict[str, Any]:
         "encoded_point_count": int(
             manifest.get("missing_point_count_before_write") or 0
         ),
-        "manifest": str(MANIFEST_PATH),
+        "manifest": _report_path(MANIFEST_PATH),
         "passed": point_count == len(chunks),
     }
     _write_json(REPORT_PATH, result)

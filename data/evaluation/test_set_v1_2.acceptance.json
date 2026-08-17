@@ -38,7 +38,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 32,
             "page_start": 32,
             "page_end": 32,
@@ -90,7 +90,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 50,
             "page_start": 50,
             "page_end": 50,
@@ -143,7 +143,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 32,
             "page_start": 32,
             "page_end": 32,
@@ -190,7 +190,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 50,
             "page_start": 50,
             "page_end": 50,
@@ -242,7 +242,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 50,
             "page_start": 50,
             "page_end": 50,
@@ -515,7 +515,7 @@
               "in millions"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf"
+              "data/annual_reports/raw/apple/apple_2024_10k.pdf"
             ],
             "mixed_scopes": false,
             "mixed_periods": true,
@@ -563,7 +563,7 @@
               "in millions"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf"
+              "data/annual_reports/raw/apple/apple_2024_10k.pdf"
             ],
             "mixed_scopes": false,
             "mixed_periods": true,
@@ -600,7 +600,7 @@
             "in millions"
           ],
           "cited_sources": [
-            "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf"
+            "data/annual_reports/raw/apple/apple_2024_10k.pdf"
           ],
           "mixed_scopes": false,
           "mixed_periods": true,
@@ -631,7 +631,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 32,
             "page_start": 32,
             "page_end": 32,
@@ -683,7 +683,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 27,
             "page_start": 27,
             "page_end": 27,
@@ -737,7 +737,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 32,
             "page_start": 32,
             "page_end": 32,
@@ -784,7 +784,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 50,
             "page_start": 50,
             "page_end": 50,
@@ -837,7 +837,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 50,
             "page_start": 50,
             "page_end": 50,
@@ -1112,7 +1112,7 @@
               "In millions"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf"
+              "data/annual_reports/raw/apple/apple_2024_10k.pdf"
             ],
             "mixed_scopes": false,
             "mixed_periods": false,
@@ -1156,7 +1156,7 @@
               "In millions"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf"
+              "data/annual_reports/raw/apple/apple_2024_10k.pdf"
             ],
             "mixed_scopes": false,
             "mixed_periods": false,
@@ -1189,7 +1189,7 @@
             "In millions"
           ],
           "cited_sources": [
-            "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf"
+            "data/annual_reports/raw/apple/apple_2024_10k.pdf"
           ],
           "mixed_scopes": false,
           "mixed_periods": false,
@@ -1221,7 +1221,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 32,
             "page_start": 32,
             "page_end": 32,
@@ -1273,7 +1273,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 25,
             "page_start": 25,
             "page_end": 25,
@@ -1320,7 +1320,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 27,
             "page_start": 27,
             "page_end": 27,
@@ -1375,7 +1375,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 25,
             "page_start": 25,
             "page_end": 25,
@@ -1429,7 +1429,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 50,
             "page_start": 50,
             "page_end": 50,
@@ -1482,7 +1482,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 26,
             "page_start": 26,
             "page_end": 26,
@@ -1949,7 +1949,7 @@
               "in millions"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf"
+              "data/annual_reports/raw/apple/apple_2024_10k.pdf"
             ],
             "mixed_scopes": true,
             "mixed_periods": false,
@@ -1997,7 +1997,7 @@
               "in millions"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf"
+              "data/annual_reports/raw/apple/apple_2024_10k.pdf"
             ],
             "mixed_scopes": true,
             "mixed_periods": false,
@@ -2034,7 +2034,7 @@
             "in millions"
           ],
           "cited_sources": [
-            "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf"
+            "data/annual_reports/raw/apple/apple_2024_10k.pdf"
           ],
           "mixed_scopes": true,
           "mixed_periods": false,
@@ -2066,7 +2066,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 36,
             "page_start": 36,
             "page_end": 36,
@@ -2120,7 +2120,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 34,
             "page_start": 34,
             "page_end": 34,
@@ -2170,7 +2170,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 27,
             "page_start": 27,
             "page_end": 27,
@@ -2217,7 +2217,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 42,
             "page_start": 42,
             "page_end": 42,
@@ -2267,7 +2267,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 35,
             "page_start": 35,
             "page_end": 35,
@@ -2718,7 +2718,7 @@
               "in millions"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf"
+              "data/annual_reports/raw/apple/apple_2024_10k.pdf"
             ],
             "mixed_scopes": false,
             "mixed_periods": true,
@@ -2765,7 +2765,7 @@
               "in millions"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf"
+              "data/annual_reports/raw/apple/apple_2024_10k.pdf"
             ],
             "mixed_scopes": false,
             "mixed_periods": true,
@@ -2801,7 +2801,7 @@
             "in millions"
           ],
           "cited_sources": [
-            "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf"
+            "data/annual_reports/raw/apple/apple_2024_10k.pdf"
           ],
           "mixed_scopes": false,
           "mixed_periods": true,
@@ -2833,7 +2833,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 32,
             "page_start": 32,
             "page_end": 32,
@@ -2886,7 +2886,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 33,
             "page_start": 33,
             "page_end": 33,
@@ -2938,7 +2938,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 39,
             "page_start": 39,
             "page_end": 39,
@@ -2993,7 +2993,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 32,
             "page_start": 32,
             "page_end": 32,
@@ -3041,7 +3041,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 50,
             "page_start": 50,
             "page_end": 50,
@@ -3093,7 +3093,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 27,
             "page_start": 27,
             "page_end": 27,
@@ -3542,7 +3542,7 @@
               "in millions"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf"
+              "data/annual_reports/raw/apple/apple_2024_10k.pdf"
             ],
             "mixed_scopes": false,
             "mixed_periods": true,
@@ -3593,7 +3593,7 @@
               "in millions"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf"
+              "data/annual_reports/raw/apple/apple_2024_10k.pdf"
             ],
             "mixed_scopes": false,
             "mixed_periods": true,
@@ -3633,7 +3633,7 @@
             "in millions"
           ],
           "cited_sources": [
-            "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf"
+            "data/annual_reports/raw/apple/apple_2024_10k.pdf"
           ],
           "mixed_scopes": false,
           "mixed_periods": true,
@@ -3664,7 +3664,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 38,
             "page_start": 38,
             "page_end": 38,
@@ -3713,7 +3713,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 32,
             "page_start": 32,
             "page_end": 32,
@@ -3765,7 +3765,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 38,
             "page_start": 38,
             "page_end": 38,
@@ -3817,7 +3817,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 27,
             "page_start": 27,
             "page_end": 27,
@@ -3871,7 +3871,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 32,
             "page_start": 32,
             "page_end": 32,
@@ -3918,7 +3918,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 26,
             "page_start": 26,
             "page_end": 26,
@@ -4349,7 +4349,7 @@
               "in millions"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf"
+              "data/annual_reports/raw/apple/apple_2024_10k.pdf"
             ],
             "mixed_scopes": true,
             "mixed_periods": true,
@@ -4400,7 +4400,7 @@
               "in millions"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf"
+              "data/annual_reports/raw/apple/apple_2024_10k.pdf"
             ],
             "mixed_scopes": true,
             "mixed_periods": true,
@@ -4440,7 +4440,7 @@
             "in millions"
           ],
           "cited_sources": [
-            "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf"
+            "data/annual_reports/raw/apple/apple_2024_10k.pdf"
           ],
           "mixed_scopes": true,
           "mixed_periods": true,
@@ -4473,7 +4473,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 32,
             "page_start": 32,
             "page_end": 32,
@@ -4526,7 +4526,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 36,
             "page_start": 36,
             "page_end": 36,
@@ -4578,7 +4578,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 27,
             "page_start": 27,
             "page_end": 27,
@@ -4626,7 +4626,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 33,
             "page_start": 33,
             "page_end": 33,
@@ -4678,7 +4678,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 27,
             "page_start": 27,
             "page_end": 27,
@@ -4730,7 +4730,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 27,
             "page_start": 27,
             "page_end": 27,
@@ -4786,7 +4786,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 50,
             "page_start": 50,
             "page_end": 50,
@@ -4838,7 +4838,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 27,
             "page_start": 27,
             "page_end": 27,
@@ -4885,7 +4885,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 27,
             "page_start": 27,
             "page_end": 27,
@@ -4933,7 +4933,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 32,
             "page_start": 32,
             "page_end": 32,
@@ -4980,7 +4980,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 50,
             "page_start": 50,
             "page_end": 50,
@@ -5032,7 +5032,7 @@
             "company_name": "Apple Inc.",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf",
+            "source_file": "data/annual_reports/raw/apple/apple_2024_10k.pdf",
             "page": 50,
             "page_start": 50,
             "page_end": 50,
@@ -5660,7 +5660,7 @@
               "in millions"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf"
+              "data/annual_reports/raw/apple/apple_2024_10k.pdf"
             ],
             "mixed_scopes": false,
             "mixed_periods": true,
@@ -5723,7 +5723,7 @@
               "in millions"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf"
+              "data/annual_reports/raw/apple/apple_2024_10k.pdf"
             ],
             "mixed_scopes": false,
             "mixed_periods": true,
@@ -5775,7 +5775,7 @@
             "in millions"
           ],
           "cited_sources": [
-            "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\apple_2024_10k.pdf"
+            "data/annual_reports/raw/apple/apple_2024_10k.pdf"
           ],
           "mixed_scopes": false,
           "mixed_periods": true,
@@ -5808,7 +5808,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 44,
             "page_start": 44,
             "page_end": 44,
@@ -5857,7 +5857,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 49,
             "page_start": 49,
             "page_end": 49,
@@ -5905,7 +5905,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 32,
             "page_start": 32,
             "page_end": 32,
@@ -5951,7 +5951,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 76,
             "page_start": 76,
             "page_end": 76,
@@ -5999,7 +5999,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 29,
             "page_start": 29,
             "page_end": 29,
@@ -6045,7 +6045,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 33,
             "page_start": 33,
             "page_end": 33,
@@ -6089,7 +6089,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 31,
             "page_start": 31,
             "page_end": 31,
@@ -6569,7 +6569,7 @@
               "USD as_reported"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf"
+              "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf"
             ],
             "mixed_scopes": false,
             "mixed_periods": true,
@@ -6619,7 +6619,7 @@
               "USD as_reported"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf"
+              "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf"
             ],
             "mixed_scopes": false,
             "mixed_periods": true,
@@ -6658,7 +6658,7 @@
             "USD as_reported"
           ],
           "cited_sources": [
-            "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf"
+            "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf"
           ],
           "mixed_scopes": false,
           "mixed_periods": true,
@@ -6689,7 +6689,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 76,
             "page_start": 76,
             "page_end": 76,
@@ -6736,7 +6736,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 32,
             "page_start": 32,
             "page_end": 32,
@@ -6782,7 +6782,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 30,
             "page_start": 30,
             "page_end": 30,
@@ -6825,7 +6825,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 32,
             "page_start": 32,
             "page_end": 32,
@@ -6868,7 +6868,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 69,
             "page_start": 69,
             "page_end": 69,
@@ -7142,7 +7142,7 @@
               "In millions"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf"
+              "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf"
             ],
             "mixed_scopes": false,
             "mixed_periods": false,
@@ -7185,7 +7185,7 @@
               "In millions"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf"
+              "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf"
             ],
             "mixed_scopes": false,
             "mixed_periods": false,
@@ -7217,7 +7217,7 @@
             "In millions"
           ],
           "cited_sources": [
-            "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf"
+            "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf"
           ],
           "mixed_scopes": false,
           "mixed_periods": false,
@@ -7248,7 +7248,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 75,
             "page_start": 75,
             "page_end": 75,
@@ -7295,7 +7295,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 44,
             "page_start": 44,
             "page_end": 44,
@@ -7342,7 +7342,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 77,
             "page_start": 77,
             "page_end": 77,
@@ -7389,7 +7389,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 32,
             "page_start": 32,
             "page_end": 32,
@@ -7435,7 +7435,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 17,
             "page_start": 17,
             "page_end": 17,
@@ -7478,7 +7478,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 76,
             "page_start": 76,
             "page_end": 76,
@@ -7870,7 +7870,7 @@
               "USD as_reported"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf"
+              "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf"
             ],
             "mixed_scopes": true,
             "mixed_periods": true,
@@ -7922,7 +7922,7 @@
               "USD as_reported"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf"
+              "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf"
             ],
             "mixed_scopes": true,
             "mixed_periods": true,
@@ -7963,7 +7963,7 @@
             "USD as_reported"
           ],
           "cited_sources": [
-            "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf"
+            "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf"
           ],
           "mixed_scopes": true,
           "mixed_periods": true,
@@ -7992,7 +7992,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 69,
             "page_start": 69,
             "page_end": 69,
@@ -8037,7 +8037,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 47,
             "page_start": 47,
             "page_end": 47,
@@ -8082,7 +8082,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 78,
             "page_start": 78,
             "page_end": 78,
@@ -8127,7 +8127,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 37,
             "page_start": 37,
             "page_end": 37,
@@ -8171,7 +8171,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 49,
             "page_start": 49,
             "page_end": 49,
@@ -8215,7 +8215,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 37,
             "page_start": 37,
             "page_end": 37,
@@ -8258,7 +8258,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 32,
             "page_start": 32,
             "page_end": 32,
@@ -8386,7 +8386,7 @@
               "USD as_reported"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf"
+              "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf"
             ],
             "mixed_scopes": false,
             "mixed_periods": true,
@@ -8436,7 +8436,7 @@
               "USD as_reported"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf"
+              "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf"
             ],
             "mixed_scopes": false,
             "mixed_periods": true,
@@ -8475,7 +8475,7 @@
             "USD as_reported"
           ],
           "cited_sources": [
-            "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf"
+            "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf"
           ],
           "mixed_scopes": false,
           "mixed_periods": true,
@@ -8506,7 +8506,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 46,
             "page_start": 46,
             "page_end": 46,
@@ -8552,7 +8552,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 78,
             "page_start": 78,
             "page_end": 78,
@@ -8599,7 +8599,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 48,
             "page_start": 48,
             "page_end": 48,
@@ -8646,7 +8646,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 52,
             "page_start": 52,
             "page_end": 52,
@@ -8693,7 +8693,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 71,
             "page_start": 71,
             "page_end": 71,
@@ -8948,7 +8948,7 @@
               "USD as_reported"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf"
+              "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf"
             ],
             "mixed_scopes": false,
             "mixed_periods": true,
@@ -8994,7 +8994,7 @@
               "USD as_reported"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf"
+              "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf"
             ],
             "mixed_scopes": false,
             "mixed_periods": true,
@@ -9029,7 +9029,7 @@
             "USD as_reported"
           ],
           "cited_sources": [
-            "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf"
+            "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf"
           ],
           "mixed_scopes": false,
           "mixed_periods": true,
@@ -9061,7 +9061,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 44,
             "page_start": 44,
             "page_end": 44,
@@ -9108,7 +9108,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 28,
             "page_start": 28,
             "page_end": 28,
@@ -9155,7 +9155,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 32,
             "page_start": 32,
             "page_end": 32,
@@ -9202,7 +9202,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 49,
             "page_start": 49,
             "page_end": 49,
@@ -9249,7 +9249,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 30,
             "page_start": 30,
             "page_end": 30,
@@ -9293,7 +9293,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 33,
             "page_start": 33,
             "page_end": 33,
@@ -9336,7 +9336,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 77,
             "page_start": 77,
             "page_end": 77,
@@ -9869,7 +9869,7 @@
               "USD as_reported"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf"
+              "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf"
             ],
             "mixed_scopes": true,
             "mixed_periods": true,
@@ -9922,7 +9922,7 @@
               "USD as_reported"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf"
+              "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf"
             ],
             "mixed_scopes": true,
             "mixed_periods": true,
@@ -9964,7 +9964,7 @@
             "USD as_reported"
           ],
           "cited_sources": [
-            "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf"
+            "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf"
           ],
           "mixed_scopes": true,
           "mixed_periods": true,
@@ -9995,7 +9995,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 11,
             "page_start": 11,
             "page_end": 11,
@@ -10043,7 +10043,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 43,
             "page_start": 43,
             "page_end": 43,
@@ -10088,7 +10088,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 29,
             "page_start": 29,
             "page_end": 29,
@@ -10133,7 +10133,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 49,
             "page_start": 49,
             "page_end": 49,
@@ -10179,7 +10179,7 @@
             "company_name": "Microsoft Corporation",
             "fiscal_year": 2023,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf",
             "page": 71,
             "page_start": 71,
             "page_end": 71,
@@ -10468,7 +10468,7 @@
               "USD as_reported"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf"
+              "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf"
             ],
             "mixed_scopes": true,
             "mixed_periods": true,
@@ -10522,7 +10522,7 @@
               "USD as_reported"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf"
+              "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf"
             ],
             "mixed_scopes": true,
             "mixed_periods": true,
@@ -10565,7 +10565,7 @@
             "USD as_reported"
           ],
           "cited_sources": [
-            "F:\\新建文件夹\\Rag\\data\\annual_reports\\multicompany_eval_v1\\raw\\pdf\\microsoft_2023_annual_report.pdf"
+            "data/annual_reports/raw/microsoft/microsoft_2023_annual_report.pdf"
           ],
           "mixed_scopes": true,
           "mixed_periods": true,
@@ -10597,7 +10597,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 225,
             "page_start": 225,
             "page_end": 225,
@@ -10647,7 +10647,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 229,
             "page_start": 229,
             "page_end": 229,
@@ -10698,7 +10698,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 181,
             "page_start": 181,
             "page_end": 181,
@@ -10745,7 +10745,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 75,
             "page_start": 75,
             "page_end": 75,
@@ -10793,7 +10793,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 184,
             "page_start": 184,
             "page_end": 184,
@@ -10839,7 +10839,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 216,
             "page_start": 216,
             "page_end": 216,
@@ -11209,7 +11209,7 @@
               "INR crore"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf"
+              "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf"
             ],
             "mixed_scopes": false,
             "mixed_periods": false,
@@ -11253,7 +11253,7 @@
               "INR crore"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf"
+              "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf"
             ],
             "mixed_scopes": false,
             "mixed_periods": false,
@@ -11286,7 +11286,7 @@
             "INR crore"
           ],
           "cited_sources": [
-            "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf"
+            "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf"
           ],
           "mixed_scopes": false,
           "mixed_periods": false,
@@ -11318,7 +11318,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 180,
             "page_start": 180,
             "page_end": 180,
@@ -11365,7 +11365,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 235,
             "page_start": 235,
             "page_end": 235,
@@ -11412,7 +11412,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 232,
             "page_start": 232,
             "page_end": 232,
@@ -11459,7 +11459,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 233,
             "page_start": 233,
             "page_end": 233,
@@ -11506,7 +11506,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 234,
             "page_start": 234,
             "page_end": 234,
@@ -11552,7 +11552,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 302,
             "page_start": 302,
             "page_end": 302,
@@ -11935,7 +11935,7 @@
               "INR crore"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf"
+              "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf"
             ],
             "mixed_scopes": false,
             "mixed_periods": false,
@@ -11979,7 +11979,7 @@
               "INR crore"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf"
+              "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf"
             ],
             "mixed_scopes": false,
             "mixed_periods": false,
@@ -12012,7 +12012,7 @@
             "INR crore"
           ],
           "cited_sources": [
-            "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf"
+            "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf"
           ],
           "mixed_scopes": false,
           "mixed_periods": false,
@@ -12044,7 +12044,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 184,
             "page_start": 184,
             "page_end": 184,
@@ -12091,7 +12091,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 185,
             "page_start": 185,
             "page_end": 185,
@@ -12138,7 +12138,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 309,
             "page_start": 309,
             "page_end": 309,
@@ -12182,7 +12182,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 225,
             "page_start": 225,
             "page_end": 225,
@@ -12233,7 +12233,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 17,
             "page_start": 17,
             "page_end": 17,
@@ -12283,7 +12283,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 181,
             "page_start": 181,
             "page_end": 181,
@@ -12662,7 +12662,7 @@
               "INR crore"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf"
+              "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf"
             ],
             "mixed_scopes": false,
             "mixed_periods": false,
@@ -12706,7 +12706,7 @@
               "INR crore"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf"
+              "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf"
             ],
             "mixed_scopes": false,
             "mixed_periods": false,
@@ -12739,7 +12739,7 @@
             "INR crore"
           ],
           "cited_sources": [
-            "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf"
+            "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf"
           ],
           "mixed_scopes": false,
           "mixed_periods": false,
@@ -12770,7 +12770,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 16,
             "page_start": 16,
             "page_end": 16,
@@ -12818,7 +12818,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 310,
             "page_start": 310,
             "page_end": 310,
@@ -12861,7 +12861,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 75,
             "page_start": 75,
             "page_end": 75,
@@ -12908,7 +12908,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 89,
             "page_start": 89,
             "page_end": 89,
@@ -12955,7 +12955,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 181,
             "page_start": 181,
             "page_end": 181,
@@ -12998,7 +12998,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 310,
             "page_start": 310,
             "page_end": 310,
@@ -13389,7 +13389,7 @@
               "INR crore"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf"
+              "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf"
             ],
             "mixed_scopes": false,
             "mixed_periods": false,
@@ -13436,7 +13436,7 @@
               "INR crore"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf"
+              "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf"
             ],
             "mixed_scopes": false,
             "mixed_periods": false,
@@ -13472,7 +13472,7 @@
             "INR crore"
           ],
           "cited_sources": [
-            "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf"
+            "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf"
           ],
           "mixed_scopes": false,
           "mixed_periods": false,
@@ -13504,7 +13504,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 128,
             "page_start": 128,
             "page_end": 128,
@@ -13551,7 +13551,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 18,
             "page_start": 18,
             "page_end": 18,
@@ -13598,7 +13598,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 146,
             "page_start": 146,
             "page_end": 146,
@@ -13645,7 +13645,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 74,
             "page_start": 74,
             "page_end": 74,
@@ -13691,7 +13691,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 74,
             "page_start": 74,
             "page_end": 74,
@@ -13737,7 +13737,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 137,
             "page_start": 137,
             "page_end": 137,
@@ -14192,7 +14192,7 @@
               "INR as_reported"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf"
+              "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf"
             ],
             "mixed_scopes": true,
             "mixed_periods": false,
@@ -14240,7 +14240,7 @@
               "INR as_reported"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf"
+              "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf"
             ],
             "mixed_scopes": true,
             "mixed_periods": false,
@@ -14277,7 +14277,7 @@
             "INR as_reported"
           ],
           "cited_sources": [
-            "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf"
+            "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf"
           ],
           "mixed_scopes": true,
           "mixed_periods": false,
@@ -14308,7 +14308,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 229,
             "page_start": 229,
             "page_end": 229,
@@ -14359,7 +14359,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 184,
             "page_start": 184,
             "page_end": 184,
@@ -14405,7 +14405,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 16,
             "page_start": 16,
             "page_end": 16,
@@ -14454,7 +14454,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 302,
             "page_start": 302,
             "page_end": 302,
@@ -14497,7 +14497,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 309,
             "page_start": 309,
             "page_end": 309,
@@ -14540,7 +14540,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 75,
             "page_start": 75,
             "page_end": 75,
@@ -14587,7 +14587,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 271,
             "page_start": 271,
             "page_end": 271,
@@ -14632,7 +14632,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 216,
             "page_start": 216,
             "page_end": 216,
@@ -15182,7 +15182,7 @@
               "INR crore"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf"
+              "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf"
             ],
             "mixed_scopes": false,
             "mixed_periods": true,
@@ -15233,7 +15233,7 @@
               "INR crore"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf"
+              "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf"
             ],
             "mixed_scopes": false,
             "mixed_periods": true,
@@ -15273,7 +15273,7 @@
             "INR crore"
           ],
           "cited_sources": [
-            "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf"
+            "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf"
           ],
           "mixed_scopes": false,
           "mixed_periods": true,
@@ -15302,7 +15302,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 184,
             "page_start": 184,
             "page_end": 184,
@@ -15346,7 +15346,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 75,
             "page_start": 75,
             "page_end": 75,
@@ -15391,7 +15391,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 302,
             "page_start": 302,
             "page_end": 302,
@@ -15432,7 +15432,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 283,
             "page_start": 283,
             "page_end": 283,
@@ -15480,7 +15480,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 285,
             "page_start": 285,
             "page_end": 285,
@@ -15528,7 +15528,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 254,
             "page_start": 254,
             "page_end": 254,
@@ -15572,7 +15572,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 229,
             "page_start": 229,
             "page_end": 229,
@@ -15620,7 +15620,7 @@
             "company_name": "Tata Consultancy Services Limited",
             "fiscal_year": 2024,
             "source_format": "pdf",
-            "source_file": "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf",
+            "source_file": "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf",
             "page": 271,
             "page_start": 271,
             "page_end": 271,
@@ -15750,7 +15750,7 @@
               "INR crore"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf"
+              "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf"
             ],
             "mixed_scopes": true,
             "mixed_periods": true,
@@ -15803,7 +15803,7 @@
               "INR crore"
             ],
             "cited_sources": [
-              "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf"
+              "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf"
             ],
             "mixed_scopes": true,
             "mixed_periods": true,
@@ -15845,7 +15845,7 @@
             "INR crore"
           ],
           "cited_sources": [
-            "F:\\新建文件夹\\Rag\\data\\annual_reports\\real_multiformat_v2\\raw\\pdf\\tcs_2024_annual_report.pdf"
+            "data/annual_reports/raw/tcs/tcs_2024_annual_report.pdf"
           ],
           "mixed_scopes": true,
           "mixed_periods": true,

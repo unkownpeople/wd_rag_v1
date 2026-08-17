@@ -4,22 +4,16 @@ import sys
 from importlib.metadata import version
 from pathlib import Path
 
-import qdrant_client
 from qdrant_client import QdrantClient, models
 
 
 def main() -> None:
     storage = Path(__file__).resolve().parents[1] / "xianlian"
     client = QdrantClient(path=str(storage))
-    collection = "rag_chunks"
+    collection = "annual_report_v1_single_company"
     names = [item.name for item in client.get_collections().collections]
-    created = False
     if collection not in names:
-        client.create_collection(
-            collection_name=collection,
-            vectors_config=models.VectorParams(size=1024, distance=models.Distance.COSINE),
-        )
-        created = True
+        raise RuntimeError(f"活动集合不存在：{collection}")
     info = client.get_collection(collection)
     smoke_collection = "_rag_client_smoke"
     if smoke_collection in [item.name for item in client.get_collections().collections]:
@@ -47,7 +41,6 @@ def main() -> None:
             "python": sys.version.split()[0],
             "storage": str(storage),
             "collection": collection,
-            "created": created,
             "collections": [item.name for item in client.get_collections().collections],
             "vector_size": info.config.params.vectors.size,
             "distance": str(info.config.params.vectors.distance),

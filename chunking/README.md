@@ -34,9 +34,10 @@ F:\python\Python313\python.exe -m chunking.run_chunking
 
 输入：`data\processed\cleaned\*.cleaned.jsonl`
 
-输出：`data\processed\chunks\bge-m3-tokenizer-v1\`
+输出：`data\processed\chunks\`
 
-旧正则基线仍保留在 `data\processed\chunks\`，新的 BGE-M3 Tokenizer 结果不会覆盖它。
+当前 V1 已验收的切块单独保存在
+`data\processed\annual_reports\v1_single_company_chunks\`，通用切块命令不会覆盖它。
 
 解析和清洗仍分别由 `parsers\`、`cleaners\` 目录负责。切分阶段不会修改清洗源文件，也不会写入 `xianlian`。
 

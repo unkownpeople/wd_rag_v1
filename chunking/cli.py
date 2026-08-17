@@ -112,7 +112,7 @@ def main() -> None:
     parser.add_argument(
         "--output-dir",
         type=Path,
-        default=root / "data" / "processed" / "chunks" / "bge-m3-tokenizer-v1",
+        default=root / "data" / "processed" / "chunks",
     )
     args = parser.parse_args()
     run(args.input_dir.resolve(), args.output_dir.resolve())
