@@ -1,0 +1,12 @@
+{
+  "missing_comparable_values": [],
+  "unremoved_answer": true,
+  "manual_review_required": [
+    "18项数值与分部和年份映射",
+    "统一CAGR起点口径",
+    "独立合计与公司金额勾稽",
+    "单位换算与敏感性",
+    "分部与Azure定义"
+  ],
+  "note": "数值存在只是筛查，不能替代语义验收。"
+}

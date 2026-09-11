@@ -33,3 +33,4 @@ xianlian/**/*.sqlite-wal
 
 # 失败评测报告可能包含本地错误和服务响应，不作为验收材料提交。
 data/evaluation/*.failed_run.json
+data/query_logs/

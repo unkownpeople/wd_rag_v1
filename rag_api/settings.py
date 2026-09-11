@@ -39,7 +39,13 @@ class Settings(BaseSettings):
 
     retrieval_mode: Literal["dense", "bm25", "hybrid"] = "hybrid"
     retrieval_top_k: int = 5
-    retrieval_max_context_chars: int = 12000
+    retrieval_max_context_chars: int = 64000
+    query_audit_dir: Path = ROOT / 'data' / 'query_logs'
+    semantic_rerank_enabled: bool = True
+    coverage_probe_mode: Literal['observe', 'repair'] = 'observe'
+    semantic_rerank_candidates: int = Field(default=16, ge=2, le=20)
+    semantic_rerank_trigger: int = Field(default=8, ge=1, le=20)
+    semantic_rerank_timeout_seconds: float = Field(default=8.0, gt=0, le=30)
     no_answer_dense_threshold: float = 0.50
 
     llm_enabled: bool = True
@@ -69,9 +75,9 @@ class Settings(BaseSettings):
     deepseek_thinking_mode: Literal["disabled", "enabled"] = "disabled"
     deepseek_timeout_seconds: float = 60.0
     llm_temperature: float = 0.0
-    llm_max_tokens: int = 1200
+    llm_max_tokens: int = 8000
 
-    planner_max_tokens: int = 800
+    planner_max_tokens: int = 4000
 
     @staticmethod
     def _has_key(value: SecretStr | None) -> bool:

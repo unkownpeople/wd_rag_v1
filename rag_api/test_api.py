@@ -8,6 +8,8 @@ from rag_api.prompts import (
     build_messages,
     build_review_messages,
     extract_citation_ids,
+    prune_unsupported_claims,
+    validate_answer_facts,
     validate_citations,
 )
 from rag_api.llm import (
@@ -148,6 +150,12 @@ class InvalidDraftAndReviewGenerator(FakeGenerator):
     def generate(self, messages):
         super().generate(messages)
         return "Invalid output.[S9]"
+
+
+class MixedFactGenerator(FakeGenerator):
+    def generate(self, messages):
+        super().generate(messages)
+        return "Supported sales were 391,035.[S1]\nUnsupported sales were 999,999.[S1]"
 
 
 class RagApiTests(unittest.TestCase):
@@ -376,6 +384,24 @@ class RagApiTests(unittest.TestCase):
         assembled = {"citations": [{"evidence_id": "S1"}]}
         self.assertFalse(validate_citations("事实[S1][S9]", assembled)["valid"])
 
+    def test_fact_validation_normalizes_numbers_and_dates(self):
+        assembled = {
+            "citations": [{"evidence_id": "S1", "fiscal_year": 2024}],
+            "evidence_texts": {
+                "S1": "Total net sales were 1,200. The year ended 2024-09-28.",
+            },
+        }
+
+        valid = validate_answer_facts("金额是 1200，日期为 2024年9月28日。[S1]", assembled)
+        invalid = validate_answer_facts("金额是 999。[S1]", assembled)
+
+        self.assertTrue(valid["valid"])
+        self.assertFalse(invalid["valid"])
+        self.assertEqual(
+            prune_unsupported_claims("金额是 1200。[S1]\n金额是 999。[S1]", invalid),
+            "金额是 1200。[S1]",
+        )
+
     def test_service_retrieval_only_does_not_need_llm(self):
         settings = Settings(
             qdrant_path=Path("."),
@@ -390,7 +416,7 @@ class RagApiTests(unittest.TestCase):
         self.assertEqual(result.citation_ids, ["S1"])
         self.assertEqual(result.generation["status"], "retrieval_only")
 
-    def test_generation_uses_planner_tasks_without_original_query_retrieval(self):
+    def test_generation_unions_original_query_with_planner_tasks(self):
         settings = Settings(
             qdrant_path=Path("."),
             chunk_dir=Path("."),
@@ -415,14 +441,16 @@ class RagApiTests(unittest.TestCase):
         self.assertEqual(result.retrieval.route, "planner")
         self.assertEqual(result.retrieval.planner["status"], "used")
         self.assertEqual(result.retrieval.resolved_filters, {"company_id": "example"})
-        self.assertEqual(result.retrieval.retrieval_tasks[0]["evidence_ids"], ["S1"])
-        self.assertEqual(result.retrieval.retrieval_tasks[1]["evidence_ids"], ["S2"])
-        self.assertEqual(result.evidence[0].retrieval_task_ids, ["T1"])
-        self.assertEqual(result.evidence[1].retrieval_task_ids, ["T2"])
-        self.assertEqual(result.retrieval.hit_count, 2)
+        self.assertEqual(result.retrieval.retrieval_tasks[0]["evidence_ids"], ["S2"])
+        self.assertEqual(result.retrieval.retrieval_tasks[1]["evidence_ids"], ["S3"])
+        self.assertEqual(result.evidence[0].retrieval_task_ids, ["ORIGINAL"])
+        self.assertEqual(result.evidence[1].retrieval_task_ids, ["T1"])
+        self.assertEqual(result.evidence[2].retrieval_task_ids, ["T2"])
+        self.assertEqual(result.retrieval.hit_count, 3)
         self.assertTrue(hasattr(planner, "messages"))
         self.assertEqual(result.retrieval.planner["retrieval_tasks"][0]["queries"], ["first evidence query"])
-        self.assertEqual([item["top_k"] for item in retriever.queries], [15, 15])
+        self.assertEqual([item["top_k"] for item in retriever.queries], [15, 15, 15])
+        self.assertEqual(retriever.queries[0]['query'], 'Explain both requested parts')
 
     def test_planner_failure_runs_original_query_once(self):
         settings = Settings(
@@ -464,15 +492,13 @@ class RagApiTests(unittest.TestCase):
         self.assertTrue(result.answerable)
         self.assertTrue(result.citation_valid)
         self.assertEqual(result.citation_ids, ["S1"])
-        self.assertEqual(result.answer, "Reviewed final answer.[S1]")
-        self.assertEqual(len(generator.calls), 2)
-        self.assertEqual(result.generation["draft"]["finish_reason"], "stop")
-        self.assertEqual(result.generation["review"]["finish_reason"], "stop")
-        self.assertEqual(result.generation["selected_output"], "review")
-        self.assertTrue(result.generation["draft"]["citation_check"]["valid"])
-        self.assertTrue(result.generation["review"]["citation_check"]["valid"])
+        self.assertEqual(result.answer, "Answer draft.[S1]")
+        self.assertEqual(len(generator.calls), 1)
+        self.assertEqual(result.generation["finish_reason"], "stop")
+        self.assertEqual(result.generation["selected_output"], "single")
+        self.assertTrue(result.generation["citation_check"]["valid"])
 
-    def test_review_failure_returns_valid_draft(self):
+    def test_single_generation_completes_before_second_call_failure(self):
         settings = Settings(
             qdrant_path=Path("."),
             chunk_dir=Path("."),
@@ -488,10 +514,10 @@ class RagApiTests(unittest.TestCase):
 
         self.assertTrue(result.answerable)
         self.assertEqual(result.answer, "Answer draft.[S1]")
-        self.assertEqual(result.generation["status"], "generated_from_draft_review_failed")
-        self.assertEqual(result.generation["selected_output"], "draft")
+        self.assertEqual(result.generation["status"], "generated")
+        self.assertEqual(result.generation["selected_output"], "single")
 
-    def test_invalid_review_returns_valid_draft(self):
+    def test_single_generation_returns_first_output(self):
         settings = Settings(
             qdrant_path=Path("."),
             chunk_dir=Path("."),
@@ -507,8 +533,8 @@ class RagApiTests(unittest.TestCase):
 
         self.assertTrue(result.answerable)
         self.assertEqual(result.answer, "Answer draft.[S1]")
-        self.assertEqual(result.generation["status"], "generated_from_draft_review_invalid")
-        self.assertEqual(result.generation["review_unknown_ids"], ["S9"])
+        self.assertEqual(result.generation["status"], "generated")
+        self.assertNotIn("review", result.generation)
 
     def test_invalid_draft_and_review_are_not_displayed(self):
         settings = Settings(
@@ -526,6 +552,78 @@ class RagApiTests(unittest.TestCase):
 
         self.assertFalse(result.answerable)
         self.assertEqual(result.generation["selected_output"], "none")
+
+    def test_service_retains_numeric_claims_with_observation(self):
+        settings = Settings(
+            qdrant_path=Path("."),
+            chunk_dir=Path("."),
+            embedding_model_path=Path("."),
+            embedding_tokenizer_path=Path("."),
+            planner_enabled=False,
+        )
+        result = RAGService(
+            settings,
+            retriever=FakeRetriever(),
+            generator=MixedFactGenerator(),
+        ).query(QueryBody(query="Apple 2024 total net sales"))
+
+        self.assertTrue(result.answerable)
+        self.assertEqual(result.answer, "Supported sales were 391,035.[S1]\nUnsupported sales were 999,999.[S1]")
+        self.assertEqual(result.generation["status"], "generated")
+        self.assertFalse(result.generation["fact_check"]["valid"])
+        self.assertEqual(result.generation["fact_check"]["validation_mode"], "observe")
+
+    def test_risk_question_stops_before_retrieval_or_generation(self):
+        settings = Settings(
+            qdrant_path=Path("."),
+            chunk_dir=Path("."),
+            embedding_model_path=Path("."),
+            embedding_tokenizer_path=Path("."),
+        )
+        retriever = FakeRetriever()
+        result = RAGService(
+            settings,
+            retriever=retriever,
+            generator=FakeGenerator(),
+        ).query(QueryBody(query="Apple 的目标价是多少？"))
+
+        self.assertFalse(result.answerable)
+        self.assertEqual(result.generation["status"], "policy_refusal")
+        self.assertEqual(retriever.queries, [])
+
+    def test_ambiguous_scope_is_clarified_before_retrieval(self):
+        settings = Settings(
+            qdrant_path=Path("."),
+            chunk_dir=Path("."),
+            embedding_model_path=Path("."),
+            embedding_tokenizer_path=Path("."),
+        )
+        retriever = FakeRetriever()
+        result = RAGService(settings, retriever=retriever, generator=FakeGenerator()).query(
+            QueryBody(query="2024 年的收入是多少？")
+        )
+
+        self.assertFalse(result.answerable)
+        self.assertEqual(result.generation["status"], "clarification_needed")
+        self.assertEqual(result.generation["refusal"]["reason"], "company_required")
+        self.assertEqual(retriever.queries, [])
+
+    def test_cross_company_scope_is_clarified_before_retrieval(self):
+        settings = Settings(
+            qdrant_path=Path("."),
+            chunk_dir=Path("."),
+            embedding_model_path=Path("."),
+            embedding_tokenizer_path=Path("."),
+        )
+        retriever = FakeRetriever()
+        result = RAGService(settings, retriever=retriever, generator=FakeGenerator()).query(
+            QueryBody(query="请比较 Apple 和 Microsoft 2023 年收入")
+        )
+
+        self.assertFalse(result.answerable)
+        self.assertEqual(result.generation["status"], "clarification_needed")
+        self.assertEqual(result.generation["refusal"]["reason"], "multiple_companies")
+        self.assertEqual(retriever.queries, [])
 
     def test_planner_context_enters_answer_and_review_messages(self):
         assembled = {

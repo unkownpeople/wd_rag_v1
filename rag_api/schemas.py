@@ -15,10 +15,13 @@ class QueryBody(BaseModel):
     source_format: Literal["pdf", "docx", "xlsx"] | None = None
     document_id: str | None = None
     report_type: str | None = None
+    statement_family: str | None = None
+    statement_scope: str | None = None
     filters: dict[str, Any] = Field(default_factory=dict)
     top_k: int = Field(default=5, ge=1, le=20)
     mode: Literal["dense", "bm25", "hybrid"] = "hybrid"
     generate: bool = True
+    plan_retrieval: bool = False
 
 
 class Citation(BaseModel):
@@ -31,6 +34,7 @@ class Citation(BaseModel):
     fiscal_year: int | None = None
     source_format: str | None = None
     source_file: str | None = None
+    source_revision: str | None = None
     page: int | None = None
     page_start: int | None = None
     page_end: int | None = None
@@ -77,6 +81,7 @@ class RetrievalInfo(BaseModel):
     route: Literal["direct", "planner"] = "planner"
     retrieval_tasks: list[dict[str, Any]] = Field(default_factory=list)
     planner: dict[str, Any] = Field(default_factory=dict)
+    diagnostics: dict[str, Any] = Field(default_factory=dict)
 
 
 class RAGResponse(BaseModel):

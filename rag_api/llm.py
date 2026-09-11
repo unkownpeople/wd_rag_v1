@@ -142,6 +142,8 @@ class DeepSeekGenerator:
             choice = response.choices[0]
             self.last_finish_reason = str(getattr(choice, "finish_reason", "") or "") or None
             content = choice.message.content or ""
+            if self.last_finish_reason == "length":
+                raise LLMRequestError("回答达到输出长度上限，未作为完整答案返回")
             if not content.strip():
                 raise LLMRequestError("DeepSeek 返回空内容")
             return content.strip()

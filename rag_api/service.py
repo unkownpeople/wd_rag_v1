@@ -4,6 +4,10 @@ from __future__ import annotations
 
 import re
 import unicodedata
+from time import perf_counter
+from embeddings.retrieval_policy import identifiers, contains_identifiers, deduplicate
+from .rerank import SemanticReranker
+from .coverage import inspect_coverage
 from typing import Any
 
 from embeddings.contracts import QueryRequest
@@ -15,14 +19,36 @@ from .llm import DeepSeekGenerator, DeepSeekPlanner, LLMRequestError, TextGenera
 from .prompts import (
     build_messages,
     build_planner_messages,
-    build_review_messages,
+    validate_answer_facts,
     validate_citations,
 )
 from .schemas import Citation, Evidence, QueryBody, RAGResponse, RetrievalInfo
 from .settings import Settings
+from .comparative import segment_comparatives, is_segment_table, requested_years
 
 
-NO_EVIDENCE_ANSWER = "根据当前召回内容无法确定。"
+NO_EVIDENCE_ANSWER = "当前年报证据不足以支持这个结论。请补充公司、财年或指标名称，或直接核对对应年报原文。"
+VALIDATION_FAILURE_ANSWER = "当前回答的来源引用校验失败，请重试或核对来源原文。"
+RISK_REFUSAL_ANSWER = "当前年报问答只解释已经披露的事实，不提供预测、交易或法律结论。请改问已披露的财务指标、风险因素或原文内容。"
+CLARIFICATION_ANSWER = "这个问题需要先明确公司和财年；若要比较多家公司，请分别指定公司、财年和指标口径。"
+
+_COMPANY_ALIASES: dict[str, tuple[str, ...]] = {
+    "apple": ("apple", "苹果", "苹果公司"),
+    "microsoft": ("microsoft", "微软", "微软公司"),
+    "tcs": ("tcs", "塔塔咨询", "塔塔咨询服务", "塔塔咨询服务公司"),
+}
+
+_RISK_QUERY_MARKERS: tuple[tuple[str, str], ...] = (
+    ("股价预测", "market_prediction"),
+    ("目标价", "market_prediction"),
+    ("买入", "investment_advice"),
+    ("卖出", "investment_advice"),
+    ("投资建议", "investment_advice"),
+    ("法律意见", "legal_advice"),
+    ("法律建议", "legal_advice"),
+    ("赔付承诺", "commitment"),
+    ("保证收益", "commitment"),
+)
 
 _QUERY_TERM_ALIASES: tuple[tuple[tuple[str, ...], tuple[str, ...]], ...] = (
     (("产品类别", "业务收入来源", "收入来源"), ("net sales disaggregated by significant products and services", "net sales by product category", "revenue by product line")),
@@ -35,6 +61,7 @@ _QUERY_TERM_ALIASES: tuple[tuple[tuple[str, ...], tuple[str, ...]], ...] = (
     (("每股", "EPS"), ("earnings per share", "basic and diluted EPS")),
     (("员工", "流失率"), ("employees", "total employees", "IT services attrition", "LTM attrition in IT services")),
     (("研发",), ("research and development expenses", "R&D")),
+    (("所得税", "税率", "income tax", "effective tax"), ("income taxes", "effective tax rate", "one-time tax charge")),
     (("云业务", "云收入"), ("cloud revenue", "cloud services revenue")),
     (("风险", "不确定性"), ("risk factors", "principal risks", "risks and uncertainties", "market risk")),
 )
@@ -88,6 +115,102 @@ class RAGService:
         return QueryRequest.from_mapping(body.model_dump(exclude_none=True))
 
     @staticmethod
+    def _risk_refusal_reason(query: str) -> str | None:
+        normalized = str(query or "").casefold()
+        return next(
+            (reason for marker, reason in _RISK_QUERY_MARKERS if marker in normalized),
+            None,
+        )
+
+    def _clarification_reason(self, request: QueryRequest) -> str | None:
+        """在检索前拦截无法唯一定位的公司/财年问题，避免自动猜测。"""
+
+        normalized = str(request.query or "").casefold()
+        mentioned = {
+            company_id
+            for company_id, aliases in _COMPANY_ALIASES.items()
+            if any(alias.casefold() in normalized for alias in aliases)
+        }
+        if len(mentioned) > 1:
+            return "multiple_companies"
+        explicit = request.explicit_filters()
+        explicit_company = explicit.get('company_id') or (next(iter(mentioned)) if mentioned else None)
+        if explicit.get('document_id'):
+            return None
+        # 趋势问题允许在同一个问题中明确列出多个年份；其余问题需要一个
+        # 可验证的财年，否则同一公司的连续年报会产生歧义。
+        years = re.findall(r"(?:19|20)\d{2}", normalized)
+        if not explicit_company:
+            return "company_required"
+        if not years and explicit.get('fiscal_year') is None and (
+            not request.company_id
+            or str(request.company_id).casefold() in _COMPANY_ALIASES
+        ):
+            return "fiscal_year_required"
+        return None
+
+    @staticmethod
+    def _clarification_response(body: QueryBody, request: QueryRequest, reason: str) -> RAGResponse:
+        return RAGResponse(
+            answer=CLARIFICATION_ANSWER,
+            answerable=False,
+            citation_valid=False,
+            citation_ids=[],
+            citations=[],
+            evidence=[],
+            retrieval=RetrievalInfo(
+                mode=body.mode,
+                top_k=request.top_k,
+                hit_count=0,
+                resolved_filters=request.explicit_filters(),
+                route="direct",
+            ),
+            generation={
+                "provider": "none",
+                "status": "clarification_needed",
+                "refusal": {"gate": "request_scope", "reason": reason},
+            },
+        )
+
+    @staticmethod
+    def _validate_answer_output(answer: str, assembled: dict[str, Any]) -> dict[str, Any]:
+        citation_check = validate_citations(answer, assembled)
+        try:
+            fact_check = validate_answer_facts(answer, assembled)
+        except Exception as exc:
+            fact_check = {"valid": None, "status": "failed", "error_type": type(exc).__name__}
+        fact_check["validation_mode"] = "observe"
+        return {
+            "answer": answer if citation_check["valid"] else None,
+            "status": "valid" if citation_check["valid"] else "invalid",
+            "citation_check": citation_check,
+            "fact_check": fact_check,
+        }
+
+    @staticmethod
+    def _policy_refusal(body: QueryBody, request: QueryRequest, reason: str) -> RAGResponse:
+        return RAGResponse(
+            answer=RISK_REFUSAL_ANSWER,
+            answerable=False,
+            citation_valid=False,
+            citation_ids=[],
+            citations=[],
+            evidence=[],
+            retrieval=RetrievalInfo(
+                mode=body.mode,
+                top_k=request.top_k,
+                hit_count=0,
+                resolved_filters=request.explicit_filters(),
+                route="direct",
+            ),
+            generation={
+                "provider": "none",
+                "status": "policy_refusal",
+                "refusal": {"gate": "risk_type", "reason": reason},
+            },
+        )
+
+    @staticmethod
     def _planner_candidate_top_k(request: QueryRequest) -> int:
         """自由问题扩大候选池，显式文档评测保持既有排序预算。"""
 
@@ -118,18 +241,31 @@ class RAGService:
                 aliases.extend(terms)
         # Planner 没有提供可识别主题时，才从原问题补充领域术语；否则会让
         # 收入、利润、现金流等并列任务共享同一条混合查询。
-        if not aliases:
+        if not aliases and not requirement_text.strip():
             for markers, terms in _QUERY_TERM_ALIASES:
                 if any(marker.casefold() in request_query.casefold() for marker in markers):
                     aliases.extend(terms)
         queries = [str(value).strip() for value in task.get("queries") or [] if str(value).strip()]
+        protected = identifiers(requirement_text)
+        queries = [query for query in queries if contains_identifiers(query, protected)]
         if aliases:
-            alias_query = f"{request_query.strip()} {' '.join(dict.fromkeys(aliases))}".strip()
+            # 子任务必须保持独立，不能把整道复合题重新混入每条检索。
+            seed = queries[0] if queries else requirement_text or request_query
+            alias_query = f"{seed.strip()} {' '.join(dict.fromkeys(aliases))}".strip()
             if alias_query not in queries:
                 # 领域原文术语优先进入融合排序，避免泛化中文查询的 dense 结果
                 # 在 RRF 中稀释掉真正包含报表标签的表格/正文块。
                 queries = [alias_query, *queries[:3]]
-        return queries[:4] or [request_query.strip()]
+        growth_queries = []
+        for metric in requirement.get('metrics') or []:
+            match = re.fullmatch(r'(.+?)\s+(?:segment\s+)?revenue growth(?: rate)?', str(metric), re.I)
+            if match:
+                # 分别检索比较对象的原文增长表述，避免“X versus Y explanation”
+                # 长查询只命中业务定义，而丢掉实际披露的增长数据。
+                growth_queries.append(f'{match[1]} revenue grew increased')
+        if growth_queries:
+            queries = [*growth_queries[:2], *queries[:2]]
+        return queries[:4] or [requirement_text.strip() or request_query.strip()]
 
     @classmethod
     def _augment_fallback_query(cls, query: str) -> str:
@@ -214,6 +350,12 @@ class RAGService:
             if any(marker.casefold() in requirement_text.casefold() for marker in markers):
                 values.extend(terms)
         values.extend(str(item) for item in requirement.get("metrics") or [])
+        for metric in requirement.get('metrics') or []:
+            # 原文常把实体与指标写成“X ... revenue increased”，保留实体
+            # 词组用于匹配，不能只要求“X revenue growth”整句字面出现。
+            entity = re.sub(r'\b(?:segment|revenue|growth|operating|income|profit|margin|rate)\b', '', str(metric), flags=re.I).strip()
+            if entity and entity != str(metric):
+                values.append(entity)
         values.append(str(requirement.get("topic") or ""))
 
         phrases: list[str] = []
@@ -255,6 +397,8 @@ class RAGService:
             return hits
         requirement = task.get("requirement") or {}
         prefers_group_coverage = bool(requirement.get("group_by"))
+        explanation = " ".join(str(requirement.get(key) or "") for key in ("topic", "relation"))
+        prefers_explanation = bool(re.search(r'原因|解释|一次性|归因|驱动|explain|reason|driver|one.time', explanation, re.I))
 
         ranked: list[tuple[tuple[int, int, int], int, dict[str, Any]]] = []
         for index, hit in enumerate(hits):
@@ -266,9 +410,12 @@ class RAGService:
             text_hits = sum(phrase in normalized_text for phrase in phrases)
             score = (
                 (text_hits, row_hits, int(row_hits > 0 and row_has_value))
-                if prefers_group_coverage
+                if prefers_group_coverage or prefers_explanation
                 else (row_hits, int(row_hits > 0 and row_has_value), text_hits)
             )
+            if re.search(r'增速|增长|growth', str(requirement), re.I) and prefers_explanation:
+                quantitative_growth = bool(re.search(r'\d\s*%', raw_text) and re.search(r'increas|grew|growth|declin|decreas', raw_text, re.I))
+                score = (int(text_hits > 0 and quantitative_growth), text_hits, row_hits)
             ranked.append((score, index, hit))
 
         if not any(score != (0, 0, 0) for score, _, _ in ranked):
@@ -440,6 +587,8 @@ class RAGService:
             "workforce", "attrition", "风险", "risk", "云业务", "cloud",
             "产品类别", "业务收入来源", "收入来源", "product category",
             "products and services",
+            "所得税", "税率", "income tax", "effective tax", "会计估计", "使用寿命",
+            "useful life", "财年长度", "财年周数", "fiscal weeks",
         )
         if any(marker in topic_text for marker in non_statement_topics):
             return hits
@@ -467,7 +616,7 @@ class RAGService:
         self._last_planner_meta = {}
         self._last_retrieval_meta = {}
         hits: list[dict[str, Any]] = []
-        if not body.generate:
+        if not body.generate and not body.plan_retrieval:
             hits = self.retriever.search_request(request, mode=body.mode)
             self._last_retrieval_meta = dict(getattr(self.retriever, "last_search_meta", {}) or {})
             self._last_planner_meta = {
@@ -485,6 +634,7 @@ class RAGService:
                 try:
                     resolved = self.retriever.resolve_request(request)
                     filters = resolved.explicit_filters()
+                    planner_started = perf_counter()
                     plan = self.planner.plan(
                         build_planner_messages(
                             question=request.query,
@@ -498,8 +648,16 @@ class RAGService:
                         )
                     )
                     task_groups: list[tuple[str, list[dict[str, Any]]]] = []
+                    planner_ms = round((perf_counter() - planner_started) * 1000, 3)
                     retrieval_tasks: list[dict[str, Any]] = []
                     candidate_count = 0
+                    original_started = perf_counter()
+                    original_hits = self.retriever.search_request(QueryRequest(query=request.query,
+                        top_k=self._planner_candidate_top_k(request), filters=filters), mode=body.mode)
+                    original_meta = dict(getattr(self.retriever, 'last_search_meta', {}) or {})
+                    task_groups.append(('ORIGINAL', original_hits))
+                    candidate_count += len(original_hits)
+                    original_ms = round((perf_counter() - original_started) * 1000, 3)
                     for index, task in enumerate(plan["retrieval_tasks"], 1):
                         task_id = f"T{index}"
                         query_results: list[list[dict[str, Any]]] = []
@@ -508,6 +666,10 @@ class RAGService:
                             request_query=request.query,
                             task=task,
                         )
+                        protected = identifiers(request.query)
+                        if protected:
+                            queries = [q + ' ' + ' '.join(x for x in protected if not contains_identifiers(q, [x])) for q in queries]
+                        queries = list(dict.fromkeys(q.strip() for q in queries))
                         candidate_top_k = self._planner_candidate_top_k(request)
                         for subquery in queries:
                             current = self.retriever.search_request(
@@ -530,6 +692,24 @@ class RAGService:
                             task.get("requirement"),
                         )
                         task_hits = self._prioritize_task_hits(task_hits, task)
+                        payloads = getattr(getattr(self.retriever, 'bm25', None), 'payloads', {})
+                        supplements = segment_comparatives(payloads, task, filters, request.query)
+                        basis = None
+                        if supplements:
+                            extra = []
+                            for payload in supplements:
+                                hit = self.retriever._with_citation({'payload': payload, 'score': 0.0})
+                                hit['citation']['context_chunk_ids'] = payload['context_chunk_ids']
+                                hit['citation']['comparison_years'] = payload['comparison_years']
+                                extra.append(hit)
+                            wanted = requested_years(request.query)
+                            if wanted and set(supplements[0]['comparison_years']) == wanted:
+                                basis = {'document_id': supplements[0]['document_id'], 'years': sorted(wanted),
+                                         'rule': '全部跨年分部计算使用此文档可比列，含CAGR起点年；其他原报值仅用于显式对照。'}
+                                task_hits = [h for h in task_hits if not is_segment_table(str(h.get('text') or '')) or
+                                             (h.get('citation') or {}).get('document_id') == basis['document_id']]
+                            extra_ids = {h['chunk_id'] for h in extra}
+                            task_hits = extra + [h for h in task_hits if h.get('chunk_id') not in extra_ids]
                         task_groups.append((task_id, task_hits))
                         retrieval_tasks.append(
                             {
@@ -540,18 +720,27 @@ class RAGService:
                                 "candidate_chunk_ids": [hit.get("chunk_id") for hit in task_hits],
                                 "candidate_top_k": candidate_top_k,
                                 "query_retrieval": query_meta,
+                                "comparison_basis": basis,
+                                "supplemented_chunk_ids": [p['chunk_id'] for p in supplements],
                             }
                         )
                     hits = self._select_task_hits(
                         task_groups,
                         # 每个任务至少保留三个候选，避免并列主题中精确表格
                         # 排在第三位时被两路候选配额提前截断。
-                        limit=min(max(request.top_k, 3 * len(task_groups)), 12),
+                        limit=min(max(request.top_k, 4 * len(task_groups)), 40),
                     )
+                    hits, duplicate_meta = deduplicate(hits)
+                    semantic_meta = {'status': 'not_available'}
+                    if isinstance(self._retriever, QdrantRetriever):
+                        hits, semantic_meta = SemanticReranker(self.settings).rank(request.query, hits)
                     self._last_retrieval_meta = {
                         "candidate_count": candidate_count,
                         "effective_top_k": len(hits),
                         "coverage_truncated": candidate_count > len(hits),
+                        'original_query': {'elapsed_ms': original_ms, 'query': request.query, 'retrieval': original_meta},
+                        'semantic_rerank': semantic_meta, 'duplicates': duplicate_meta,
+                        'planner_ms': planner_ms,
                     }
                     planner_meta = {
                         "status": "used",
@@ -564,6 +753,9 @@ class RAGService:
                         "clarification_needed": plan.get("clarification_needed", False),
                         "usage": dict(getattr(self.planner, "last_usage", {}) or {}),
                         "finish_reason": getattr(self.planner, "last_finish_reason", None),
+                        'original_query': self._last_retrieval_meta['original_query'],
+                        'semantic_rerank': semantic_meta,
+                        'planner_ms': planner_ms,
                     }
                 except (LLMRequestError, ValueError, TypeError) as exc:
                     planner_meta.update(
@@ -574,7 +766,7 @@ class RAGService:
                     )
             if planner_meta["status"] != "used":
                 fallback_request = QueryRequest(
-                    query=self._augment_fallback_query(request.query),
+                    query=request.query,
                     top_k=max(request.top_k, 40),
                     filters=request.explicit_filters(),
                 )
@@ -599,6 +791,46 @@ class RAGService:
                 evidence_ids_by_task.setdefault(task_id, []).append(item.evidence_id)
         for task in self._last_planner_meta.get("retrieval_tasks") or []:
             task["evidence_ids"] = evidence_ids_by_task.get(str(task.get("task_id")), [])
+        missing_tasks = [t for t in self._last_planner_meta.get('retrieval_tasks', []) if not t['evidence_ids']]
+        coverage_before = inspect_coverage(self._last_planner_meta.get('retrieval_tasks', []), evidence, request.query)
+        metric_gaps = [row for row in coverage_before if row['status'] == 'gap'] if self.settings.coverage_probe_mode == 'repair' else []
+        repair_log = []
+        retry_jobs = []
+        scope = self.retriever.resolve_request(request).explicit_filters()
+        for gap in metric_gaps:
+            years = gap['missing_years'] or gap['requested_years']
+            query = ' '.join([str(scope.get('company_id') or ''), ' '.join(map(str, years)), gap['terms'][0]])
+            retry_jobs.append({'task_id': gap['task_id'], 'query': query, 'metric': gap['metric']})
+        for task in missing_tasks:
+            retry_jobs.append({'task_id': task['task_id'], 'query': (task.get('queries') or [request.query])[0]})
+        seen_jobs = set()
+        for job in retry_jobs:
+            if len(repair_log) >= 4:
+                break
+            task_id, query = job['task_id'], job['query']
+            if (task_id, query) in seen_jobs:
+                continue
+            seen_jobs.add((task_id, query))
+            retry = self.retriever.search_request(QueryRequest(query=query, top_k=3, filters=scope), mode=body.mode)
+            for hit in retry:
+                hit['_retrieval_task_ids'] = [task_id]
+            repair_log.append({**job, 'candidate_ids': [h.get('chunk_id') for h in retry]})
+            hits = retry + hits
+        if repair_log:
+            hits, _ = deduplicate(hits)
+            assembled = assemble_context(hits, max_chars=self.settings.retrieval_max_context_chars)
+            evidence = self._evidence(hits, assembled)
+            for task in self._last_planner_meta.get('retrieval_tasks', []):
+                task['evidence_ids'] = [e.evidence_id for e in evidence if task['task_id'] in e.retrieval_task_ids]
+        self._last_planner_meta['coverage_check'] = {'repair_attempts': repair_log,
+            'mode': self.settings.coverage_probe_mode,
+            'metrics_before': coverage_before,
+            'metrics_after': inspect_coverage(self._last_planner_meta.get('retrieval_tasks', []), evidence, request.query),
+            'missing_task_ids': [t['task_id'] for t in self._last_planner_meta.get('retrieval_tasks', []) if not t.get('evidence_ids')],
+            'boundary': '指标附近数值及证据年份为覆盖线索；candidate_covered不证明行列、单位或语义正确，unverified须核对'}
+        self._last_retrieval_meta['context'] = {'chars': len(assembled.get('context', '')),
+            'budget': self.settings.retrieval_max_context_chars, 'evidence_count': len(evidence),
+            'selected_chunk_ids': [e.citation.chunk_id for e in evidence]}
         return request, hits, assembled, evidence
 
     def _top_dense_score(self, hits: list[dict[str, Any]], mode: str) -> float | None:
@@ -606,8 +838,8 @@ class RAGService:
             return None
         if mode == "dense":
             return float(hits[0].get("score"))
-        value = hits[0].get("dense_score")
-        return float(value) if value is not None else None
+        values = [float(h['dense_score']) for h in hits if h.get('dense_score') is not None]
+        return max(values) if values else None
 
     def _retrieval_info(self, *, request: QueryRequest, hits: list[dict[str, Any]], mode: str) -> RetrievalInfo:
         resolved = self.retriever.resolve_request(request)
@@ -627,9 +859,17 @@ class RAGService:
             route=str(self._last_planner_meta.get("route") or meta.get("route") or "planner"),
             retrieval_tasks=list(self._last_planner_meta.get("retrieval_tasks") or []),
             planner=dict(self._last_planner_meta),
+            diagnostics=meta,
         )
 
     def query(self, body: QueryBody) -> RAGResponse:
+        request_for_policy = self._request(body)
+        risk_reason = self._risk_refusal_reason(request_for_policy.query)
+        if risk_reason:
+            return self._policy_refusal(body, request_for_policy, risk_reason)
+        clarification_reason = self._clarification_reason(request_for_policy)
+        if clarification_reason:
+            return self._clarification_response(body, request_for_policy, clarification_reason)
         request, hits, assembled, evidence = self.retrieve(body)
         retrieval = self._retrieval_info(request=request, hits=hits, mode=body.mode)
         enough_evidence = bool(evidence)
@@ -645,6 +885,10 @@ class RAGService:
         }
         if not enough_evidence:
             base_generation["status"] = "no_evidence"
+            base_generation["refusal"] = {
+                "gate": "evidence",
+                "reason": "insufficient_retrieval_evidence",
+            }
             return RAGResponse(
                 answer=NO_EVIDENCE_ANSWER,
                 answerable=False,
@@ -659,7 +903,7 @@ class RAGService:
         if not body.generate:
             base_generation["status"] = "retrieval_only"
             return RAGResponse(
-                answer="已完成召回，当前请求未调用 LLM。",
+                answer="已完成规划与召回，未生成答案。" if body.plan_retrieval else "已完成召回，当前请求未调用 LLM。",
                 answerable=True,
                 citation_valid=True,
                 citation_ids=[item.evidence_id for item in evidence],
@@ -674,124 +918,24 @@ class RAGService:
             assembled=assembled,
             planner_meta=self._last_planner_meta,
         )
-        try:
-            draft = self.generator.generate(messages)
-        except LLMRequestError:
-            base_generation["status"] = "draft_generation_failed"
-            raise
-
-        draft_usage = dict(getattr(self._generator, "last_usage", {}) or {})
-        draft_finish_reason = getattr(self._generator, "last_finish_reason", None)
-        draft_citation_check = validate_citations(draft, assembled)
-        draft_meta = {
-            "status": "generated",
-            "usage": draft_usage,
-            "finish_reason": draft_finish_reason,
-            "citation_check": draft_citation_check,
-        }
-        review_messages = build_review_messages(
-            question=request.query,
-            draft=draft,
-            assembled=assembled,
-            planner_meta=self._last_planner_meta,
-        )
-        try:
-            answer = self.generator.generate(review_messages)
-        except LLMRequestError:
-            base_generation.update(
-                {
-                    "status": "review_generation_failed",
-                    "draft": draft_meta,
-                    "review": {"status": "failed"},
-                }
-            )
-            if draft_citation_check["valid"]:
-                base_generation.update(
-                    {
-                        "status": "generated_from_draft_review_failed",
-                        "selected_output": "draft",
-                        "citation_check": draft_citation_check,
-                    }
-                )
-                return RAGResponse(
-                    answer=draft,
-                    answerable=True,
-                    citation_valid=True,
-                    citation_ids=draft_citation_check["citation_ids"],
-                    citations=citations,
-                    evidence=evidence,
-                    retrieval=retrieval,
-                    generation=base_generation,
-                )
-            return RAGResponse(
-                answer="模型回答复核失败，未安全展示生成内容。",
-                answerable=False,
-                citation_valid=False,
-                citation_ids=[],
-                citations=citations,
-                evidence=evidence,
-                retrieval=retrieval,
-                generation=base_generation,
-            )
-
-        review_usage = dict(getattr(self._generator, "last_usage", {}) or {})
-        review_finish_reason = getattr(self._generator, "last_finish_reason", None)
-        review_citation_check = validate_citations(answer, assembled)
-        base_generation.update(
-            {
-                "usage": self._combined_usage(draft_usage, review_usage),
-                "draft": draft_meta,
-                "review": {
-                    "status": "generated",
-                    "usage": review_usage,
-                    "finish_reason": review_finish_reason,
-                    "citation_check": review_citation_check,
-                },
-            }
-        )
-        if not review_citation_check["valid"] and draft_citation_check["valid"]:
-            base_generation.update(
-                {
-                    "status": "generated_from_draft_review_invalid",
-                    "selected_output": "draft",
-                    "citation_check": draft_citation_check,
-                    "review_unknown_ids": review_citation_check["unknown_ids"],
-                }
-            )
-            return RAGResponse(
-                answer=draft,
-                answerable=True,
-                citation_valid=True,
-                citation_ids=draft_citation_check["citation_ids"],
-                citations=citations,
-                evidence=evidence,
-                retrieval=retrieval,
-                generation=base_generation,
-            )
-        if not review_citation_check["valid"]:
-            base_generation["status"] = "citation_validation_failed"
-            base_generation["selected_output"] = "none"
-            base_generation["unknown_ids"] = review_citation_check["unknown_ids"]
-            base_generation["citation_check"] = review_citation_check
-            return RAGResponse(
-                answer="模型返回的答案未通过引用校验，未安全展示生成内容。",
-                answerable=False,
-                citation_valid=False,
-                citation_ids=review_citation_check["citation_ids"],
-                citations=citations,
-                evidence=evidence,
-                retrieval=retrieval,
-                generation=base_generation,
-            )
-
-        base_generation["status"] = "generated"
-        base_generation["selected_output"] = "review"
-        base_generation["citation_check"] = review_citation_check
+        answer = self.generator.generate(messages)
+        checked = self._validate_answer_output(answer, assembled)
+        citation_check = checked["citation_check"]
+        base_generation.update({
+            "status": "generated" if citation_check["valid"] else "answer_validation_failed",
+            "selected_output": "single" if citation_check["valid"] else "none",
+            "usage": self._combined_usage(dict(getattr(self._generator, "last_usage", {}) or {})),
+            "finish_reason": getattr(self._generator, "last_finish_reason", None),
+            "citation_check": citation_check,
+            "fact_check": checked["fact_check"],
+        })
+        if not citation_check["valid"]:
+            base_generation["refusal"] = {"gate": "citation_validation", "reason": "invalid_citation"}
         return RAGResponse(
-            answer=answer,
-            answerable=True,
-            citation_valid=True,
-            citation_ids=review_citation_check["citation_ids"],
+            answer=answer if citation_check["valid"] else VALIDATION_FAILURE_ANSWER,
+            answerable=bool(citation_check["valid"]),
+            citation_valid=bool(citation_check["valid"]),
+            citation_ids=citation_check["citation_ids"],
             citations=citations,
             evidence=evidence,
             retrieval=retrieval,

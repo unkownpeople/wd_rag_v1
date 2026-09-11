@@ -34,6 +34,8 @@ class QueryRequest:
     source_format: str | None = None
     document_id: str | None = None
     report_type: str | None = None
+    statement_family: str | None = None
+    statement_scope: str | None = None
     top_k: int = 5
     filters: dict[str, Any] = field(default_factory=dict)
 
@@ -45,6 +47,8 @@ class QueryRequest:
         self.source_format = _optional_text(self.source_format)
         self.document_id = _optional_text(self.document_id)
         self.report_type = _optional_text(self.report_type)
+        self.statement_family = _optional_text(self.statement_family)
+        self.statement_scope = _optional_text(self.statement_scope)
         if self.fiscal_year is not None:
             try:
                 self.fiscal_year = int(self.fiscal_year)
@@ -64,7 +68,10 @@ class QueryRequest:
         if not isinstance(value, Mapping):
             raise TypeError("检索请求必须是映射对象")
         filters = dict(value.get("filters") or {})
-        for key in ("company_id", "fiscal_year", "source_format", "document_id", "report_type"):
+        for key in (
+            "company_id", "fiscal_year", "source_format", "document_id", "report_type",
+            "statement_family", "statement_scope",
+        ):
             if value.get(key) is not None:
                 filters[key] = value[key]
         return cls(
@@ -74,6 +81,8 @@ class QueryRequest:
             source_format=value.get("source_format"),
             document_id=value.get("document_id"),
             report_type=value.get("report_type"),
+            statement_family=value.get("statement_family"),
+            statement_scope=value.get("statement_scope"),
             top_k=value.get("top_k", 5),
             filters=filters,
         )
@@ -92,6 +101,10 @@ class QueryRequest:
             filters["document_id"] = self.document_id
         if self.report_type is not None:
             filters["report_type"] = self.report_type
+        if self.statement_family is not None:
+            filters["statement_family"] = self.statement_family
+        if self.statement_scope is not None:
+            filters["statement_scope"] = self.statement_scope
         return filters
 
     def with_filters(self, filters: Mapping[str, Any]) -> "QueryRequest":
@@ -133,7 +146,8 @@ def infer_filters(
     known_fiscal_years = {
         year for year in explicit_fiscal_years if not years or year in years
     }
-    if len(explicit_fiscal_years) == 1 and len(known_fiscal_years) == 1:
+    mentioned_years = set(re.findall(r'(?<!\d)(?:19|20)\d{2}(?!\d)', normalized))
+    if len(explicit_fiscal_years) == 1 and len(known_fiscal_years) == 1 and len(mentioned_years) == 1:
         result["fiscal_year"] = next(iter(known_fiscal_years))
 
     formats = {str(value).casefold() for value in (known_formats or set())}
@@ -145,4 +159,8 @@ def infer_filters(
     report_types = {str(value).casefold(): value for value in (known_report_types or set())}
     if ("annual report" in normalized or "年报" in normalized) and report_types:
         result["report_type"] = report_types.get("annual_report", next(iter(report_types.values())))
+    if re.search(r"\bconsolidated\b|合并", normalized):
+        result["statement_scope"] = "consolidated"
+    elif re.search(r"\bstandalone\b|\bseparate financial\b|单体|独立口径", normalized):
+        result["statement_scope"] = "standalone"
     return result

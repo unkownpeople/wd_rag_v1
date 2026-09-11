@@ -248,6 +248,14 @@ def _statement_family(text: str, chunk: Mapping[str, Any]) -> str:
         term in normalized for term in ("gross margin", "operating income", "net income", "earnings per share")
     ):
         scores["income_statement"] += 30
+    # Microsoft 等文本型年报常用“SUMMARY RESULTS OF OPERATIONS”，不一定带有
+    # ``income statement`` 标题；同时出现收入、营业利润和净利润时仍可确定为损益表。
+    if "summary results of operations" in normalized:
+        scores["income_statement"] += 18
+    if all(term in normalized for term in ("revenue", "operating income", "net income")):
+        scores["income_statement"] += 14
+    if "total revenue" in normalized and "operating income" in normalized:
+        scores["income_statement"] += 10
 
     # 没有可识别的主题时，表格仍保留为 other，避免把普通披露误标成财务报表。
     best = max(scores, key=lambda family: (scores[family], -list(scores).index(family)))

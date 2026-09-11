@@ -6,7 +6,7 @@ from unittest.mock import Mock
 
 from .contracts import QueryRequest
 from .retrieve import BM25Index, QdrantRetriever, assemble_context
-from .vectorize import DEFAULT_CHUNK_DIR, _payload
+from .vectorize import DEFAULT_CHUNK_DIR, _embed_text, _payload
 from .semantic_metadata import enrich_chunk
 
 
@@ -17,6 +17,7 @@ class BM25IndexTests(unittest.TestCase):
             "company_id": "apple",
             "document_id": "apple_2024_10k",
             "fiscal_year": 2024,
+            "source_sha256": "0123456789abcdef0123456789abcdef",
             "source_provider": "AnnualReports.com",
             "table_header": [["Item", "2024"]],
             "header_row_count": 1,
@@ -35,6 +36,19 @@ class BM25IndexTests(unittest.TestCase):
         self.assertEqual(payload["row_matrix"][1][0], "Total assets")
         self.assertIn("Total assets", payload["search_text"])
         self.assertNotIn("raw_matrix", payload)
+        self.assertEqual(payload["source_revision"], "0123456789abcdef")
+
+    def test_embedding_text_prefix_keeps_document_context(self) -> None:
+        text = _embed_text(
+            {
+                "embedding_text": "Total net sales were 391,035.",
+                "company_id": "apple",
+                "document_id": "apple_2024_10k",
+                "section_path": "Item 8 > Operations",
+            }
+        )
+
+        self.assertTrue(text.startswith("apple | apple_2024_10k | Item 8 > Operations\n"))
 
     def test_bm25_registry_deduplicates_full_table_matrix(self) -> None:
         matrix = [["Item", "2024"], ["Revenue", "100"], ["Operating income", "20"]]
@@ -87,6 +101,7 @@ class BM25IndexTests(unittest.TestCase):
                     "fiscal_year": 2023,
                     "source_format": "pdf",
                     "source_file": "microsoft_2023_annual_report.pdf",
+                    "source_revision": "abcd1234efgh5678",
                     "page_start": 11,
                     "page_end": 11,
                 }
@@ -94,6 +109,7 @@ class BM25IndexTests(unittest.TestCase):
         )
 
         self.assertEqual(hit["citation"]["statement_family"], "risk")
+        self.assertEqual(hit["citation"]["source_revision"], "abcd1234efgh5678")
 
     def test_formulations_query_finds_exact_chunk(self) -> None:
         index = BM25Index(
@@ -314,6 +330,26 @@ class BM25IndexTests(unittest.TestCase):
         self.assertEqual(len(chunk_ids), len(set(chunk_ids)))
         self.assertEqual(set(chunk_ids), {"shared", "dense-only", "sparse-only"})
 
+    def test_lightweight_rerank_prefers_exact_query_phrase(self) -> None:
+        reranked, applied = QdrantRetriever._rerank_candidates(
+            "operating cash flow",
+            [
+                {
+                    "chunk_id": "generic",
+                    "rrf_score": 0.04,
+                    "payload": {"chunk_text": "Cash and finance notes."},
+                },
+                {
+                    "chunk_id": "target",
+                    "rrf_score": 0.03,
+                    "payload": {"chunk_text": "Net cash from operating cash flow was 100."},
+                },
+            ],
+        )
+
+        self.assertTrue(applied)
+        self.assertEqual(reranked[0]["chunk_id"], "target")
+
     def test_context_honors_character_budget(self) -> None:
         context = assemble_context(
             [
@@ -377,6 +413,37 @@ class BM25IndexTests(unittest.TestCase):
         hits = retriever.search_request(request, mode="dense")
 
         self.assertEqual([hit["chunk_id"] for hit in hits], ["shared", "other"])
+
+    def test_search_request_covers_parallel_financial_metrics(self) -> None:
+        retriever = object.__new__(QdrantRetriever)
+        request = QueryRequest(
+            query="Apple 2023 Total assets, Total liabilities and Total shareholders' equity",
+            top_k=3,
+        )
+        retriever.resolve_request = Mock(return_value=request)
+        retriever.search_hybrid = Mock(
+            return_value=[
+                {"chunk_id": "assets", "score": 0.04, "rrf_score": 0.04, "payload": {"chunk_text": "Total assets 100"}},
+                {"chunk_id": "liabilities", "score": 0.03, "rrf_score": 0.03, "payload": {"chunk_text": "Total liabilities 60"}},
+                {"chunk_id": "equity", "score": 0.02, "rrf_score": 0.02, "payload": {"chunk_text": "Total shareholders' equity 40"}},
+            ]
+        )
+        retriever.last_search_meta = {}
+
+        hits = retriever.search_request(request, mode="hybrid")
+
+        self.assertEqual({hit["chunk_id"] for hit in hits}, {"assets", "liabilities", "equity"})
+        self.assertEqual(retriever.search_hybrid.call_args.kwargs["limit"], 100)
+        self.assertEqual(retriever.last_search_meta["coverage_groups_hit"], 3)
+
+    def test_query_request_infers_consolidated_scope(self) -> None:
+        index = BM25Index(
+            [{"chunk_id": "tcs", "company_id": "tcs", "fiscal_year": 2024, "chunk_text": "TCS"}]
+        )
+        self.assertEqual(
+            index.infer_filters("TCS FY2024 consolidated balance sheet"),
+            {"company_id": "tcs", "fiscal_year": 2024, "statement_scope": "consolidated"},
+        )
 
 
 

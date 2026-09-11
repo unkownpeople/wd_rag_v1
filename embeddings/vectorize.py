@@ -107,13 +107,27 @@ def _point_id(chunk_id: str) -> str:
 
 def _embed_text(chunk: dict[str, Any]) -> str:
     if chunk.get("embedding_text"):
-        return str(chunk["embedding_text"])
-    if chunk.get("chunk_type", "").startswith("table"):
-        return str(chunk.get("search_text") or chunk.get("chunk_text") or "")
-    return str(chunk.get("chunk_text") or "")
+        body = str(chunk["embedding_text"])
+    elif chunk.get("chunk_type", "").startswith("table"):
+        body = str(chunk.get("search_text") or chunk.get("chunk_text") or "")
+    else:
+        body = str(chunk.get("chunk_text") or "")
+    prefix = " | ".join(
+        str(value).strip()
+        for value in (
+            chunk.get("company_name") or chunk.get("company_id"),
+            chunk.get("document_id"),
+            chunk.get("section_path"),
+            chunk.get("table_title") or chunk.get("table_title_raw"),
+        )
+        if str(value or "").strip()
+    )
+    return f"{prefix}\n{body}" if prefix else body
 
 
 def _payload(chunk: dict[str, Any]) -> dict[str, Any]:
+    source_sha256 = str(chunk.get("sha256") or chunk.get("source_sha256") or "").strip()
+    source_revision = str(chunk.get("source_revision") or source_sha256[:16]).strip() or None
     return {
         "chunk_id": chunk["chunk_id"],
         "chunk_index": chunk.get("chunk_index"),
@@ -155,7 +169,8 @@ def _payload(chunk: dict[str, Any]) -> dict[str, Any]:
         "currency": chunk.get("currency"),
         "unit_scale": chunk.get("unit_scale"),
         "source_url": chunk.get("source_url"),
-        "source_sha256": chunk.get("sha256") or chunk.get("source_sha256"),
+        "source_sha256": source_sha256 or None,
+        "source_revision": source_revision,
         "table_title": chunk.get("table_title"),
         "table_context": chunk.get("table_context"),
         "measure_name": chunk.get("measure_name"),

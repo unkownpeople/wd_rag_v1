@@ -4,6 +4,10 @@ from __future__ import annotations
 
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
+import time
+import uuid
+from threading import Lock
+from .audit import write_query_record
 
 from .llm import LLMConfigurationError, LLMRequestError
 from .schemas import QueryBody, RAGResponse
@@ -20,6 +24,7 @@ class UTF8JSONResponse(JSONResponse):
 def create_app(service: RAGService | None = None, settings: Settings | None = None) -> FastAPI:
     active_settings = settings or get_settings()
     active_service = service
+    query_lock = Lock()
 
     def resolve_service() -> RAGService:
         nonlocal active_service
@@ -29,7 +34,7 @@ def create_app(service: RAGService | None = None, settings: Settings | None = No
 
     app = FastAPI(
         title=active_settings.app_name,
-        version="0.1.0",
+        version="1.3.0",
         default_response_class=UTF8JSONResponse,
     )
 
@@ -49,8 +54,15 @@ def create_app(service: RAGService | None = None, settings: Settings | None = No
 
     @app.post("/api/rag/query", response_model=RAGResponse)
     def query(body: QueryBody) -> RAGResponse:
+        request_id = uuid.uuid4().hex
+        started = time.monotonic()
+        result = None
+        error_type = None
         try:
-            return resolve_service().query(body)
+            with query_lock:
+                result = resolve_service().query(body)
+            result.generation['request_id'] = request_id
+            return result
         except (ValueError, TypeError) as exc:
             raise HTTPException(status_code=422, detail=str(exc)) from exc
         except LLMConfigurationError as exc:
@@ -59,6 +71,18 @@ def create_app(service: RAGService | None = None, settings: Settings | None = No
             raise HTTPException(status_code=502, detail=str(exc)) from exc
         except (FileNotFoundError, RuntimeError) as exc:
             raise HTTPException(status_code=503, detail=str(exc)) from exc
+        finally:
+            import sys
+            active_error = sys.exc_info()[1]
+            if active_error is not None:
+                error_type = type(active_error).__name__
+            try:
+                write_query_record(active_settings.query_audit_dir, request_id,
+                                   body.model_dump(), result.model_dump() if result else None,
+                                   time.monotonic() - started, error_type)
+            except OSError:
+                if result is not None:
+                    result.generation['audit_warning'] = '本地请求记录写入失败'
 
     return app
 

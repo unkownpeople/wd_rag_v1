@@ -1,0 +1,1562 @@
+{
+  "status": "completed",
+  "label_method": "固定术语和原文金额的本地代理标签，非独立人工标注",
+  "gold_chunk_ids": {
+    "apple_revenue_exact": [
+      "chunk_b92c8a00eac1b916f0e731c3",
+      "chunk_63b9c538ca07bea3848a39ff",
+      "chunk_abe966132373213242359c8c",
+      "chunk_0ec906e4eed54a65a4e5fcce",
+      "chunk_793ac5a0b7dbbbbe2786a52c",
+      "chunk_b85ad753f9af0b240362c6e5",
+      "chunk_c145ba310262fa78093812be",
+      "chunk_05c36dd67edfbf99721a5d1d",
+      "chunk_ab14328a6d2367313320dfed",
+      "chunk_3f66c5d551e5c427cef68456",
+      "chunk_c94c35d40f41f0a48c45d10f"
+    ],
+    "apple_revenue_natural": [
+      "chunk_b92c8a00eac1b916f0e731c3",
+      "chunk_63b9c538ca07bea3848a39ff",
+      "chunk_abe966132373213242359c8c",
+      "chunk_0ec906e4eed54a65a4e5fcce",
+      "chunk_793ac5a0b7dbbbbe2786a52c",
+      "chunk_b85ad753f9af0b240362c6e5",
+      "chunk_c145ba310262fa78093812be",
+      "chunk_05c36dd67edfbf99721a5d1d",
+      "chunk_ab14328a6d2367313320dfed",
+      "chunk_3f66c5d551e5c427cef68456",
+      "chunk_c94c35d40f41f0a48c45d10f"
+    ],
+    "ms_profit_exact": [
+      "chunk_c2c450ba490671d0b6aed353",
+      "chunk_a5d1ae27d867782864608b60",
+      "chunk_92a1729eeff38c629b4cdab9",
+      "chunk_b525d4af8bb0b788c129b95b"
+    ],
+    "ms_profit_natural": [
+      "chunk_c2c450ba490671d0b6aed353",
+      "chunk_a5d1ae27d867782864608b60",
+      "chunk_92a1729eeff38c629b4cdab9",
+      "chunk_b525d4af8bb0b788c129b95b"
+    ],
+    "apple_cash_exact": [
+      "chunk_bc03d788bdf3bb2542461103",
+      "chunk_6571aabbb1e6cbea56855765"
+    ],
+    "apple_cash_natural": [
+      "chunk_bc03d788bdf3bb2542461103",
+      "chunk_6571aabbb1e6cbea56855765"
+    ],
+    "tcs_assets_exact": [
+      "chunk_9d686bb766d54ccbc7957176"
+    ],
+    "tcs_assets_natural": [
+      "chunk_9d686bb766d54ccbc7957176"
+    ],
+    "tcs_cash_exact": [
+      "chunk_dfc0dbb7b4af8cf2812fcbec"
+    ],
+    "tcs_cash_natural": [
+      "chunk_dfc0dbb7b4af8cf2812fcbec"
+    ],
+    "apple_tax_exact": [
+      "chunk_85e432a7726756fc69990406",
+      "chunk_793ac5a0b7dbbbbe2786a52c",
+      "chunk_bfc7be455f141a182469ea31",
+      "chunk_12043c41704d768bd27d41a8",
+      "chunk_761c778e54321eb3c670c980",
+      "chunk_32201e1a47ebad8d0eacfc73",
+      "chunk_56fcc441c2aef8a7a70530c6"
+    ],
+    "apple_tax_natural": [
+      "chunk_85e432a7726756fc69990406",
+      "chunk_793ac5a0b7dbbbbe2786a52c",
+      "chunk_bfc7be455f141a182469ea31",
+      "chunk_12043c41704d768bd27d41a8",
+      "chunk_761c778e54321eb3c670c980",
+      "chunk_32201e1a47ebad8d0eacfc73",
+      "chunk_56fcc441c2aef8a7a70530c6"
+    ]
+  },
+  "results": [
+    {
+      "case": "apple_revenue_exact",
+      "repeat": 0,
+      "group": "exact_label",
+      "rank": 1,
+      "hit_at_5": true,
+      "mrr_at_10": 1.0,
+      "request_id": "e4efb9f573714675a6dba11670fa20ac",
+      "status": "retrieval_only",
+      "rerank": {
+        "status": "not_triggered",
+        "candidate_count": 0
+      },
+      "coverage": {
+        "repair_attempts": [],
+        "mode": "observe",
+        "metrics_before": [
+          {
+            "task_id": "T1",
+            "metric": "total net sales",
+            "terms": [
+              "total net sales"
+            ],
+            "evidence_ids": [
+              "S2",
+              "S3",
+              "S4",
+              "S6",
+              "S8"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "metrics_after": [
+          {
+            "task_id": "T1",
+            "metric": "total net sales",
+            "terms": [
+              "total net sales"
+            ],
+            "evidence_ids": [
+              "S2",
+              "S3",
+              "S4",
+              "S6",
+              "S8"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "missing_task_ids": [],
+        "boundary": "指标附近数值及证据年份为覆盖线索；candidate_covered不证明行列、单位或语义正确，unverified须核对"
+      },
+      "elapsed_ms": 28602.6
+    },
+    {
+      "case": "apple_revenue_natural",
+      "repeat": 0,
+      "group": "natural_language",
+      "rank": 1,
+      "hit_at_5": true,
+      "mrr_at_10": 1.0,
+      "request_id": "ce030f77a8e84cca82d358c3f48cc77f",
+      "status": "retrieval_only",
+      "rerank": {
+        "status": "not_triggered",
+        "candidate_count": 0
+      },
+      "coverage": {
+        "repair_attempts": [],
+        "mode": "observe",
+        "metrics_before": [
+          {
+            "task_id": "T1",
+            "metric": "净销售额",
+            "status": "unverified",
+            "missing_years": []
+          },
+          {
+            "task_id": "T1",
+            "metric": "总净销售额",
+            "terms": [
+              "total net sales"
+            ],
+            "evidence_ids": [
+              "S2",
+              "S4",
+              "S6",
+              "S7"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "metrics_after": [
+          {
+            "task_id": "T1",
+            "metric": "净销售额",
+            "status": "unverified",
+            "missing_years": []
+          },
+          {
+            "task_id": "T1",
+            "metric": "总净销售额",
+            "terms": [
+              "total net sales"
+            ],
+            "evidence_ids": [
+              "S2",
+              "S4",
+              "S6",
+              "S7"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "missing_task_ids": [],
+        "boundary": "指标附近数值及证据年份为覆盖线索；candidate_covered不证明行列、单位或语义正确，unverified须核对"
+      },
+      "elapsed_ms": 3368.96
+    },
+    {
+      "case": "ms_profit_exact",
+      "repeat": 0,
+      "group": "exact_label",
+      "rank": 1,
+      "hit_at_5": true,
+      "mrr_at_10": 1.0,
+      "request_id": "7b13f03aa1f54df1ae27db6dc69474d0",
+      "status": "retrieval_only",
+      "rerank": {
+        "status": "not_triggered",
+        "candidate_count": 0
+      },
+      "coverage": {
+        "repair_attempts": [],
+        "mode": "observe",
+        "metrics_before": [
+          {
+            "task_id": "T1",
+            "metric": "operating income",
+            "terms": [
+              "operating income"
+            ],
+            "evidence_ids": [
+              "S1",
+              "S2",
+              "S3",
+              "S4",
+              "S5",
+              "S6",
+              "S7"
+            ],
+            "requested_years": [
+              2023
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "metrics_after": [
+          {
+            "task_id": "T1",
+            "metric": "operating income",
+            "terms": [
+              "operating income"
+            ],
+            "evidence_ids": [
+              "S1",
+              "S2",
+              "S3",
+              "S4",
+              "S5",
+              "S6",
+              "S7"
+            ],
+            "requested_years": [
+              2023
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "missing_task_ids": [],
+        "boundary": "指标附近数值及证据年份为覆盖线索；candidate_covered不证明行列、单位或语义正确，unverified须核对"
+      },
+      "elapsed_ms": 3155.16
+    },
+    {
+      "case": "ms_profit_natural",
+      "repeat": 0,
+      "group": "natural_language",
+      "rank": 2,
+      "hit_at_5": true,
+      "mrr_at_10": 0.5,
+      "request_id": "ec7367ff7c1647e6b2d55c2828bfe8b9",
+      "status": "retrieval_only",
+      "rerank": {
+        "status": "not_triggered",
+        "candidate_count": 0
+      },
+      "coverage": {
+        "repair_attempts": [],
+        "mode": "observe",
+        "metrics_before": [
+          {
+            "task_id": "T1",
+            "metric": "operating income",
+            "terms": [
+              "operating income"
+            ],
+            "evidence_ids": [
+              "S2",
+              "S4",
+              "S6",
+              "S8"
+            ],
+            "requested_years": [
+              2023
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "metrics_after": [
+          {
+            "task_id": "T1",
+            "metric": "operating income",
+            "terms": [
+              "operating income"
+            ],
+            "evidence_ids": [
+              "S2",
+              "S4",
+              "S6",
+              "S8"
+            ],
+            "requested_years": [
+              2023
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "missing_task_ids": [],
+        "boundary": "指标附近数值及证据年份为覆盖线索；candidate_covered不证明行列、单位或语义正确，unverified须核对"
+      },
+      "elapsed_ms": 4173.67
+    },
+    {
+      "case": "apple_cash_exact",
+      "repeat": 0,
+      "group": "exact_label",
+      "rank": 1,
+      "hit_at_5": true,
+      "mrr_at_10": 1.0,
+      "request_id": "9a997a9fb3394ec5aa1b76124392567d",
+      "status": "retrieval_only",
+      "rerank": {
+        "status": "not_triggered",
+        "candidate_count": 0
+      },
+      "coverage": {
+        "repair_attempts": [],
+        "mode": "observe",
+        "metrics_before": [
+          {
+            "task_id": "T1",
+            "metric": "cash generated by operating activities",
+            "terms": [
+              "cash generated by operating activities"
+            ],
+            "evidence_ids": [
+              "S1",
+              "S2"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "metrics_after": [
+          {
+            "task_id": "T1",
+            "metric": "cash generated by operating activities",
+            "terms": [
+              "cash generated by operating activities"
+            ],
+            "evidence_ids": [
+              "S1",
+              "S2"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "missing_task_ids": [],
+        "boundary": "指标附近数值及证据年份为覆盖线索；candidate_covered不证明行列、单位或语义正确，unverified须核对"
+      },
+      "elapsed_ms": 2787.66
+    },
+    {
+      "case": "apple_cash_natural",
+      "repeat": 0,
+      "group": "natural_language",
+      "rank": 2,
+      "hit_at_5": true,
+      "mrr_at_10": 0.5,
+      "request_id": "4eabbfa3b9f042c8a0a3e9e086d9d51e",
+      "status": "retrieval_only",
+      "rerank": {
+        "status": "not_triggered",
+        "candidate_count": 0
+      },
+      "coverage": {
+        "repair_attempts": [],
+        "mode": "observe",
+        "metrics_before": [
+          {
+            "task_id": "T1",
+            "metric": "经营活动产生的现金流量净额",
+            "status": "unverified",
+            "missing_years": []
+          }
+        ],
+        "metrics_after": [
+          {
+            "task_id": "T1",
+            "metric": "经营活动产生的现金流量净额",
+            "status": "unverified",
+            "missing_years": []
+          }
+        ],
+        "missing_task_ids": [],
+        "boundary": "指标附近数值及证据年份为覆盖线索；candidate_covered不证明行列、单位或语义正确，unverified须核对"
+      },
+      "elapsed_ms": 3996.03
+    },
+    {
+      "case": "tcs_assets_exact",
+      "repeat": 0,
+      "group": "exact_label",
+      "rank": 1,
+      "hit_at_5": true,
+      "mrr_at_10": 1.0,
+      "request_id": "55ebdaffc0384371bd2ba9d52a438677",
+      "status": "retrieval_only",
+      "rerank": {
+        "status": "not_triggered",
+        "candidate_count": 0
+      },
+      "coverage": {
+        "repair_attempts": [],
+        "mode": "observe",
+        "metrics_before": [
+          {
+            "task_id": "T1",
+            "metric": "total assets",
+            "terms": [
+              "total assets"
+            ],
+            "evidence_ids": [
+              "S1",
+              "S2",
+              "S3",
+              "S4",
+              "S5"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "metrics_after": [
+          {
+            "task_id": "T1",
+            "metric": "total assets",
+            "terms": [
+              "total assets"
+            ],
+            "evidence_ids": [
+              "S1",
+              "S2",
+              "S3",
+              "S4",
+              "S5"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "missing_task_ids": [],
+        "boundary": "指标附近数值及证据年份为覆盖线索；candidate_covered不证明行列、单位或语义正确，unverified须核对"
+      },
+      "elapsed_ms": 5241.82
+    },
+    {
+      "case": "tcs_assets_natural",
+      "repeat": 0,
+      "group": "natural_language",
+      "rank": 2,
+      "hit_at_5": true,
+      "mrr_at_10": 0.5,
+      "request_id": "256b9494874d46a9a2ca7f23500c6b75",
+      "status": "retrieval_only",
+      "rerank": {
+        "status": "not_triggered",
+        "candidate_count": 0
+      },
+      "coverage": {
+        "repair_attempts": [],
+        "mode": "observe",
+        "metrics_before": [
+          {
+            "task_id": "T1",
+            "metric": "total assets",
+            "terms": [
+              "total assets"
+            ],
+            "evidence_ids": [
+              "S2",
+              "S4",
+              "S6",
+              "S7"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "metrics_after": [
+          {
+            "task_id": "T1",
+            "metric": "total assets",
+            "terms": [
+              "total assets"
+            ],
+            "evidence_ids": [
+              "S2",
+              "S4",
+              "S6",
+              "S7"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "missing_task_ids": [],
+        "boundary": "指标附近数值及证据年份为覆盖线索；candidate_covered不证明行列、单位或语义正确，unverified须核对"
+      },
+      "elapsed_ms": 3413.98
+    },
+    {
+      "case": "tcs_cash_exact",
+      "repeat": 0,
+      "group": "exact_label",
+      "rank": 1,
+      "hit_at_5": true,
+      "mrr_at_10": 1.0,
+      "request_id": "e7772d8a86c243e18b3de6373789a7d7",
+      "status": "retrieval_only",
+      "rerank": {
+        "status": "not_triggered",
+        "candidate_count": 0
+      },
+      "coverage": {
+        "repair_attempts": [],
+        "mode": "observe",
+        "metrics_before": [
+          {
+            "task_id": "T1",
+            "metric": "net cash generated from operating activities",
+            "terms": [
+              "net cash generated from operating activities"
+            ],
+            "evidence_ids": [
+              "S1",
+              "S2"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "metrics_after": [
+          {
+            "task_id": "T1",
+            "metric": "net cash generated from operating activities",
+            "terms": [
+              "net cash generated from operating activities"
+            ],
+            "evidence_ids": [
+              "S1",
+              "S2"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "missing_task_ids": [],
+        "boundary": "指标附近数值及证据年份为覆盖线索；candidate_covered不证明行列、单位或语义正确，unverified须核对"
+      },
+      "elapsed_ms": 4427.0
+    },
+    {
+      "case": "tcs_cash_natural",
+      "repeat": 0,
+      "group": "natural_language",
+      "rank": 2,
+      "hit_at_5": true,
+      "mrr_at_10": 0.5,
+      "request_id": "52172df07bfa416c9b2f140724cecae3",
+      "status": "retrieval_only",
+      "rerank": {
+        "status": "not_triggered",
+        "candidate_count": 0
+      },
+      "coverage": {
+        "repair_attempts": [],
+        "mode": "observe",
+        "metrics_before": [
+          {
+            "task_id": "T1",
+            "metric": "经营活动产生的现金流量净额",
+            "status": "unverified",
+            "missing_years": []
+          }
+        ],
+        "metrics_after": [
+          {
+            "task_id": "T1",
+            "metric": "经营活动产生的现金流量净额",
+            "status": "unverified",
+            "missing_years": []
+          }
+        ],
+        "missing_task_ids": [],
+        "boundary": "指标附近数值及证据年份为覆盖线索；candidate_covered不证明行列、单位或语义正确，unverified须核对"
+      },
+      "elapsed_ms": 6254.53
+    },
+    {
+      "case": "apple_tax_exact",
+      "repeat": 0,
+      "group": "exact_label",
+      "rank": 1,
+      "hit_at_5": true,
+      "mrr_at_10": 1.0,
+      "request_id": "e6646c405bfe4b6dabee94be49901740",
+      "status": "retrieval_only",
+      "rerank": {
+        "status": "not_triggered",
+        "candidate_count": 0
+      },
+      "coverage": {
+        "repair_attempts": [],
+        "mode": "observe",
+        "metrics_before": [
+          {
+            "task_id": "T1",
+            "metric": "provision for income taxes",
+            "terms": [
+              "provision for income taxes"
+            ],
+            "evidence_ids": [
+              "S1",
+              "S2",
+              "S3",
+              "S4",
+              "S5",
+              "S6"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "metrics_after": [
+          {
+            "task_id": "T1",
+            "metric": "provision for income taxes",
+            "terms": [
+              "provision for income taxes"
+            ],
+            "evidence_ids": [
+              "S1",
+              "S2",
+              "S3",
+              "S4",
+              "S5",
+              "S6"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "missing_task_ids": [],
+        "boundary": "指标附近数值及证据年份为覆盖线索；candidate_covered不证明行列、单位或语义正确，unverified须核对"
+      },
+      "elapsed_ms": 3466.65
+    },
+    {
+      "case": "apple_tax_natural",
+      "repeat": 0,
+      "group": "natural_language",
+      "rank": 1,
+      "hit_at_5": true,
+      "mrr_at_10": 1.0,
+      "request_id": "4a22d8f2898b46908ed529889f1d488c",
+      "status": "retrieval_only",
+      "rerank": {
+        "status": "not_triggered",
+        "candidate_count": 0
+      },
+      "coverage": {
+        "repair_attempts": [],
+        "mode": "observe",
+        "metrics_before": [
+          {
+            "task_id": "T1",
+            "metric": "所得税费用",
+            "terms": [
+              "provision for income taxes",
+              "income tax expense"
+            ],
+            "evidence_ids": [
+              "S1",
+              "S2",
+              "S3",
+              "S5",
+              "S6"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          },
+          {
+            "task_id": "T1",
+            "metric": "provision for income taxes",
+            "terms": [
+              "provision for income taxes"
+            ],
+            "evidence_ids": [
+              "S1",
+              "S2",
+              "S3",
+              "S5",
+              "S6"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "metrics_after": [
+          {
+            "task_id": "T1",
+            "metric": "所得税费用",
+            "terms": [
+              "provision for income taxes",
+              "income tax expense"
+            ],
+            "evidence_ids": [
+              "S1",
+              "S2",
+              "S3",
+              "S5",
+              "S6"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          },
+          {
+            "task_id": "T1",
+            "metric": "provision for income taxes",
+            "terms": [
+              "provision for income taxes"
+            ],
+            "evidence_ids": [
+              "S1",
+              "S2",
+              "S3",
+              "S5",
+              "S6"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "missing_task_ids": [],
+        "boundary": "指标附近数值及证据年份为覆盖线索；candidate_covered不证明行列、单位或语义正确，unverified须核对"
+      },
+      "elapsed_ms": 3578.98
+    },
+    {
+      "case": "apple_revenue_exact",
+      "repeat": 1,
+      "group": "exact_label",
+      "rank": 1,
+      "hit_at_5": true,
+      "mrr_at_10": 1.0,
+      "request_id": "6c0995e738ef409285c2f48252f3c854",
+      "status": "retrieval_only",
+      "rerank": {
+        "status": "not_triggered",
+        "candidate_count": 0
+      },
+      "coverage": {
+        "repair_attempts": [],
+        "mode": "observe",
+        "metrics_before": [
+          {
+            "task_id": "T1",
+            "metric": "total net sales",
+            "terms": [
+              "total net sales"
+            ],
+            "evidence_ids": [
+              "S2",
+              "S3",
+              "S4",
+              "S6",
+              "S8"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "metrics_after": [
+          {
+            "task_id": "T1",
+            "metric": "total net sales",
+            "terms": [
+              "total net sales"
+            ],
+            "evidence_ids": [
+              "S2",
+              "S3",
+              "S4",
+              "S6",
+              "S8"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "missing_task_ids": [],
+        "boundary": "指标附近数值及证据年份为覆盖线索；candidate_covered不证明行列、单位或语义正确，unverified须核对"
+      },
+      "elapsed_ms": 4989.27
+    },
+    {
+      "case": "apple_revenue_natural",
+      "repeat": 1,
+      "group": "natural_language",
+      "rank": 1,
+      "hit_at_5": true,
+      "mrr_at_10": 1.0,
+      "request_id": "894c40d7d28e424b99450c27e0a1deaf",
+      "status": "retrieval_only",
+      "rerank": {
+        "status": "not_triggered",
+        "candidate_count": 0
+      },
+      "coverage": {
+        "repair_attempts": [],
+        "mode": "observe",
+        "metrics_before": [
+          {
+            "task_id": "T1",
+            "metric": "总净销售额",
+            "terms": [
+              "total net sales"
+            ],
+            "evidence_ids": [
+              "S2",
+              "S4",
+              "S6",
+              "S7"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "metrics_after": [
+          {
+            "task_id": "T1",
+            "metric": "总净销售额",
+            "terms": [
+              "total net sales"
+            ],
+            "evidence_ids": [
+              "S2",
+              "S4",
+              "S6",
+              "S7"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "missing_task_ids": [],
+        "boundary": "指标附近数值及证据年份为覆盖线索；candidate_covered不证明行列、单位或语义正确，unverified须核对"
+      },
+      "elapsed_ms": 4803.34
+    },
+    {
+      "case": "ms_profit_exact",
+      "repeat": 1,
+      "group": "exact_label",
+      "rank": 1,
+      "hit_at_5": true,
+      "mrr_at_10": 1.0,
+      "request_id": "f1c3af0e332a42dc904073c21bd933de",
+      "status": "retrieval_only",
+      "rerank": {
+        "status": "not_triggered",
+        "candidate_count": 0
+      },
+      "coverage": {
+        "repair_attempts": [],
+        "mode": "observe",
+        "metrics_before": [
+          {
+            "task_id": "T1",
+            "metric": "operating income",
+            "terms": [
+              "operating income"
+            ],
+            "evidence_ids": [
+              "S1",
+              "S3",
+              "S5",
+              "S7"
+            ],
+            "requested_years": [
+              2023
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "metrics_after": [
+          {
+            "task_id": "T1",
+            "metric": "operating income",
+            "terms": [
+              "operating income"
+            ],
+            "evidence_ids": [
+              "S1",
+              "S3",
+              "S5",
+              "S7"
+            ],
+            "requested_years": [
+              2023
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "missing_task_ids": [],
+        "boundary": "指标附近数值及证据年份为覆盖线索；candidate_covered不证明行列、单位或语义正确，unverified须核对"
+      },
+      "elapsed_ms": 5228.14
+    },
+    {
+      "case": "ms_profit_natural",
+      "repeat": 1,
+      "group": "natural_language",
+      "rank": 2,
+      "hit_at_5": true,
+      "mrr_at_10": 0.5,
+      "request_id": "72611cf7f11f4434853b3453eb94184b",
+      "status": "retrieval_only",
+      "rerank": {
+        "status": "not_triggered",
+        "candidate_count": 0
+      },
+      "coverage": {
+        "repair_attempts": [],
+        "mode": "observe",
+        "metrics_before": [
+          {
+            "task_id": "T1",
+            "metric": "operating income",
+            "terms": [
+              "operating income"
+            ],
+            "evidence_ids": [
+              "S2",
+              "S4",
+              "S6",
+              "S8"
+            ],
+            "requested_years": [
+              2023
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "metrics_after": [
+          {
+            "task_id": "T1",
+            "metric": "operating income",
+            "terms": [
+              "operating income"
+            ],
+            "evidence_ids": [
+              "S2",
+              "S4",
+              "S6",
+              "S8"
+            ],
+            "requested_years": [
+              2023
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "missing_task_ids": [],
+        "boundary": "指标附近数值及证据年份为覆盖线索；candidate_covered不证明行列、单位或语义正确，unverified须核对"
+      },
+      "elapsed_ms": 4040.95
+    },
+    {
+      "case": "apple_cash_exact",
+      "repeat": 1,
+      "group": "exact_label",
+      "rank": 1,
+      "hit_at_5": true,
+      "mrr_at_10": 1.0,
+      "request_id": "91a64ec5616d4475a29a3042fd981e08",
+      "status": "retrieval_only",
+      "rerank": {
+        "status": "not_triggered",
+        "candidate_count": 0
+      },
+      "coverage": {
+        "repair_attempts": [],
+        "mode": "observe",
+        "metrics_before": [
+          {
+            "task_id": "T1",
+            "metric": "cash generated by operating activities",
+            "terms": [
+              "cash generated by operating activities"
+            ],
+            "evidence_ids": [
+              "S1",
+              "S2"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "metrics_after": [
+          {
+            "task_id": "T1",
+            "metric": "cash generated by operating activities",
+            "terms": [
+              "cash generated by operating activities"
+            ],
+            "evidence_ids": [
+              "S1",
+              "S2"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "missing_task_ids": [],
+        "boundary": "指标附近数值及证据年份为覆盖线索；candidate_covered不证明行列、单位或语义正确，unverified须核对"
+      },
+      "elapsed_ms": 3518.19
+    },
+    {
+      "case": "apple_cash_natural",
+      "repeat": 1,
+      "group": "natural_language",
+      "rank": 2,
+      "hit_at_5": true,
+      "mrr_at_10": 0.5,
+      "request_id": "323958dec346437e84222c6046c509f5",
+      "status": "retrieval_only",
+      "rerank": {
+        "status": "not_triggered",
+        "candidate_count": 0
+      },
+      "coverage": {
+        "repair_attempts": [],
+        "mode": "observe",
+        "metrics_before": [
+          {
+            "task_id": "T1",
+            "metric": "经营活动产生的现金流量净额",
+            "status": "unverified",
+            "missing_years": []
+          }
+        ],
+        "metrics_after": [
+          {
+            "task_id": "T1",
+            "metric": "经营活动产生的现金流量净额",
+            "status": "unverified",
+            "missing_years": []
+          }
+        ],
+        "missing_task_ids": [],
+        "boundary": "指标附近数值及证据年份为覆盖线索；candidate_covered不证明行列、单位或语义正确，unverified须核对"
+      },
+      "elapsed_ms": 3641.39
+    },
+    {
+      "case": "tcs_assets_exact",
+      "repeat": 1,
+      "group": "exact_label",
+      "rank": 1,
+      "hit_at_5": true,
+      "mrr_at_10": 1.0,
+      "request_id": "fe5cd9e14eb348549338b7b8ed55e520",
+      "status": "retrieval_only",
+      "rerank": {
+        "status": "not_triggered",
+        "candidate_count": 0
+      },
+      "coverage": {
+        "repair_attempts": [],
+        "mode": "observe",
+        "metrics_before": [
+          {
+            "task_id": "T1",
+            "metric": "total assets",
+            "terms": [
+              "total assets"
+            ],
+            "evidence_ids": [
+              "S1",
+              "S2",
+              "S3",
+              "S4",
+              "S5"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "metrics_after": [
+          {
+            "task_id": "T1",
+            "metric": "total assets",
+            "terms": [
+              "total assets"
+            ],
+            "evidence_ids": [
+              "S1",
+              "S2",
+              "S3",
+              "S4",
+              "S5"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "missing_task_ids": [],
+        "boundary": "指标附近数值及证据年份为覆盖线索；candidate_covered不证明行列、单位或语义正确，unverified须核对"
+      },
+      "elapsed_ms": 4362.49
+    },
+    {
+      "case": "tcs_assets_natural",
+      "repeat": 1,
+      "group": "natural_language",
+      "rank": 2,
+      "hit_at_5": true,
+      "mrr_at_10": 0.5,
+      "request_id": "887105be6d5341a998d0eb84d0aa287f",
+      "status": "retrieval_only",
+      "rerank": {
+        "status": "not_triggered",
+        "candidate_count": 0
+      },
+      "coverage": {
+        "repair_attempts": [],
+        "mode": "observe",
+        "metrics_before": [
+          {
+            "task_id": "T1",
+            "metric": "total assets",
+            "terms": [
+              "total assets"
+            ],
+            "evidence_ids": [
+              "S2",
+              "S4",
+              "S6",
+              "S7"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "metrics_after": [
+          {
+            "task_id": "T1",
+            "metric": "total assets",
+            "terms": [
+              "total assets"
+            ],
+            "evidence_ids": [
+              "S2",
+              "S4",
+              "S6",
+              "S7"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "missing_task_ids": [],
+        "boundary": "指标附近数值及证据年份为覆盖线索；candidate_covered不证明行列、单位或语义正确，unverified须核对"
+      },
+      "elapsed_ms": 3712.71
+    },
+    {
+      "case": "tcs_cash_exact",
+      "repeat": 1,
+      "group": "exact_label",
+      "rank": 1,
+      "hit_at_5": true,
+      "mrr_at_10": 1.0,
+      "request_id": "9c26b56acbe646a79e844b37d28a543a",
+      "status": "retrieval_only",
+      "rerank": {
+        "status": "not_triggered",
+        "candidate_count": 0
+      },
+      "coverage": {
+        "repair_attempts": [],
+        "mode": "observe",
+        "metrics_before": [
+          {
+            "task_id": "T1",
+            "metric": "net cash generated from operating activities",
+            "terms": [
+              "net cash generated from operating activities"
+            ],
+            "evidence_ids": [
+              "S1"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "metrics_after": [
+          {
+            "task_id": "T1",
+            "metric": "net cash generated from operating activities",
+            "terms": [
+              "net cash generated from operating activities"
+            ],
+            "evidence_ids": [
+              "S1"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "missing_task_ids": [],
+        "boundary": "指标附近数值及证据年份为覆盖线索；candidate_covered不证明行列、单位或语义正确，unverified须核对"
+      },
+      "elapsed_ms": 4334.07
+    },
+    {
+      "case": "tcs_cash_natural",
+      "repeat": 1,
+      "group": "natural_language",
+      "rank": 2,
+      "hit_at_5": true,
+      "mrr_at_10": 0.5,
+      "request_id": "052d31e7b73b46b4aa6d0fc413c908c1",
+      "status": "retrieval_only",
+      "rerank": {
+        "status": "not_triggered",
+        "candidate_count": 0
+      },
+      "coverage": {
+        "repair_attempts": [],
+        "mode": "observe",
+        "metrics_before": [
+          {
+            "task_id": "T1",
+            "metric": "经营活动产生的现金流量净额",
+            "status": "unverified",
+            "missing_years": []
+          }
+        ],
+        "metrics_after": [
+          {
+            "task_id": "T1",
+            "metric": "经营活动产生的现金流量净额",
+            "status": "unverified",
+            "missing_years": []
+          }
+        ],
+        "missing_task_ids": [],
+        "boundary": "指标附近数值及证据年份为覆盖线索；candidate_covered不证明行列、单位或语义正确，unverified须核对"
+      },
+      "elapsed_ms": 4406.1
+    },
+    {
+      "case": "apple_tax_exact",
+      "repeat": 1,
+      "group": "exact_label",
+      "rank": 1,
+      "hit_at_5": true,
+      "mrr_at_10": 1.0,
+      "request_id": "530b6d5cea354cb2b22213d445b7fcd0",
+      "status": "retrieval_only",
+      "rerank": {
+        "status": "not_triggered",
+        "candidate_count": 0
+      },
+      "coverage": {
+        "repair_attempts": [],
+        "mode": "observe",
+        "metrics_before": [
+          {
+            "task_id": "T1",
+            "metric": "provision for income taxes",
+            "terms": [
+              "provision for income taxes"
+            ],
+            "evidence_ids": [
+              "S1",
+              "S2",
+              "S3",
+              "S4",
+              "S5",
+              "S6"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "metrics_after": [
+          {
+            "task_id": "T1",
+            "metric": "provision for income taxes",
+            "terms": [
+              "provision for income taxes"
+            ],
+            "evidence_ids": [
+              "S1",
+              "S2",
+              "S3",
+              "S4",
+              "S5",
+              "S6"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "missing_task_ids": [],
+        "boundary": "指标附近数值及证据年份为覆盖线索；candidate_covered不证明行列、单位或语义正确，unverified须核对"
+      },
+      "elapsed_ms": 3174.17
+    },
+    {
+      "case": "apple_tax_natural",
+      "repeat": 1,
+      "group": "natural_language",
+      "rank": 1,
+      "hit_at_5": true,
+      "mrr_at_10": 1.0,
+      "request_id": "1a574ddb97604906899351e3aab19858",
+      "status": "retrieval_only",
+      "rerank": {
+        "status": "not_triggered",
+        "candidate_count": 0
+      },
+      "coverage": {
+        "repair_attempts": [],
+        "mode": "observe",
+        "metrics_before": [
+          {
+            "task_id": "T1",
+            "metric": "所得税费用",
+            "terms": [
+              "provision for income taxes",
+              "income tax expense"
+            ],
+            "evidence_ids": [
+              "S1",
+              "S2",
+              "S3",
+              "S5",
+              "S6"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          },
+          {
+            "task_id": "T1",
+            "metric": "provision for income taxes",
+            "terms": [
+              "provision for income taxes"
+            ],
+            "evidence_ids": [
+              "S1",
+              "S2",
+              "S3",
+              "S5",
+              "S6"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "metrics_after": [
+          {
+            "task_id": "T1",
+            "metric": "所得税费用",
+            "terms": [
+              "provision for income taxes",
+              "income tax expense"
+            ],
+            "evidence_ids": [
+              "S1",
+              "S2",
+              "S3",
+              "S5",
+              "S6"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          },
+          {
+            "task_id": "T1",
+            "metric": "provision for income taxes",
+            "terms": [
+              "provision for income taxes"
+            ],
+            "evidence_ids": [
+              "S1",
+              "S2",
+              "S3",
+              "S5",
+              "S6"
+            ],
+            "requested_years": [
+              2024
+            ],
+            "missing_years": [],
+            "status": "candidate_covered"
+          }
+        ],
+        "missing_task_ids": [],
+        "boundary": "指标附近数值及证据年份为覆盖线索；candidate_covered不证明行列、单位或语义正确，unverified须核对"
+      },
+      "elapsed_ms": 3424.42
+    }
+  ],
+  "summary": {
+    "n": 24,
+    "hit_at_5": 24,
+    "mrr_at_10": 0.8333333333333334,
+    "failures": [],
+    "elapsed_ms_range": [
+      2787.66,
+      28602.6
+    ]
+  }
+}

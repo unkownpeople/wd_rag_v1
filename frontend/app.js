@@ -281,6 +281,7 @@
     return [
       citation.source_format && citation.source_format.toUpperCase(),
       sourceFileName(citation.source_file),
+      citation.source_revision && `版本 ${citation.source_revision}`,
       locationText(citation),
       citation.statement_family,
       citation.period_end,
@@ -292,6 +293,7 @@
   function evidenceMetadata(citation) {
     const entries = [
       ["来源文件", sourceFileName(citation.source_file)],
+      ["来源版本", citation.source_revision],
       ["表格标题", citation.table_title],
       ["原始表题", citation.table_title_raw],
       ["表格组", citation.table_group_id],

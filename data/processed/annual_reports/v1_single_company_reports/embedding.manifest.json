@@ -3,10 +3,10 @@
   "collection": "annual_report_v1_single_company",
   "qdrant_path": "xianlian",
   "chunk_dir": "data/processed/annual_reports/v1_single_company_chunks",
-  "chunk_digest": "8984ea20140efce907cfeeeebd9145f7e6bd1f78ece66e3e8dfcd62a177656f5",
-  "chunk_count": 3959,
-  "point_count": 3959,
-  "vector_digest": "34fcba77215cd613b5a8ef1e1400828081b95f7bef25f39d2df8f0b4b77cfde6",
+  "chunk_digest": "92946825dc39833da92bb1f32bc36a3d67c098bccc3bea993b41897537a31ea7",
+  "chunk_count": 6266,
+  "point_count": 6266,
+  "vector_digest": "056be6f7f21e10c874ac50fc776e38ca2b17f9cd2ee931fcecaee76d20cfc438",
   "collection_cleanup": {
     "requested": false,
     "performed": false,
@@ -16,7 +16,7 @@
   },
   "resume_existing": true,
   "existing_ids_valid": true,
-  "missing_point_count_before_write": 0,
+  "missing_point_count_before_write": 1337,
   "model": {
     "model_id": "BAAI/bge-m3",
     "model_format": "onnx-int8",
@@ -32,7 +32,7 @@
     "intra_op_num_threads": 4,
     "inter_op_num_threads": 1
   },
-  "created_at": "2026-08-14T05:16:18.112728+00:00",
+  "created_at": "2026-09-05T18:20:00+00:00",
   "metadata_refreshed_at": "2026-08-17T17:27:16.9476744+08:00",
   "retrieval_evaluation": "not_run"
 }

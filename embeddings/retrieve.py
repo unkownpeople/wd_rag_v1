@@ -6,6 +6,9 @@ from collections import Counter, defaultdict
 import math
 from pathlib import Path
 import re
+from concurrent.futures import ThreadPoolExecutor
+from time import perf_counter
+from .retrieval_policy import identifiers, contains_identifiers, deduplicate, ranking
 from typing import Any
 
 from qdrant_client import QdrantClient, models
@@ -36,6 +39,28 @@ _GENERIC_ACCOUNTING_TERMS = {
     "according", "statement", "statements", "financial", "consolidated", "standalone",
     "profit", "loss", "income", "amount", "figure", "overall", "performance", "business",
 }
+
+# 多指标问题的最小覆盖词表。它只用于从已经召回的候选中补齐并列指标，
+# 不改变查询语义，也不调用外部模型。
+_COVERAGE_GROUPS: tuple[tuple[str, ...], ...] = (
+    ("total net sales", "net sales", "revenue from operations", "total revenue", "revenue"),
+    ("operating income", "operating profit", "ebit"),
+    ("net income", "profit for the year", "profit after tax"),
+    ("total income",),
+    ("total assets",),
+    ("total liabilities",),
+    ("total shareholders equity", "total stockholders equity", "total equity"),
+    ("cash flows from operating activities", "cash generated from operations", "net cash generated from operating activities", "cash flows"),
+    ("cash flows from investing activities", "cash used in investing activities"),
+    ("cash flows from financing activities", "cash used in financing activities"),
+    ("earnings per share", "basic and diluted eps", "eps"),
+    ("ebit margin", "operating margin"),
+    ("employees", "employee count", "headcount"),
+    ("it services attrition", "attrition"),
+    ("iphone",),
+    ("services",),
+    ("mac",),
+)
 
 _COMPANY_QUERY_ALIASES: dict[str, tuple[str, ...]] = {
     "apple": ("苹果", "苹果公司"),
@@ -78,6 +103,77 @@ def _ascii_phrase_windows(text: str, *, max_width: int = 6) -> list[tuple[str, i
 
 def _normalized_ascii_text(text: str) -> str:
     return " ".join(word.casefold() for word in _ASCII_WORD_RE.findall(str(text or "")))
+
+
+def _normalized_coverage_text(text: str) -> str:
+    """为覆盖检查统一英文标点（如 shareholders' equity）。"""
+
+    return f" {_normalized_ascii_text(text)} "
+
+
+def _contains_coverage_term(normalized_text: str, term: str) -> bool:
+    phrase = _normalized_ascii_text(term)
+    if not phrase:
+        return False
+    if f" {phrase} " in normalized_text:
+        return True
+    # 年报常在标题/句中使用复数（EBIT margins、cash flows）。
+    if " " in phrase:
+        plural = f"{phrase}s"
+        if f" {plural} " in normalized_text:
+            return True
+    return False
+
+
+def _coverage_groups(query: str) -> list[tuple[str, ...]]:
+    normalized = _normalized_coverage_text(query)
+    raw = str(query or "").casefold()
+    result: list[tuple[str, ...]] = []
+    for group in _COVERAGE_GROUPS:
+        if any(
+            _contains_coverage_term(normalized, term)
+            or (term.casefold() in raw and not re.search(r"[a-z]", term))
+            for term in group
+        ):
+            result.append(group)
+    return result
+
+
+def _hit_covers_group(hit: dict[str, Any], group: tuple[str, ...]) -> bool:
+    payload = hit.get("payload") or {}
+    text = str(
+        hit.get("text")
+        or payload.get("search_text")
+        or payload.get("chunk_text")
+        or ""
+    )
+    normalized = _normalized_coverage_text(text)
+    raw = text.casefold()
+    return any(
+        _contains_coverage_term(normalized, term)
+        or (term.casefold() in raw and not re.search(r"[a-z]", term))
+        for term in group
+    )
+
+
+def _coverage_hit_score(hit: dict[str, Any], group: tuple[str, ...]) -> tuple[int, int, int, int]:
+    """在同一指标组内优先选财务表/带数值的候选。"""
+
+    payload = hit.get("payload") or {}
+    citation = hit.get("citation") or {}
+    text = str(hit.get("text") or payload.get("search_text") or payload.get("chunk_text") or "")
+    normalized = _normalized_coverage_text(text)
+    phrase_hits = sum(_contains_coverage_term(normalized, term) for term in group)
+    numeric_hits = len(re.findall(r"\(?-?\d[\d,]*(?:\.\d+)?\)?%?", text))
+    family = str(citation.get("statement_family") or payload.get("statement_family") or "").casefold()
+    financial_family = int(family in {"income_statement", "balance_sheet", "cash_flow", "ratio", "equity"})
+    has_statement_label = int(
+        any(marker in normalized for marker in (
+            "summary results of operations", "income statements", "financial results",
+            "consolidated financial statements", "consolidated balance sheet",
+        ))
+    )
+    return phrase_hits, financial_family + has_statement_label, numeric_hits, -int(hit.get("rank") or 0)
 
 
 def _normalize_table_matrix(raw_matrix: Any) -> list[list[Any]]:
@@ -182,6 +278,7 @@ class BM25Index:
         for value in (filters or {}).values():
             ignored_terms.update(_tokenize(str(value)))
         query_terms = set(_tokenize(query)) - ignored_terms
+        required_ids = identifiers(query)
         phrase_windows = _ascii_phrase_windows(query)
         metric_terms = {
             term
@@ -218,6 +315,9 @@ class BM25Index:
         # "net sales" 重复词。对表格块做有限提升，避免 BM25 只返回正文副本而
         # 丢失 table_id、表头和行号等引用元数据。
         for chunk_id in list(scores):
+            if required_ids and not contains_identifiers(str(self.payloads[chunk_id].get('chunk_text') or self.payloads[chunk_id].get('search_text') or ''), required_ids):
+                del scores[chunk_id]
+                continue
             if str(self.payloads[chunk_id].get("chunk_type") or "").startswith("table"):
                 payload_text = str(
                     self.payloads[chunk_id].get("search_text")
@@ -326,6 +426,7 @@ class QdrantRetriever:
             "company_name": payload.get("company_name"),
             "fiscal_year": payload.get("fiscal_year"),
             "source_file": payload.get("source_file"),
+            "source_revision": payload.get("source_revision"),
             "source_url": payload.get("source_url"),
             "source_format": payload.get("source_format"),
             "source_kind": payload.get("source_kind"),
@@ -363,6 +464,43 @@ class QdrantRetriever:
         result["text"] = payload.get("chunk_text") or payload.get("search_text") or ""
         result["citation"] = citation
         return result
+
+    @staticmethod
+    def _rerank_candidates(
+        query: str,
+        candidates: list[dict[str, Any]],
+    ) -> tuple[list[dict[str, Any]], bool]:
+        """用原问题的精确词覆盖度细调 Hybrid/RRF 候选排序。"""
+
+        terms = {
+            term
+            for term in _tokenize(query)
+            if term.isdigit() or len(term) >= 3
+        }
+        phrases = [phrase for phrase, _ in _ascii_phrase_windows(query)]
+        if not candidates or (not terms and not phrases):
+            return candidates, False
+
+        def sort_key(hit: dict[str, Any]) -> tuple[int, int, float, str]:
+            payload = hit.get("payload") or {}
+            text = str(
+                hit.get("text")
+                or payload.get("search_text")
+                or payload.get("chunk_text")
+                or ""
+            )
+            normalized = f" {_normalized_ascii_text(text)} "
+            tokens = set(_tokenize(text))
+            phrase_hits = sum(f" {phrase} " in normalized for phrase in phrases)
+            term_hits = len(terms & tokens)
+            return (
+                -phrase_hits,
+                -term_hits,
+                -float(hit.get("rrf_score") or hit.get("score") or 0.0),
+                str(hit.get("chunk_id") or ""),
+            )
+
+        return sorted(candidates, key=sort_key), True
 
     def resolve_request(self, request: QueryRequest) -> QueryRequest:
         inferred = self.bm25.infer_filters(request.query)
@@ -436,8 +574,18 @@ class QdrantRetriever:
 
         if limit <= 0:
             return []
-        dense_hits = self.search(query, limit=dense_limit or max(limit * 4, 20), filters=filters)
-        sparse_hits = self.bm25.search(query, limit=sparse_limit or max(limit * 4, 20), filters=filters)
+        started = perf_counter()
+        def timed(fn, **kwargs):
+            begin = perf_counter()
+            result = fn(query, **kwargs)
+            return result, round((perf_counter() - begin) * 1000, 3)
+        with ThreadPoolExecutor(max_workers=2, thread_name_prefix='rag-recall') as pool:
+            dense_future = pool.submit(timed, self.search, limit=dense_limit or max(limit * 4, 20), filters=filters)
+            sparse_future = pool.submit(timed, self.bm25.search, limit=sparse_limit or max(limit * 4, 20), filters=filters)
+            dense_hits, dense_ms = dense_future.result()
+            sparse_hits, sparse_ms = sparse_future.result()
+        recall_ms = (perf_counter() - started) * 1000
+        fusion_started = perf_counter()
         sparse_by_id = {str(hit["chunk_id"]): hit for hit in sparse_hits}
         dense_by_id = {str(hit["chunk_id"]): hit for hit in dense_hits}
         all_ids = set(sparse_by_id) | set(dense_by_id)
@@ -451,9 +599,18 @@ class QdrantRetriever:
             item["dense_score"] = dense_by_id.get(chunk_id, {}).get("score")
             item["bm25_score"] = sparse_by_id.get(chunk_id, {}).get("score")
             item["rrf_score"] = score
+            item['dense_rank'] = dense_rank
+            item['bm25_rank'] = sparse_rank
             item["score"] = score
             fused.append(self._with_table_matrix(item))
-        return sorted(fused, key=lambda hit: (-float(hit["rrf_score"]), str(hit.get("chunk_id"))))[:limit]
+        required_ids = identifiers(query)
+        if required_ids:
+            fused = [h for h in fused if contains_identifiers(str(h.get('text') or ''), required_ids)]
+        result = sorted(fused, key=lambda hit: (-float(hit["rrf_score"]), str(hit.get("chunk_id"))))[:limit]
+        self.last_hybrid_meta = {'dense_ms': dense_ms, 'bm25_ms': sparse_ms,
+            'parallel_recall_ms': round(recall_ms, 3), 'fusion_ms': round((perf_counter()-fusion_started)*1000, 3),
+            'required_identifiers': required_ids, 'fusion_ranking': ranking(result)}
+        return result
 
     def search_request(
         self,
@@ -462,14 +619,24 @@ class QdrantRetriever:
         mode: str = "hybrid",
     ) -> list[dict[str, Any]]:
         normalized = request if isinstance(request, QueryRequest) else QueryRequest.from_mapping(request)
+        started = perf_counter()
         resolved = self.resolve_request(normalized)
         filters = resolved.explicit_filters()
+        # 先扩大候选池，再在本地做并列指标覆盖；否则 top_k=5 时一个高分正文
+        # 可能挤掉同一问题要求的资产、负债或权益行。普通泛查询保持原预算。
+        coverage = _coverage_groups(resolved.query)
+        year_mentions = set(re.findall(r"(?:19|20)\d{2}", resolved.query))
+        candidate_limit = (
+            100
+            if len(coverage) >= 2 or len(year_mentions) >= 2
+            else (min(max(resolved.top_k * 4, 20), 100) if coverage else resolved.top_k)
+        )
         if mode == "dense":
-            candidates = self.search(resolved.query, limit=resolved.top_k, filters=filters)
+            candidates = self.search(resolved.query, limit=candidate_limit, filters=filters)
         elif mode == "bm25":
-            candidates = self.search_sparse(resolved.query, limit=resolved.top_k, filters=filters)
+            candidates = self.search_sparse(resolved.query, limit=candidate_limit, filters=filters)
         elif mode == "hybrid":
-            candidates = self.search_hybrid(resolved.query, limit=resolved.top_k, filters=filters)
+            candidates = self.search_hybrid(resolved.query, limit=candidate_limit, filters=filters)
         else:
             raise ValueError(f"不支持的检索模式：{mode}")
 
@@ -480,10 +647,63 @@ class QdrantRetriever:
             if chunk_id and chunk_id not in seen_ids:
                 seen_ids.add(chunk_id)
                 selected.append(self._with_table_matrix(hit))
+        rerank_applied = False
+        before = ranking(selected)
+        rank_started = perf_counter()
+        rerank_count = len(selected)
+        if mode == "hybrid" and len(selected) > resolved.top_k:
+            selected, rerank_applied = self._rerank_candidates(resolved.query, selected)
+        rank_ms = (perf_counter() - rank_started) * 1000
+        dedup_started = perf_counter()
+        selected, duplicates = deduplicate(selected)
+        dedup_ms = (perf_counter() - dedup_started) * 1000
+        coverage_candidates = selected
+        if coverage:
+            covered: list[dict[str, Any]] = []
+            covered_ids: set[str] = set()
+            # 每组先取排序最靠前的一条，随后按原排序补齐；不增加返回数量。
+            for group in coverage:
+                hit = next(
+                    iter(
+                        sorted(
+                            (
+                                item
+                                for item in coverage_candidates
+                                if str(item.get("chunk_id") or "") not in covered_ids
+                                and _hit_covers_group(item, group)
+                            ),
+                            key=lambda item: _coverage_hit_score(item, group),
+                            reverse=True,
+                        )
+                    ),
+                    None,
+                )
+                if hit is not None:
+                    covered.append(hit)
+                    covered_ids.add(str(hit.get("chunk_id") or ""))
+            for item in coverage_candidates:
+                item_id = str(item.get("chunk_id") or "")
+                if item_id not in covered_ids:
+                    covered.append(item)
+                    covered_ids.add(item_id)
+            selected = covered[: resolved.top_k]
+        selected = selected[:resolved.top_k]
         meta = {
             "candidate_count": len(candidates),
             "effective_top_k": resolved.top_k,
             "coverage_truncated": len(selected) < len(candidates),
+            "rerank_applied": rerank_applied,
+            "rerank_candidate_count": rerank_count if rerank_applied else 0,
+            'hybrid': (getattr(self, 'last_hybrid_meta', {}) if mode == 'hybrid' else {}),
+            'timing_ms': {**({k:v for k,v in getattr(self, 'last_hybrid_meta', {}).items() if k.endswith('_ms')} if mode == 'hybrid' else {}),
+                          'rule_rerank_ms': round(rank_ms, 3), 'dedup_ms': round(dedup_ms, 3),
+                          'total_ms': round((perf_counter()-started)*1000, 3)},
+            'before_rerank': before, 'final_ranking': ranking(selected), 'duplicates': duplicates,
+            "coverage_groups": len(coverage),
+            "coverage_groups_hit": sum(
+                any(_hit_covers_group(item, group) for item in selected)
+                for group in coverage
+            ),
         }
         self.last_search_meta = meta
         for rank, hit in enumerate(selected, 1):
@@ -559,7 +779,7 @@ def assemble_context(hits: list[dict[str, Any]], *, max_chars: int = 12000) -> d
     for index, record in enumerate(table_records):
         remaining = max_chars - used
         groups_left = len(table_records) - index
-        allocation = min(6002, remaining // max(groups_left, 1))
+        allocation = min(12002, remaining // max(groups_left, 1))
         if allocation <= 2:
             continue
         rows = [
@@ -588,6 +808,10 @@ def assemble_context(hits: list[dict[str, Any]], *, max_chars: int = 12000) -> d
     return {
         "context": "\n\n".join(blocks),
         "citations": citations,
+        "evidence_texts": {
+            str(record["citation"]["evidence_id"]): str(record["text"])
+            for record in prepared
+        },
         "coverage": {
             "statement_families": sorted({str(item.get("statement_family") or "other") for item in citations}),
             "statement_scopes": sorted({str(item.get("statement_scope") or "unknown") for item in citations}),
